@@ -13,7 +13,8 @@ apis:
     description: "Ensure your field and accounting teams always have trusted, timely data. No delays or double-entry. From budgets and contracts, to payroll and\_costs. "
 name: Agave
 tags:
-  - API
+  - Accounting
+  - Construction
 type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
