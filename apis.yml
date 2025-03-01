@@ -1,27 +1,34 @@
 aid: agave
-name: Agave
-description: "Ensure your field and accounting teams always have trusted, timely data. No delays or double-entry. From budgets and contracts, to payroll and\_costs. "
-type: Index
-position: Consumer
-access: 3rd-Party
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-tags:
-  - API
-created: '2025-03-01'
-modified: '2025-03-01'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/agave/refs/heads/main/apis.yml
-specificationVersion: '0.19'
 apis:
   - aid: agave:agave
     name: Agave
-    description: "Ensure your field and accounting teams always have trusted, timely data. No delays or double-entry. From budgets and contracts, to payroll and\_costs. "
-    humanURL: ' https://www.agaveapi.com/'
     tags:
       - API
+    humanURL: ' https://www.agaveapi.com/'
     properties:
-      - type: Documentation
-        url: ' https://www.agaveapi.com/'
+      - url: ' https://www.agaveapi.com/'
+        type: Documentation
+    description: "Ensure your field and accounting teams always have trusted, timely data. No delays or double-entry. From budgets and contracts, to payroll and\_costs. "
+name: Agave
+tags:
+  - API
+type: Contract
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+access: 3rd-Party
+created: '2025-03-01'
+modified: '2025-03-01'
+position: Consuming
+description: >-
+  Ensure your field and accounting teams always have trusted, timely data. No
+  delays or double-entry. From budgets and contracts, to payroll and costs. We
+  help Construction Software Companies to integrate with other source systems
+  with ease. We provide a unified API to access data across all the construction
+  software platforms like Procore, BIM 360, QuickBooks Online, and more. We also
+  save you time by providing best-in-class documentation and pre-built front end
+  components.
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
+specificationVersion: '0.19'
