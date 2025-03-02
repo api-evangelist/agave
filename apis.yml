@@ -5,7 +5,8 @@ apis:
   - aid: agave:agave
     name: Agave
     tags:
-      - API
+      - Accounting
+      - Construction
     humanURL: ' https://www.agaveapi.com/'
     properties:
       - url: ' https://www.agaveapi.com/'
