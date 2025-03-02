@@ -34,3 +34,24 @@ maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
 specificationVersion: '0.19'
+common:
+  - name: Agave Security Portal | Powered by SafeBase
+    description: 'null'
+    url: https://security.agaveapi.com/
+    type: Security
+  - name: Pricing - Agave
+    description: 'null'
+    url: https://www.agaveapi.com/software-vendors/pricing/
+    type: Pricing
+  - name: Introduction | Agave API
+    description: 'null'
+    url: https://docs.agaveapi.com/
+    type: Documentation
+  - name: Become an Integration Partner - Agave
+    description: 'null'
+    url: https://www.agaveapi.com/partners/
+    type: Partners
+  - name: Use-case Library - Agave
+    description: 'null'
+    url: https://www.agaveapi.com/software-vendors/use-case-library/
+    type: UseCases
