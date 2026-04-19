@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/agave/refs/heads/main/json-structure/unified-api-link-session-structure.json",
+  "name": "LinkSession",
+  "description": "An Agave Link session token.",
+  "type": "object",
+  "properties": {
+    "link_token": {
+      "type": "string",
+      "description": "Token to initialize the Agave Link component for the user.",
+      "example": "link-token-abc123xyz456"
+    },
+    "reference_id": {
+      "type": "string",
+      "description": "The reference ID associated with this session.",
+      "example": "user-789-procore"
+    },
+    "expires_at": {
+      "type": "datetime",
+      "description": "Timestamp when the link token expires.",
+      "example": "2025-03-15T16:30:00Z"
+    }
+  }
+}

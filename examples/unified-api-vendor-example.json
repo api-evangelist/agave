@@ -1,0 +1,9 @@
+{
+  "id": "500123",
+  "name": "Example Name",
+  "email": "admin@example.com",
+  "phone": "example_value",
+  "address": "example_value",
+  "tax_id": "500123",
+  "status": "active"
+}

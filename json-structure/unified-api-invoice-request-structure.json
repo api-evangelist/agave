@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/agave/refs/heads/main/json-structure/unified-api-invoice-request-structure.json",
+  "name": "InvoiceRequest",
+  "description": "Request payload for creating an invoice.",
+  "type": "object",
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "description": "Project to associate the invoice with.",
+      "example": "proj-500123"
+    },
+    "vendor_id": {
+      "type": "string",
+      "description": "Vendor identifier.",
+      "example": "ven-334455"
+    },
+    "invoice_number": {
+      "type": "string",
+      "description": "Vendor invoice number.",
+      "example": "INV-2025-1042"
+    },
+    "amount": {
+      "type": "double",
+      "description": "Invoice amount in USD.",
+      "example": 85000.0
+    },
+    "invoice_date": {
+      "type": "date",
+      "description": "Invoice date.",
+      "example": "2025-03-01"
+    }
+  },
+  "required": [
+    "project_id",
+    "vendor_id",
+    "invoice_number",
+    "amount",
+    "invoice_date"
+  ]
+}

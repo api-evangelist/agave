@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/agave/refs/heads/main/json-structure/unified-api-link-session-request-structure.json",
+  "name": "LinkSessionRequest",
+  "description": "Request payload for creating an Agave Link session.",
+  "type": "object",
+  "properties": {
+    "reference_id": {
+      "type": "string",
+      "description": "Unique identifier for the user or entity linking their account.",
+      "example": "user-789-procore"
+    },
+    "redirect_url": {
+      "type": "string",
+      "description": "URL to redirect the user to after completing the link flow.",
+      "example": "https://myapp.com/integration/callback"
+    }
+  },
+  "required": [
+    "reference_id"
+  ]
+}

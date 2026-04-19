@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/agave/refs/heads/main/json-structure/unified-api-budget-list-structure.json",
+  "name": "BudgetList",
+  "description": "Paginated list of budget line items.",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "Array of budget records.",
+      "items": {
+        "$ref": "#/components/schemas/Budget"
+      },
+      "example": [
+        "example_value"
+      ]
+    },
+    "next_cursor": {
+      "type": "string",
+      "description": "Cursor for the next page.",
+      "example": "eyJpZCI6MTIzfQ=="
+    },
+    "count": {
+      "type": "int32",
+      "description": "Number of records returned.",
+      "example": 100
+    }
+  }
+}

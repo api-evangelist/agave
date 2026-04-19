@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/agave/refs/heads/main/json-schema/unified-api-employee-schema.json",
+  "title": "Employee",
+  "description": "An employee record.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Employee identifier.",
+      "example": "emp-123456"
+    },
+    "first_name": {
+      "type": "string",
+      "description": "Employee first name.",
+      "example": "John"
+    },
+    "last_name": {
+      "type": "string",
+      "description": "Employee last name.",
+      "example": "Doe"
+    },
+    "email": {
+      "type": "string",
+      "description": "Employee email address.",
+      "example": "john.doe@contractor.com"
+    },
+    "title": {
+      "type": "string",
+      "description": "Employee job title.",
+      "example": "Project Manager"
+    },
+    "status": {
+      "type": "string",
+      "description": "Employment status.",
+      "enum": [
+        "active",
+        "inactive",
+        "terminated"
+      ],
+      "example": "active"
+    },
+    "hire_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of hire.",
+      "example": "2020-06-01"
+    }
+  }
+}

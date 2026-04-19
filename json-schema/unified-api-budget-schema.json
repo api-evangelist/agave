@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/agave/refs/heads/main/json-schema/unified-api-budget-schema.json",
+  "title": "Budget",
+  "description": "A budget line item for a construction project.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Agave budget line item identifier.",
+      "example": "bud-112233"
+    },
+    "project_id": {
+      "type": "string",
+      "description": "Associated project identifier.",
+      "example": "proj-500123"
+    },
+    "cost_code_id": {
+      "type": "string",
+      "description": "Associated cost code identifier.",
+      "example": "cc-445566"
+    },
+    "description": {
+      "type": "string",
+      "description": "Budget line item description.",
+      "example": "Concrete Foundation Work"
+    },
+    "original_amount": {
+      "type": "number",
+      "description": "Original budgeted amount in USD.",
+      "example": 250000.0
+    },
+    "revised_amount": {
+      "type": "number",
+      "description": "Revised budget amount including changes.",
+      "example": 275000.0
+    },
+    "actual_cost": {
+      "type": "number",
+      "description": "Actual cost incurred to date.",
+      "example": 180000.0
+    },
+    "projected_cost": {
+      "type": "number",
+      "description": "Total projected cost at completion.",
+      "example": 270000.0
+    }
+  }
+}

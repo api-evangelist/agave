@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/agave/refs/heads/main/json-schema/unified-api-contract-schema.json",
+  "title": "Contract",
+  "description": "A prime contract for a construction project.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Contract identifier.",
+      "example": "con-778899"
+    },
+    "project_id": {
+      "type": "string",
+      "description": "Associated project identifier.",
+      "example": "proj-500123"
+    },
+    "name": {
+      "type": "string",
+      "description": "Contract name.",
+      "example": "Prime Construction Contract"
+    },
+    "number": {
+      "type": "string",
+      "description": "Contract number.",
+      "example": "GC-2025-001"
+    },
+    "status": {
+      "type": "string",
+      "description": "Contract status.",
+      "enum": [
+        "draft",
+        "approved",
+        "executed",
+        "completed",
+        "voided"
+      ],
+      "example": "executed"
+    },
+    "original_value": {
+      "type": "number",
+      "description": "Original contract value in USD.",
+      "example": 4500000.0
+    },
+    "revised_value": {
+      "type": "number",
+      "description": "Revised contract value including change orders.",
+      "example": 4750000.0
+    },
+    "executed_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the contract was executed.",
+      "example": "2025-01-20"
+    }
+  }
+}

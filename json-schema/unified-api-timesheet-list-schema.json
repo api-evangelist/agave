@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/agave/refs/heads/main/json-schema/unified-api-timesheet-list-schema.json",
+  "title": "TimesheetList",
+  "description": "Paginated list of timesheets.",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Timesheet"
+      },
+      "example": [
+        "example_value"
+      ]
+    },
+    "next_cursor": {
+      "type": "string",
+      "example": "eyJpZCI6MTIzfQ=="
+    },
+    "count": {
+      "type": "integer",
+      "example": 500
+    }
+  }
+}

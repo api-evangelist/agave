@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/agave/refs/heads/main/json-schema/unified-api-cost-code-schema.json",
+  "title": "CostCode",
+  "description": "A job cost code for categorizing construction costs.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Cost code identifier.",
+      "example": "cc-445566"
+    },
+    "project_id": {
+      "type": "string",
+      "description": "Associated project identifier.",
+      "example": "proj-500123"
+    },
+    "code": {
+      "type": "string",
+      "description": "Cost code value.",
+      "example": "03-1000"
+    },
+    "description": {
+      "type": "string",
+      "description": "Cost code description.",
+      "example": "Concrete"
+    },
+    "cost_type": {
+      "type": "string",
+      "description": "Cost type classification.",
+      "enum": [
+        "labor",
+        "material",
+        "equipment",
+        "subcontract",
+        "other"
+      ],
+      "example": "material"
+    }
+  }
+}

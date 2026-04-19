@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/agave/refs/heads/main/json-schema/unified-api-cost-code-list-schema.json",
+  "title": "CostCodeList",
+  "description": "Paginated list of cost codes.",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CostCode"
+      },
+      "example": [
+        "example_value"
+      ]
+    },
+    "next_cursor": {
+      "type": "string",
+      "example": "eyJpZCI6MTIzfQ=="
+    },
+    "count": {
+      "type": "integer",
+      "example": 200
+    }
+  }
+}

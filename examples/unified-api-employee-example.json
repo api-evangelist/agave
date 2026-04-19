@@ -1,0 +1,9 @@
+{
+  "id": "500123",
+  "first_name": "Example Name",
+  "last_name": "Example Name",
+  "email": "admin@example.com",
+  "title": "example_value",
+  "status": "active",
+  "hire_date": "2025-03-15"
+}

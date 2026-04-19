@@ -1,0 +1,202 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "agave": "https://agave.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "EmployeeList": "agave:EmployeeList",
+    "data": {
+      "@id": "agave:data",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "nextCursor": {
+      "@id": "agave:next_cursor",
+      "@type": "xsd:string"
+    },
+    "count": {
+      "@id": "agave:count",
+      "@type": "xsd:integer"
+    },
+    "CostCodeList": "agave:CostCodeList",
+    "TimesheetList": "agave:TimesheetList",
+    "Contract": "agave:Contract",
+    "id": {
+      "@id": "agave:id",
+      "@type": "xsd:string"
+    },
+    "projectId": {
+      "@id": "agave:project_id",
+      "@type": "xsd:string"
+    },
+    "name": "schema:name",
+    "number": {
+      "@id": "agave:number",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "agave:status",
+      "@type": "xsd:string"
+    },
+    "originalValue": {
+      "@id": "agave:original_value",
+      "@type": "xsd:decimal"
+    },
+    "revisedValue": {
+      "@id": "agave:revised_value",
+      "@type": "xsd:decimal"
+    },
+    "executedDate": {
+      "@id": "agave:executed_date",
+      "@type": "xsd:date"
+    },
+    "ContractList": "agave:ContractList",
+    "Budget": "agave:Budget",
+    "costCodeId": {
+      "@id": "agave:cost_code_id",
+      "@type": "xsd:string"
+    },
+    "description": "schema:description",
+    "originalAmount": {
+      "@id": "agave:original_amount",
+      "@type": "xsd:decimal"
+    },
+    "revisedAmount": {
+      "@id": "agave:revised_amount",
+      "@type": "xsd:decimal"
+    },
+    "actualCost": {
+      "@id": "agave:actual_cost",
+      "@type": "xsd:decimal"
+    },
+    "projectedCost": {
+      "@id": "agave:projected_cost",
+      "@type": "xsd:decimal"
+    },
+    "LinkSessionRequest": "agave:LinkSessionRequest",
+    "referenceId": {
+      "@id": "agave:reference_id",
+      "@type": "xsd:string"
+    },
+    "redirectUrl": {
+      "@id": "agave:redirect_url",
+      "@type": "xsd:string"
+    },
+    "VendorList": "agave:VendorList",
+    "LinkSession": "agave:LinkSession",
+    "linkToken": {
+      "@id": "agave:link_token",
+      "@type": "xsd:string"
+    },
+    "expiresAt": {
+      "@id": "agave:expires_at",
+      "@type": "xsd:dateTime"
+    },
+    "ProjectList": "agave:ProjectList",
+    "Timesheet": "agave:Timesheet",
+    "employeeId": {
+      "@id": "agave:employee_id",
+      "@type": "xsd:string"
+    },
+    "date": {
+      "@id": "agave:date",
+      "@type": "xsd:date"
+    },
+    "regularHours": {
+      "@id": "agave:regular_hours",
+      "@type": "xsd:decimal"
+    },
+    "overtimeHours": {
+      "@id": "agave:overtime_hours",
+      "@type": "xsd:decimal"
+    },
+    "payRate": {
+      "@id": "agave:pay_rate",
+      "@type": "xsd:decimal"
+    },
+    "BudgetList": "agave:BudgetList",
+    "Invoice": "agave:Invoice",
+    "vendorId": {
+      "@id": "agave:vendor_id",
+      "@type": "xsd:string"
+    },
+    "invoiceNumber": {
+      "@id": "agave:invoice_number",
+      "@type": "xsd:string"
+    },
+    "amount": {
+      "@id": "agave:amount",
+      "@type": "xsd:decimal"
+    },
+    "invoiceDate": {
+      "@id": "agave:invoice_date",
+      "@type": "xsd:date"
+    },
+    "dueDate": {
+      "@id": "agave:due_date",
+      "@type": "xsd:date"
+    },
+    "Project": "agave:Project",
+    "sourceId": {
+      "@id": "agave:source_id",
+      "@type": "xsd:string"
+    },
+    "address": {
+      "@id": "agave:address",
+      "@type": "xsd:string"
+    },
+    "startDate": {
+      "@id": "agave:start_date",
+      "@type": "xsd:date"
+    },
+    "estimatedCompletionDate": {
+      "@id": "agave:estimated_completion_date",
+      "@type": "xsd:date"
+    },
+    "totalBudget": {
+      "@id": "agave:total_budget",
+      "@type": "xsd:decimal"
+    },
+    "createdAt": "schema:dateCreated",
+    "updatedAt": "schema:dateModified",
+    "Vendor": "agave:Vendor",
+    "email": "schema:email",
+    "phone": {
+      "@id": "agave:phone",
+      "@type": "xsd:string"
+    },
+    "taxId": {
+      "@id": "agave:tax_id",
+      "@type": "xsd:string"
+    },
+    "Employee": "agave:Employee",
+    "firstName": {
+      "@id": "agave:first_name",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "agave:last_name",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "agave:title",
+      "@type": "xsd:string"
+    },
+    "hireDate": {
+      "@id": "agave:hire_date",
+      "@type": "xsd:date"
+    },
+    "InvoiceList": "agave:InvoiceList",
+    "CostCode": "agave:CostCode",
+    "code": {
+      "@id": "agave:code",
+      "@type": "xsd:string"
+    },
+    "costType": {
+      "@id": "agave:cost_type",
+      "@type": "xsd:string"
+    },
+    "InvoiceRequest": "agave:InvoiceRequest"
+  }
+}

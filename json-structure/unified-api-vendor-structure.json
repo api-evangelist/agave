@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/agave/refs/heads/main/json-structure/unified-api-vendor-structure.json",
+  "name": "Vendor",
+  "description": "A vendor or subcontractor record.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Vendor identifier.",
+      "example": "ven-334455"
+    },
+    "name": {
+      "type": "string",
+      "description": "Vendor name.",
+      "example": "ABC Concrete Contractors"
+    },
+    "email": {
+      "type": "string",
+      "description": "Primary vendor contact email.",
+      "example": "admin@abcconcrete.com"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Vendor phone number.",
+      "example": 14155551234
+    },
+    "address": {
+      "type": "string",
+      "description": "Vendor address.",
+      "example": "456 Industrial Blvd, Oakland, CA 94601"
+    },
+    "tax_id": {
+      "type": "string",
+      "description": "Vendor tax identification number.",
+      "example": "12-3456789"
+    },
+    "status": {
+      "type": "string",
+      "description": "Vendor status.",
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "example": "active"
+    }
+  }
+}

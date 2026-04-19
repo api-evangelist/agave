@@ -1,0 +1,182 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Agave Unified Construction API"
+  description: "Shared capability definition for the Agave Unified Construction API covering projects, budgets, contracts, vendors, cost codes, invoices, timesheets, and employees."
+  tags:
+    - Agave
+    - Construction
+    - Integration
+    - Accounting
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      AGAVE_API_KEY: AGAVE_API_KEY
+      AGAVE_SOURCE_SYSTEM_ID: AGAVE_SOURCE_SYSTEM_ID
+
+capability:
+  consumes:
+    - type: http
+      namespace: agave-unified
+      baseUri: https://api.agaveapi.com/v1
+      description: "Agave Unified Construction API."
+      authentication:
+        type: apikey
+        key: API-Key
+        value: "{{AGAVE_API_KEY}}"
+        placement: header
+      resources:
+        - name: projects
+          path: /projects
+          description: "Construction project data."
+          operations:
+            - name: list-projects
+              method: GET
+              description: "List construction projects."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: budgets
+          path: /budgets
+          description: "Project budget line items."
+          operations:
+            - name: list-budgets
+              method: GET
+              description: "List budget line items."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: contracts
+          path: /contracts
+          description: "Prime contracts."
+          operations:
+            - name: list-contracts
+              method: GET
+              description: "List prime contracts."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: vendors
+          path: /vendors
+          description: "Vendor records."
+          operations:
+            - name: list-vendors
+              method: GET
+              description: "List vendors."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: invoices
+          path: /invoices
+          description: "AP invoice management."
+          operations:
+            - name: list-invoices
+              method: GET
+              description: "List invoices."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-invoice
+              method: POST
+              description: "Create a new invoice."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: timesheets
+          path: /timesheets
+          description: "Employee timesheets."
+          operations:
+            - name: list-timesheets
+              method: GET
+              description: "List timesheets."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: employees
+          path: /employees
+          description: "Employee records."
+          operations:
+            - name: list-employees
+              method: GET
+              description: "List employees."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: agave-unified-api
+      resources:
+        - path: /v1/projects
+          name: projects
+          description: "Construction projects."
+          operations:
+            - method: GET
+              name: list-projects
+              description: "List projects."
+              call: "agave-unified.list-projects"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: agave-unified-mcp
+      transport: http
+      tools:
+        - name: list-projects
+          description: "List construction projects from a connected source system."
+          hints:
+            readOnly: true
+            destructive: false
+          call: "agave-unified.list-projects"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-budgets
+          description: "List project budget line items from a connected source system."
+          hints:
+            readOnly: true
+            destructive: false
+          call: "agave-unified.list-budgets"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-invoices
+          description: "List AP invoices from a connected source system."
+          hints:
+            readOnly: true
+            destructive: false
+          call: "agave-unified.list-invoices"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-invoice
+          description: "Create an AP invoice in a connected source system."
+          hints:
+            readOnly: false
+            destructive: false
+          call: "agave-unified.create-invoice"
+          outputParameters:
+            - type: object
+              mapping: "$."

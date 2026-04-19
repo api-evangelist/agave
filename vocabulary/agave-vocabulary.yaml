@@ -1,0 +1,291 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Agave"
+  description: "Unified taxonomy of the Agave construction integration platform covering projects, budgets, contracts, vendors, invoices, timesheets, and employees across 100+ connected construction software systems."
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - namespace: agave-unified
+      name: Agave Unified Construction API
+      version: "1.0"
+      baseUrl: https://api.agaveapi.com/v1
+      status: active
+
+  resources:
+    - name: projects
+      description: "Construction projects from connected source systems."
+      apis:
+        - agave-unified
+      actions:
+        - list
+        - get
+    - name: budgets
+      description: "Project budget line items for job costing and cost tracking."
+      apis:
+        - agave-unified
+      actions:
+        - list
+        - get
+    - name: contracts
+      description: "Prime contracts for construction projects."
+      apis:
+        - agave-unified
+      actions:
+        - list
+        - get
+    - name: vendors
+      description: "Vendor and subcontractor records."
+      apis:
+        - agave-unified
+      actions:
+        - list
+        - get
+    - name: cost-codes
+      description: "Job cost codes for categorizing construction expenses."
+      apis:
+        - agave-unified
+      actions:
+        - list
+        - get
+    - name: invoices
+      description: "Accounts payable invoices from connected systems."
+      apis:
+        - agave-unified
+      actions:
+        - list
+        - get
+        - create
+    - name: timesheets
+      description: "Employee timesheet records for labor tracking."
+      apis:
+        - agave-unified
+      actions:
+        - list
+        - get
+    - name: employees
+      description: "Employee records from connected HR and ERP systems."
+      apis:
+        - agave-unified
+      actions:
+        - list
+        - get
+    - name: link-sessions
+      description: "Agave Link authentication sessions for source system connectivity."
+      apis:
+        - agave-unified
+      actions:
+        - create
+
+  actions:
+    - name: list
+      description: "Retrieve a paginated list of resources from the connected source system."
+      httpMethod: GET
+      pattern: read
+    - name: get
+      description: "Retrieve a single resource by identifier."
+      httpMethod: GET
+      pattern: read
+    - name: create
+      description: "Create a new resource in the connected source system."
+      httpMethod: POST
+      pattern: write
+
+  schemas:
+    core:
+      - name: Project
+        description: "Normalized construction project record from any connected source system."
+        api: agave-unified
+      - name: Budget
+        description: "Budget line item for project cost tracking."
+        api: agave-unified
+      - name: Contract
+        description: "Prime contract record for a construction project."
+        api: agave-unified
+    financial:
+      - name: Invoice
+        description: "Accounts payable invoice from a connected source system."
+        api: agave-unified
+      - name: InvoiceRequest
+        description: "Request payload for creating an AP invoice."
+        api: agave-unified
+    workforce:
+      - name: Employee
+        description: "Normalized employee record from a connected source system."
+        api: agave-unified
+      - name: Timesheet
+        description: "Employee timesheet entry for labor tracking."
+        api: agave-unified
+    vendors:
+      - name: Vendor
+        description: "Vendor or subcontractor record."
+        api: agave-unified
+    costing:
+      - name: CostCode
+        description: "Job cost code for categorizing construction expenses."
+        api: agave-unified
+    auth:
+      - name: LinkSession
+        description: "Agave Link session token for user authentication."
+        api: agave-unified
+
+  parameters:
+    pagination:
+      - name: limit
+        description: "Maximum number of results to return."
+        type: integer
+      - name: cursor
+        description: "Pagination cursor for the next page of results."
+        type: string
+    identifiers:
+      - name: id
+        description: "Agave unified resource identifier."
+        type: string
+      - name: source_id
+        description: "Identifier in the source system."
+        type: string
+    filters:
+      - name: project_id
+        description: "Filter resources by project."
+        type: string
+      - name: date_from
+        description: "Start date for range filters."
+        type: string
+      - name: date_to
+        description: "End date for range filters."
+        type: string
+
+  enums:
+    project-statuses:
+      - active
+      - inactive
+      - completed
+    contract-statuses:
+      - draft
+      - approved
+      - executed
+      - completed
+      - voided
+    invoice-statuses:
+      - draft
+      - submitted
+      - approved
+      - paid
+      - rejected
+    cost-types:
+      - labor
+      - material
+      - equipment
+      - subcontract
+      - other
+    employee-statuses:
+      - active
+      - inactive
+      - terminated
+
+  authentication:
+    schemes:
+      - type: apikey
+        description: "API key passed in the API-Key header for all requests."
+        apis:
+          - agave-unified
+
+capability:
+  workflows:
+    - name: Construction Data Sync
+      file: capabilities/construction-data-sync.yaml
+      description: "Full construction data synchronization covering projects, budgets, contracts, invoices, timesheets, and employees."
+      apisComposed:
+        - agave-unified
+      toolCount: 8
+      personas:
+        - construction-software-engineer
+        - contractor-admin
+
+  personas:
+    - id: construction-software-engineer
+      name: Construction Software Engineer
+      description: "Developer integrating a construction software platform with other systems via Agave's unified API."
+      workflows:
+        - Construction Data Sync
+    - id: contractor-admin
+      name: Contractor Administrator
+      description: "Construction company admin using connected tools to sync financial and project data between systems."
+      workflows:
+        - Construction Data Sync
+
+  domains:
+    - name: Project Management
+      description: "Construction project tracking and management."
+      resources:
+        - projects
+        - contracts
+    - name: Job Costing
+      description: "Budget, cost code, and cost tracking for construction jobs."
+      resources:
+        - budgets
+        - cost-codes
+    - name: Accounts Payable
+      description: "Invoice processing and vendor payment management."
+      resources:
+        - invoices
+        - vendors
+    - name: Workforce
+      description: "Employee and timesheet management."
+      resources:
+        - employees
+        - timesheets
+
+  namespaces:
+    consumed:
+      - agave-unified
+    rest:
+      - name: agave-sync-api
+        port: 8080
+    mcp:
+      - name: agave-sync-mcp
+        port: 9090
+
+  binds:
+    - name: AGAVE_API_KEY
+      description: "Agave API key for authentication."
+      usedIn:
+        - Construction Data Sync
+    - name: AGAVE_SOURCE_SYSTEM_ID
+      description: "Linked account source system identifier header value."
+      usedIn:
+        - Construction Data Sync
+
+crossReference:
+  - resource: projects
+    operations:
+      - list-projects
+    workflows:
+      - Construction Data Sync
+    personas:
+      - construction-software-engineer
+      - contractor-admin
+  - resource: budgets
+    operations:
+      - list-budgets
+    workflows:
+      - Construction Data Sync
+    personas:
+      - contractor-admin
+  - resource: invoices
+    operations:
+      - list-invoices
+      - create-invoice
+    workflows:
+      - Construction Data Sync
+    personas:
+      - contractor-admin
+  - resource: timesheets
+    operations:
+      - list-timesheets
+    workflows:
+      - Construction Data Sync
+    personas:
+      - contractor-admin

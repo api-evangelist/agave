@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/agave/refs/heads/main/json-structure/unified-api-timesheet-structure.json",
+  "name": "Timesheet",
+  "description": "An employee timesheet entry.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Timesheet identifier.",
+      "example": "ts-990011"
+    },
+    "employee_id": {
+      "type": "string",
+      "description": "Employee identifier.",
+      "example": "emp-123456"
+    },
+    "project_id": {
+      "type": "string",
+      "description": "Associated project identifier.",
+      "example": "proj-500123"
+    },
+    "cost_code_id": {
+      "type": "string",
+      "description": "Associated cost code.",
+      "example": "cc-445566"
+    },
+    "date": {
+      "type": "date",
+      "description": "Timesheet date.",
+      "example": "2025-03-15"
+    },
+    "regular_hours": {
+      "type": "double",
+      "description": "Regular hours worked.",
+      "example": 8.0
+    },
+    "overtime_hours": {
+      "type": "double",
+      "description": "Overtime hours worked.",
+      "example": 2.0
+    },
+    "pay_rate": {
+      "type": "double",
+      "description": "Hourly pay rate in USD.",
+      "example": 45.0
+    }
+  }
+}
