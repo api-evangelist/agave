@@ -4,149 +4,51 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Agave
 providerId: agave
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Accounting
   - Construction
   - Integration
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+description: Agave does not publish list prices for its Unified Construction API. Pricing is custom and
+  modular, derived from four variables (systems integrated, number of companies, sync modules, and
+  customizations). All engagements include unlimited users/projects, 1:1 onboarding, post-implementation
+  support, a 99% uptime guarantee with credits, and SOC 2 Type I/II compliance. Contact sales for a
+  quote.
+notes: No public pricing page; values below are placeholders pending a sales quote. Module list reflects
+  Agave's published Sync product packaging (Core required; AP, AR, Workforce, Forecast optional).
+sources:
+  - https://useagave.com/contractors/pricing
 plans:
-  - id: agave-free
-    name: Free
-    type: freemium
-    description: Free entry tier for the Agave API surface. Intended for evaluation, prototyping, and
-      low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://api.agaveapi.com
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://api.agaveapi.com
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Agave Unified Construction API
-      - name: Agave Link Component
-      - name: Agave File Manager Component
-  - id: agave-pro
-    name: Professional
-    type: paid
-    description: Production tier for Agave. Provides higher quotas, priority support, and access to the
-      broader API portfolio. Pricing placeholder; align with the provider's pricing page.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://api.agaveapi.com
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://api.agaveapi.com
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: global
-        domains:
-          - https://api.agaveapi.com
-        unit: 1000
-        price: TBD
-        userMultiplied: false
-    elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Agave Unified Construction API
-      - name: Agave Link Component
-      - name: Agave File Manager Component
-  - id: agave-enterprise
-    name: Enterprise
+  - id: agave-custom
+    name: Custom (Contact Sales)
     type: enterprise
-    description: Custom-negotiated tier for Agave. Includes dedicated capacity, contractual SLAs, security
-      review, data residency options, and named technical account management.
+    description: Quoted engagement for ERP sync. Cost depends on systems integrated, number of companies,
+      modules selected, and customizations. Includes unlimited users/projects, dedicated onboarding,
+      ongoing support, 99% uptime guarantee, SOC 2 Type I/II, and annual penetration testing.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
+      - label: Custom contract
+        name: custom_contract
+        type: subscription
+        metric: contract
         limit: -1
         timeFrame: month
-        geo: configurable
-        domains:
-          - https://api.agaveapi.com
+        geo: global
         unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://api.agaveapi.com
-        unit: 1
-        price: custom
+        price: contact sales
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Agave Unified Construction API
-      - name: Agave Link Component
-      - name: Agave File Manager Component
+      - name: Core module (Projects, Cost Codes, Vendors, Cost Types, Customers, Budgets, Sub Jobs)
+      - name: Accounts Payable module (optional)
+      - name: Accounts Receivable module (optional)
+      - name: Workforce module (optional)
+      - name: Forecast module (optional)
+      - name: Unlimited users and projects
+      - name: 1:1 onboarding with implementation expert
+      - name: Unlimited post-implementation support
+      - name: 99% uptime guarantee with credits
+      - name: SOC 2 Type I & II certification
+      - name: Annual penetration testing
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
