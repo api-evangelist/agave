@@ -5,7 +5,7 @@ tags:
 - Accounting
 - Construction
 - Integration
-type: Contract
+kind: contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2025-03-01'
@@ -230,7 +230,7 @@ common:
   url: json-structure/unified-api-vendor-list-structure.json
 - type: JSONStructure
   url: json-structure/unified-api-vendor-structure.json
-- type: JSON-LD
+- type: JSONLD
   url: json-ld/agave-unified-context.jsonld
 - type: Example
   url: examples/unified-api-budget-example.json
