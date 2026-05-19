@@ -1,0 +1,88 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Agave Unified Construction API — Contracts
+  description: 'Agave Unified Construction API — Contracts. 1 operations. Lead operation: Agave List Contracts. Self-contained
+    Naftiko capability covering one Agave business surface.'
+  tags:
+  - Agave
+  - Contracts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AGAVE_API_KEY: AGAVE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: unified-contracts
+    baseUri: https://api.agaveapi.com/v1
+    description: Agave Unified Construction API — Contracts business capability. Self-contained, no shared references.
+    resources:
+    - name: contracts
+      path: /contracts
+      operations:
+      - name: listcontracts
+        method: GET
+        description: Agave List Contracts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: source_system_id
+          in: header
+          type: string
+          description: The linked account source system identifier.
+          required: true
+        - name: project_id
+          in: query
+          type: string
+          description: Filter by project ID.
+    authentication:
+      type: apikey
+      key: API-Key
+      value: '{{env.AGAVE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: unified-contracts-rest
+    port: 8080
+    description: REST adapter for Agave Unified Construction API — Contracts. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/contracts
+      name: contracts
+      description: REST surface for contracts.
+      operations:
+      - method: GET
+        name: listcontracts
+        description: Agave List Contracts
+        call: unified-contracts.listcontracts
+        with:
+          source_system_id: rest.source_system_id
+          project_id: rest.project_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: unified-contracts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Agave Unified Construction API — Contracts. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: agave-list-contracts
+      description: Agave List Contracts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: unified-contracts.listcontracts
+      with:
+        source_system_id: tools.source_system_id
+        project_id: tools.project_id
+      outputParameters:
+      - type: object
+        mapping: $.

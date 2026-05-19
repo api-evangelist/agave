@@ -81,6 +81,8 @@ apis:
     Agave File Manager is a front-end component that allows users to pick files
     and folders from linked construction software accounts to share with your application.
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/agave-api
 - type: Portal
   url: https://docs.agaveapi.com
 - type: GettingStarted

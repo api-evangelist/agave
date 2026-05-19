@@ -1,0 +1,88 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Agave Unified Construction API — Employees
+  description: 'Agave Unified Construction API — Employees. 1 operations. Lead operation: Agave List Employees. Self-contained
+    Naftiko capability covering one Agave business surface.'
+  tags:
+  - Agave
+  - Employees
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AGAVE_API_KEY: AGAVE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: unified-employees
+    baseUri: https://api.agaveapi.com/v1
+    description: Agave Unified Construction API — Employees business capability. Self-contained, no shared references.
+    resources:
+    - name: employees
+      path: /employees
+      operations:
+      - name: listemployees
+        method: GET
+        description: Agave List Employees
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: source_system_id
+          in: header
+          type: string
+          description: The linked account source system identifier.
+          required: true
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of results to return.
+    authentication:
+      type: apikey
+      key: API-Key
+      value: '{{env.AGAVE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: unified-employees-rest
+    port: 8080
+    description: REST adapter for Agave Unified Construction API — Employees. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/employees
+      name: employees
+      description: REST surface for employees.
+      operations:
+      - method: GET
+        name: listemployees
+        description: Agave List Employees
+        call: unified-employees.listemployees
+        with:
+          source_system_id: rest.source_system_id
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: unified-employees-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Agave Unified Construction API — Employees. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: agave-list-employees
+      description: Agave List Employees
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: unified-employees.listemployees
+      with:
+        source_system_id: tools.source_system_id
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.

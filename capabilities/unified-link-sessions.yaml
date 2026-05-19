@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Agave Unified Construction API — Link Sessions
+  description: 'Agave Unified Construction API — Link Sessions. 1 operations. Lead operation: Agave Create Link Session. Self-contained
+    Naftiko capability covering one Agave business surface.'
+  tags:
+  - Agave
+  - Link Sessions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AGAVE_API_KEY: AGAVE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: unified-link-sessions
+    baseUri: https://api.agaveapi.com/v1
+    description: Agave Unified Construction API — Link Sessions business capability. Self-contained, no shared references.
+    resources:
+    - name: link-sessions
+      path: /link-sessions
+      operations:
+      - name: createlinksession
+        method: POST
+        description: Agave Create Link Session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: API-Key
+      value: '{{env.AGAVE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: unified-link-sessions-rest
+    port: 8080
+    description: REST adapter for Agave Unified Construction API — Link Sessions. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/link-sessions
+      name: link-sessions
+      description: REST surface for link-sessions.
+      operations:
+      - method: POST
+        name: createlinksession
+        description: Agave Create Link Session
+        call: unified-link-sessions.createlinksession
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: unified-link-sessions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Agave Unified Construction API — Link Sessions. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: agave-create-link-session
+      description: Agave Create Link Session
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: unified-link-sessions.createlinksession
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

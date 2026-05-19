@@ -1,0 +1,88 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Agave Unified Construction API — Cost Codes
+  description: 'Agave Unified Construction API — Cost Codes. 1 operations. Lead operation: Agave List Cost Codes. Self-contained
+    Naftiko capability covering one Agave business surface.'
+  tags:
+  - Agave
+  - Cost Codes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AGAVE_API_KEY: AGAVE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: unified-cost-codes
+    baseUri: https://api.agaveapi.com/v1
+    description: Agave Unified Construction API — Cost Codes business capability. Self-contained, no shared references.
+    resources:
+    - name: cost-codes
+      path: /cost-codes
+      operations:
+      - name: listcostcodes
+        method: GET
+        description: Agave List Cost Codes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: source_system_id
+          in: header
+          type: string
+          description: The linked account source system identifier.
+          required: true
+        - name: project_id
+          in: query
+          type: string
+          description: Filter cost codes by project ID.
+    authentication:
+      type: apikey
+      key: API-Key
+      value: '{{env.AGAVE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: unified-cost-codes-rest
+    port: 8080
+    description: REST adapter for Agave Unified Construction API — Cost Codes. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/cost-codes
+      name: cost-codes
+      description: REST surface for cost-codes.
+      operations:
+      - method: GET
+        name: listcostcodes
+        description: Agave List Cost Codes
+        call: unified-cost-codes.listcostcodes
+        with:
+          source_system_id: rest.source_system_id
+          project_id: rest.project_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: unified-cost-codes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Agave Unified Construction API — Cost Codes. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: agave-list-cost-codes
+      description: Agave List Cost Codes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: unified-cost-codes.listcostcodes
+      with:
+        source_system_id: tools.source_system_id
+        project_id: tools.project_id
+      outputParameters:
+      - type: object
+        mapping: $.
