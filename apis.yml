@@ -6,7 +6,7 @@ tags:
 - Construction
 - Integration
 kind: contract
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2025-03-01'
 modified: '2026-04-19'
@@ -28,7 +28,7 @@ apis:
   - Contracts
   - Integration
   - Projects
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.agaveapi.com
   humanURL: https://docs.agaveapi.com/
   properties:
@@ -53,7 +53,7 @@ apis:
   - Construction
   - Front-End
   - OAuth
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.agaveapi.com
   humanURL: https://docs.agaveapi.com/
   properties:
@@ -71,7 +71,7 @@ apis:
   - Documents
   - Files
   - Front-End
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.agaveapi.com
   humanURL: https://docs.agaveapi.com/agave-file-manager/component
   properties:
