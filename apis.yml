@@ -37,7 +37,7 @@ apis:
   - url: https://docs.agaveapi.com/reference
     type: APIReference
   - url: https://docs.agaveapi.com/quickstart
-    type: Quickstart
+    type: GettingStarted
   - type: OpenAPI
     url: openapi/agave-unified-api-openapi.yml
   - url: graphql/agave-graphql.md
@@ -60,7 +60,7 @@ apis:
   - url: https://docs.agaveapi.com/
     type: Documentation
   - url: https://github.com/agave-api/react-agave-link
-    type: SDK
+    type: SDKs
   description: Agave Link is a front-end component that enables users to select source
     systems, authenticate with their construction software accounts, and share data
     with your application, handling OAuth flows for all supported platforms.
@@ -97,7 +97,7 @@ common:
   url: https://www.agaveapi.com/partners/
 - type: GitHubOrganization
   url: https://github.com/agave-api
-- type: SDK
+- type: SDKs
   url: https://github.com/agave-api/react-agave-link
   title: React SDK
 - type: Features
@@ -255,43 +255,43 @@ common:
   url: json-structure/unified-api-vendor-structure.json
 - type: JSONLD
   url: json-ld/agave-unified-context.jsonld
-- type: Example
+- type: Examples
   url: examples/unified-api-budget-example.json
-- type: Example
+- type: Examples
   url: examples/unified-api-budget-list-example.json
-- type: Example
+- type: Examples
   url: examples/unified-api-contract-example.json
-- type: Example
+- type: Examples
   url: examples/unified-api-contract-list-example.json
-- type: Example
+- type: Examples
   url: examples/unified-api-cost-code-example.json
-- type: Example
+- type: Examples
   url: examples/unified-api-cost-code-list-example.json
-- type: Example
+- type: Examples
   url: examples/unified-api-employee-example.json
-- type: Example
+- type: Examples
   url: examples/unified-api-employee-list-example.json
-- type: Example
+- type: Examples
   url: examples/unified-api-invoice-example.json
-- type: Example
+- type: Examples
   url: examples/unified-api-invoice-list-example.json
-- type: Example
+- type: Examples
   url: examples/unified-api-invoice-request-example.json
-- type: Example
+- type: Examples
   url: examples/unified-api-link-session-example.json
-- type: Example
+- type: Examples
   url: examples/unified-api-link-session-request-example.json
-- type: Example
+- type: Examples
   url: examples/unified-api-project-example.json
-- type: Example
+- type: Examples
   url: examples/unified-api-project-list-example.json
-- type: Example
+- type: Examples
   url: examples/unified-api-timesheet-example.json
-- type: Example
+- type: Examples
   url: examples/unified-api-timesheet-list-example.json
-- type: Example
+- type: Examples
   url: examples/unified-api-vendor-example.json
-- type: Example
+- type: Examples
   url: examples/unified-api-vendor-list-example.json
 - type: SpectralRules
   url: rules/agave-spectral-rules.yml
