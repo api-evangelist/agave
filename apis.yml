@@ -81,6 +81,12 @@ apis:
     files and folders from linked construction software accounts to share with your
     application.
 common:
+- type: TrustCenter
+  url: security/agave-trust-center.yml
+- type: DomainSecurity
+  url: security/agave-domain-security.yml
+- type: Authentication
+  url: authentication/agave-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/agave-api
 - type: Portal
@@ -297,3 +303,5 @@ common:
   url: rules/agave-spectral-rules.yml
 - type: Vocabulary
   url: vocabulary/agave-vocabulary.yaml
+- type: Blog
+  url: https://useagave.com/blog

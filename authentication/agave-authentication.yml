@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/agave-unified-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: API-Key
+  description: Agave API key for authentication.
+  sources:
+  - openapi/agave-unified-api-openapi.yml
