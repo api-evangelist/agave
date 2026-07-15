@@ -81,6 +81,8 @@ apis:
     files and folders from linked construction software accounts to share with your
     application.
 common:
+- type: AgenticAccess
+  url: agentic-access/agave-agentic-access.yml
 - type: TrustCenter
   url: security/agave-trust-center.yml
 - type: DomainSecurity
