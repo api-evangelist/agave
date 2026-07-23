@@ -1,0 +1,128 @@
+openapi: 3.0.3
+info:
+  title: Agave Unified Construction Budgets Link Sessions API
+  description: The Agave Unified Construction API provides a single REST API to read and write data from 100+ construction and accounting software systems. It normalizes data across platforms including projects, budgets, contracts, commitments, purchase orders, invoices, cost codes, vendors, timesheets, and employees.
+  version: '1.0'
+  contact:
+    name: Agave API Support
+    url: https://docs.agaveapi.com
+  x-generated-from: documentation
+servers:
+- url: https://api.agaveapi.com/v1
+  description: Production Server
+- url: https://sandbox.agaveapi.com/v1
+  description: Sandbox Server
+security:
+- apiKey: []
+tags:
+- name: Link Sessions
+  description: Agave Link session management for user authentication.
+paths:
+  /link-sessions:
+    post:
+      operationId: createLinkSession
+      summary: Agave Create Link Session
+      description: Create a new Agave Link session token for a user to authenticate with a source system.
+      tags:
+      - Link Sessions
+      requestBody:
+        required: true
+        description: Link session creation payload.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkSessionRequest'
+            examples:
+              createLinkSessionRequestExample:
+                summary: Default createLinkSession request
+                x-microcks-default: true
+                value:
+                  reference_id: '500123'
+                  redirect_url: https://example.com
+      responses:
+        '201':
+          description: Link session created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkSession'
+              examples:
+                createLinkSession201Example:
+                  summary: Default createLinkSession 201 response
+                  x-microcks-default: true
+                  value:
+                    link_token: example_value
+                    reference_id: '500123'
+                    expires_at: '2025-03-15T14:30:00Z'
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                createLinkSession400Example:
+                  summary: Default createLinkSession 400 response
+                  x-microcks-default: true
+                  value:
+                    error: example_value
+                    message: example_value
+                    request_id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    LinkSession:
+      type: object
+      description: An Agave Link session token.
+      properties:
+        link_token:
+          type: string
+          description: Token to initialize the Agave Link component for the user.
+          example: link-token-abc123xyz456
+        reference_id:
+          type: string
+          description: The reference ID associated with this session.
+          example: user-789-procore
+        expires_at:
+          type: string
+          format: date-time
+          description: Timestamp when the link token expires.
+          example: '2025-03-15T16:30:00Z'
+    LinkSessionRequest:
+      type: object
+      description: Request payload for creating an Agave Link session.
+      required:
+      - reference_id
+      properties:
+        reference_id:
+          type: string
+          description: Unique identifier for the user or entity linking their account.
+          example: user-789-procore
+        redirect_url:
+          type: string
+          description: URL to redirect the user to after completing the link flow.
+          example: https://myapp.com/integration/callback
+    Error:
+      type: object
+      description: API error response.
+      properties:
+        error:
+          type: string
+          description: Error code.
+          example: not_found
+        message:
+          type: string
+          description: Human-readable error description.
+          example: The requested resource was not found.
+        request_id:
+          type: string
+          description: Unique request ID for support.
+          example: req-a1b2c3d4e5
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: API-Key
+      description: Agave API key for authentication.

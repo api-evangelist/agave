@@ -1,0 +1,257 @@
+openapi: 3.0.3
+info:
+  title: Agave Unified Construction Budgets Invoices API
+  description: The Agave Unified Construction API provides a single REST API to read and write data from 100+ construction and accounting software systems. It normalizes data across platforms including projects, budgets, contracts, commitments, purchase orders, invoices, cost codes, vendors, timesheets, and employees.
+  version: '1.0'
+  contact:
+    name: Agave API Support
+    url: https://docs.agaveapi.com
+  x-generated-from: documentation
+servers:
+- url: https://api.agaveapi.com/v1
+  description: Production Server
+- url: https://sandbox.agaveapi.com/v1
+  description: Sandbox Server
+security:
+- apiKey: []
+tags:
+- name: Invoices
+  description: Accounts payable invoices and billing.
+paths:
+  /invoices:
+    get:
+      operationId: listInvoices
+      summary: Agave List Invoices
+      description: Retrieve accounts payable invoices from the linked source system.
+      tags:
+      - Invoices
+      parameters:
+      - name: source_system_id
+        in: header
+        required: true
+        description: The linked account source system identifier.
+        schema:
+          type: string
+        example: linked-account-abc123
+      - name: project_id
+        in: query
+        description: Filter by project ID.
+        schema:
+          type: string
+        example: proj-500123
+      responses:
+        '200':
+          description: A list of invoices.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceList'
+              examples:
+                listInvoices200Example:
+                  summary: Default listInvoices 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - {}
+                    next_cursor: example_value
+                    count: 1
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                listInvoices401Example:
+                  summary: Default listInvoices 401 response
+                  x-microcks-default: true
+                  value:
+                    error: example_value
+                    message: example_value
+                    request_id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createInvoice
+      summary: Agave Create Invoice
+      description: Create a new accounts payable invoice in the linked source system.
+      tags:
+      - Invoices
+      parameters:
+      - name: source_system_id
+        in: header
+        required: true
+        description: The linked account source system identifier.
+        schema:
+          type: string
+        example: linked-account-abc123
+      requestBody:
+        required: true
+        description: Invoice creation payload.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceRequest'
+            examples:
+              createInvoiceRequestExample:
+                summary: Default createInvoice request
+                x-microcks-default: true
+                value:
+                  project_id: '500123'
+                  vendor_id: '500123'
+                  invoice_number: example_value
+                  amount: 99.99
+                  invoice_date: '2025-03-15'
+      responses:
+        '201':
+          description: Invoice created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+              examples:
+                createInvoice201Example:
+                  summary: Default createInvoice 201 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    project_id: '500123'
+                    vendor_id: '500123'
+                    invoice_number: example_value
+                    amount: 99.99
+                    status: draft
+                    invoice_date: '2025-03-15'
+                    due_date: '2025-03-15'
+        '400':
+          description: Invalid invoice data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                createInvoice400Example:
+                  summary: Default createInvoice 400 response
+                  x-microcks-default: true
+                  value:
+                    error: example_value
+                    message: example_value
+                    request_id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    InvoiceRequest:
+      type: object
+      description: Request payload for creating an invoice.
+      required:
+      - project_id
+      - vendor_id
+      - invoice_number
+      - amount
+      - invoice_date
+      properties:
+        project_id:
+          type: string
+          description: Project to associate the invoice with.
+          example: proj-500123
+        vendor_id:
+          type: string
+          description: Vendor identifier.
+          example: ven-334455
+        invoice_number:
+          type: string
+          description: Vendor invoice number.
+          example: INV-2025-1042
+        amount:
+          type: number
+          description: Invoice amount in USD.
+          example: 85000.0
+        invoice_date:
+          type: string
+          format: date
+          description: Invoice date.
+          example: '2025-03-01'
+    Invoice:
+      type: object
+      description: An accounts payable invoice.
+      properties:
+        id:
+          type: string
+          description: Invoice identifier.
+          example: inv-667788
+        project_id:
+          type: string
+          description: Associated project identifier.
+          example: proj-500123
+        vendor_id:
+          type: string
+          description: Vendor who issued the invoice.
+          example: ven-334455
+        invoice_number:
+          type: string
+          description: Vendor invoice number.
+          example: INV-2025-1042
+        amount:
+          type: number
+          description: Invoice total amount in USD.
+          example: 85000.0
+        status:
+          type: string
+          description: Invoice processing status.
+          enum:
+          - draft
+          - submitted
+          - approved
+          - paid
+          - rejected
+          example: approved
+        invoice_date:
+          type: string
+          format: date
+          description: Invoice date.
+          example: '2025-03-01'
+        due_date:
+          type: string
+          format: date
+          description: Invoice due date.
+          example: '2025-03-31'
+    Error:
+      type: object
+      description: API error response.
+      properties:
+        error:
+          type: string
+          description: Error code.
+          example: not_found
+        message:
+          type: string
+          description: Human-readable error description.
+          example: The requested resource was not found.
+        request_id:
+          type: string
+          description: Unique request ID for support.
+          example: req-a1b2c3d4e5
+    InvoiceList:
+      type: object
+      description: Paginated list of invoices.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invoice'
+          example:
+          - example_value
+        next_cursor:
+          type: string
+          example: eyJpZCI6MTIzfQ==
+        count:
+          type: integer
+          example: 75
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: API-Key
+      description: Agave API key for authentication.
