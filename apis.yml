@@ -6,7 +6,20 @@ tags:
 - Construction
 - Integration
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/agave.png
 access: 3rd-Party
 created: '2025-03-01'
 modified: '2026-04-19'
@@ -19,33 +32,6 @@ maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 apis:
-- aid: agave:unified-api
-  name: Agave Unified Construction API
-  tags:
-  - Accounting
-  - Budgets
-  - Construction
-  - Contracts
-  - Integration
-  - Projects
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://api.agaveapi.com
-  humanURL: https://docs.agaveapi.com/
-  properties:
-  - url: https://docs.agaveapi.com/
-    type: Documentation
-  - url: https://docs.agaveapi.com/reference
-    type: APIReference
-  - url: https://docs.agaveapi.com/quickstart
-    type: GettingStarted
-  - type: OpenAPI
-    url: openapi/agave-unified-api-openapi.yml
-  - url: graphql/agave-graphql.md
-    type: GraphQL
-  description: The Agave Unified Construction API provides a single REST API to read
-    and write data from 100+ construction and accounting software systems. It normalizes
-    data across platforms covering projects, budgets, contracts, commitments, purchase
-    orders, invoices, cost codes, vendors, timesheets, and employees.
 - aid: agave:agave-link
   name: Agave Link Component
   tags:
@@ -61,9 +47,10 @@ apis:
     type: Documentation
   - url: https://github.com/agave-api/react-agave-link
     type: SDKs
-  description: Agave Link is a front-end component that enables users to select source
-    systems, authenticate with their construction software accounts, and share data
-    with your application, handling OAuth flows for all supported platforms.
+  description: >-
+    Agave Link is a front-end component that enables users to select source systems, authenticate with
+    their construction software accounts, and share data with your application, handling OAuth flows for
+    all supported platforms.
 - aid: agave:agave-file-manager
   name: Agave File Manager Component
   tags:
@@ -77,9 +64,171 @@ apis:
   properties:
   - url: https://docs.agaveapi.com/agave-file-manager/component
     type: Documentation
-  description: Agave File Manager is a front-end component that allows users to pick
-    files and folders from linked construction software accounts to share with your
-    application.
+  description: >-
+    Agave File Manager is a front-end component that allows users to pick files and folders from linked
+    construction software accounts to share with your application.
+- aid: agave:agave-budgets-api
+  name: Agave Budgets API
+  description: Project budget and cost management resources.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Budgets
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-budgets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.agaveapi.com/
+  - type: APIReference
+    url: https://docs.agaveapi.com/reference
+  - type: GettingStarted
+    url: https://docs.agaveapi.com/quickstart
+  - type: GraphQL
+    url: graphql/agave-graphql.md
+- aid: agave:agave-contracts-api
+  name: Agave Contracts API
+  description: Prime contracts and commitment management.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Contracts
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-contracts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.agaveapi.com/
+  - type: APIReference
+    url: https://docs.agaveapi.com/reference
+  - type: GettingStarted
+    url: https://docs.agaveapi.com/quickstart
+  - type: GraphQL
+    url: graphql/agave-graphql.md
+- aid: agave:agave-cost-codes-api
+  name: Agave Cost Codes API
+  description: Job cost codes and cost types.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Cost Codes
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-cost-codes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.agaveapi.com/
+  - type: APIReference
+    url: https://docs.agaveapi.com/reference
+  - type: GettingStarted
+    url: https://docs.agaveapi.com/quickstart
+  - type: GraphQL
+    url: graphql/agave-graphql.md
+- aid: agave:agave-employees-api
+  name: Agave Employees API
+  description: Employee records and workforce management.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Employees
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-employees-api-openapi.yml
+  - type: Documentation
+    url: https://docs.agaveapi.com/
+  - type: APIReference
+    url: https://docs.agaveapi.com/reference
+  - type: GettingStarted
+    url: https://docs.agaveapi.com/quickstart
+  - type: GraphQL
+    url: graphql/agave-graphql.md
+- aid: agave:agave-invoices-api
+  name: Agave Invoices API
+  description: Accounts payable invoices and billing.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-invoices-api-openapi.yml
+  - type: Documentation
+    url: https://docs.agaveapi.com/
+  - type: APIReference
+    url: https://docs.agaveapi.com/reference
+  - type: GettingStarted
+    url: https://docs.agaveapi.com/quickstart
+  - type: GraphQL
+    url: graphql/agave-graphql.md
+- aid: agave:agave-link-sessions-api
+  name: Agave Link Sessions API
+  description: Agave Link session management for user authentication.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Link Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-link-sessions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.agaveapi.com/
+  - type: APIReference
+    url: https://docs.agaveapi.com/reference
+  - type: GettingStarted
+    url: https://docs.agaveapi.com/quickstart
+  - type: GraphQL
+    url: graphql/agave-graphql.md
+- aid: agave:agave-projects-api
+  name: Agave Projects API
+  description: Construction project management resources.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-projects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.agaveapi.com/
+  - type: APIReference
+    url: https://docs.agaveapi.com/reference
+  - type: GettingStarted
+    url: https://docs.agaveapi.com/quickstart
+  - type: GraphQL
+    url: graphql/agave-graphql.md
+- aid: agave:agave-timesheets-api
+  name: Agave Timesheets API
+  description: Employee timesheet and labor tracking.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Timesheets
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-timesheets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.agaveapi.com/
+  - type: APIReference
+    url: https://docs.agaveapi.com/reference
+  - type: GettingStarted
+    url: https://docs.agaveapi.com/quickstart
+  - type: GraphQL
+    url: graphql/agave-graphql.md
+- aid: agave:agave-vendors-api
+  name: Agave Vendors API
+  description: Vendor and subcontractor management.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Vendors
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-vendors-api-openapi.yml
+  - type: Documentation
+    url: https://docs.agaveapi.com/
+  - type: APIReference
+    url: https://docs.agaveapi.com/reference
+  - type: GettingStarted
+    url: https://docs.agaveapi.com/quickstart
+  - type: GraphQL
+    url: graphql/agave-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/agave-agentic-access.yml
