@@ -1,0 +1,1219 @@
+openapi: 3.0.3
+info:
+  title: Agave Unified Construction API
+  description: >-
+    The Agave Unified Construction API provides a single REST API to read and write
+    data from 100+ construction and accounting software systems. It normalizes data
+    across platforms including projects, budgets, contracts, commitments, purchase orders,
+    invoices, cost codes, vendors, timesheets, and employees.
+  version: '1.0'
+  contact:
+    name: Agave API Support
+    url: https://docs.agaveapi.com
+  x-generated-from: documentation
+servers:
+- url: https://api.agaveapi.com/v1
+  description: Production Server
+- url: https://sandbox.agaveapi.com/v1
+  description: Sandbox Server
+tags:
+- name: Projects
+  description: Construction project management resources.
+- name: Budgets
+  description: Project budget and cost management resources.
+- name: Contracts
+  description: Prime contracts and commitment management.
+- name: Vendors
+  description: Vendor and subcontractor management.
+- name: Cost Codes
+  description: Job cost codes and cost types.
+- name: Invoices
+  description: Accounts payable invoices and billing.
+- name: Timesheets
+  description: Employee timesheet and labor tracking.
+- name: Employees
+  description: Employee records and workforce management.
+- name: Link Sessions
+  description: Agave Link session management for user authentication.
+security:
+- apiKey: []
+paths:
+  /projects:
+    get:
+      operationId: listProjects
+      summary: Agave List Projects
+      description: Retrieve a list of construction projects from the linked source system.
+      tags:
+      - Projects
+      parameters:
+      - name: source_system_id
+        in: header
+        description: The linked account source system identifier.
+        required: true
+        schema:
+          type: string
+        example: linked-account-abc123
+      - name: limit
+        in: query
+        description: Maximum number of results to return.
+        schema:
+          type: integer
+        example: 100
+      - name: cursor
+        in: query
+        description: Pagination cursor for the next page of results.
+        schema:
+          type: string
+        example: eyJpZCI6MTIzfQ==
+      responses:
+        '200':
+          description: A paginated list of projects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectList'
+              examples:
+                listProjects200Example:
+                  summary: Default listProjects 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - {}
+                    next_cursor: example_value
+                    count: 1
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                listProjects401Example:
+                  summary: Default listProjects 401 response
+                  x-microcks-default: true
+                  value:
+                    error: example_value
+                    message: example_value
+                    request_id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /projects/{id}:
+    get:
+      operationId: getProject
+      summary: Agave Get Project
+      description: Retrieve a specific construction project by ID.
+      tags:
+      - Projects
+      parameters:
+      - name: source_system_id
+        in: header
+        required: true
+        description: The linked account source system identifier.
+        schema:
+          type: string
+        example: linked-account-abc123
+      - name: id
+        in: path
+        required: true
+        description: Project identifier.
+        schema:
+          type: string
+        example: proj-500123
+      responses:
+        '200':
+          description: Project details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+              examples:
+                getProject200Example:
+                  summary: Default getProject 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    source_id: '500123'
+                    name: Example Name
+                    number: example_value
+                    status: active
+                    address: example_value
+                    start_date: '2025-03-15'
+                    estimated_completion_date: '2025-03-15'
+                    total_budget: 99.99
+                    created_at: '2025-03-15T14:30:00Z'
+                    updated_at: '2025-03-15T14:30:00Z'
+        '404':
+          description: Project not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                getProject404Example:
+                  summary: Default getProject 404 response
+                  x-microcks-default: true
+                  value:
+                    error: example_value
+                    message: example_value
+                    request_id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /budgets:
+    get:
+      operationId: listBudgets
+      summary: Agave List Budgets
+      description: Retrieve budget line items for projects in the linked source system.
+      tags:
+      - Budgets
+      parameters:
+      - name: source_system_id
+        in: header
+        required: true
+        description: The linked account source system identifier.
+        schema:
+          type: string
+        example: linked-account-abc123
+      - name: project_id
+        in: query
+        description: Filter budgets by project ID.
+        schema:
+          type: string
+        example: proj-500123
+      - name: limit
+        in: query
+        description: Maximum number of results to return.
+        schema:
+          type: integer
+        example: 100
+      responses:
+        '200':
+          description: A list of budget line items.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetList'
+              examples:
+                listBudgets200Example:
+                  summary: Default listBudgets 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - {}
+                    next_cursor: example_value
+                    count: 1
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                listBudgets401Example:
+                  summary: Default listBudgets 401 response
+                  x-microcks-default: true
+                  value:
+                    error: example_value
+                    message: example_value
+                    request_id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /contracts:
+    get:
+      operationId: listContracts
+      summary: Agave List Contracts
+      description: Retrieve prime contracts from the linked source system.
+      tags:
+      - Contracts
+      parameters:
+      - name: source_system_id
+        in: header
+        required: true
+        description: The linked account source system identifier.
+        schema:
+          type: string
+        example: linked-account-abc123
+      - name: project_id
+        in: query
+        description: Filter by project ID.
+        schema:
+          type: string
+        example: proj-500123
+      responses:
+        '200':
+          description: A list of contracts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractList'
+              examples:
+                listContracts200Example:
+                  summary: Default listContracts 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - {}
+                    next_cursor: example_value
+                    count: 1
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                listContracts401Example:
+                  summary: Default listContracts 401 response
+                  x-microcks-default: true
+                  value:
+                    error: example_value
+                    message: example_value
+                    request_id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /vendors:
+    get:
+      operationId: listVendors
+      summary: Agave List Vendors
+      description: Retrieve vendors and subcontractors from the linked source system.
+      tags:
+      - Vendors
+      parameters:
+      - name: source_system_id
+        in: header
+        required: true
+        description: The linked account source system identifier.
+        schema:
+          type: string
+        example: linked-account-abc123
+      - name: limit
+        in: query
+        description: Maximum number of results to return.
+        schema:
+          type: integer
+        example: 100
+      responses:
+        '200':
+          description: A list of vendors.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VendorList'
+              examples:
+                listVendors200Example:
+                  summary: Default listVendors 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - {}
+                    next_cursor: example_value
+                    count: 1
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                listVendors401Example:
+                  summary: Default listVendors 401 response
+                  x-microcks-default: true
+                  value:
+                    error: example_value
+                    message: example_value
+                    request_id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /cost-codes:
+    get:
+      operationId: listCostCodes
+      summary: Agave List Cost Codes
+      description: Retrieve job cost codes from the linked source system.
+      tags:
+      - Cost Codes
+      parameters:
+      - name: source_system_id
+        in: header
+        required: true
+        description: The linked account source system identifier.
+        schema:
+          type: string
+        example: linked-account-abc123
+      - name: project_id
+        in: query
+        description: Filter cost codes by project ID.
+        schema:
+          type: string
+        example: proj-500123
+      responses:
+        '200':
+          description: A list of cost codes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostCodeList'
+              examples:
+                listCostCodes200Example:
+                  summary: Default listCostCodes 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - {}
+                    next_cursor: example_value
+                    count: 1
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                listCostCodes401Example:
+                  summary: Default listCostCodes 401 response
+                  x-microcks-default: true
+                  value:
+                    error: example_value
+                    message: example_value
+                    request_id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /invoices:
+    get:
+      operationId: listInvoices
+      summary: Agave List Invoices
+      description: Retrieve accounts payable invoices from the linked source system.
+      tags:
+      - Invoices
+      parameters:
+      - name: source_system_id
+        in: header
+        required: true
+        description: The linked account source system identifier.
+        schema:
+          type: string
+        example: linked-account-abc123
+      - name: project_id
+        in: query
+        description: Filter by project ID.
+        schema:
+          type: string
+        example: proj-500123
+      responses:
+        '200':
+          description: A list of invoices.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceList'
+              examples:
+                listInvoices200Example:
+                  summary: Default listInvoices 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - {}
+                    next_cursor: example_value
+                    count: 1
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                listInvoices401Example:
+                  summary: Default listInvoices 401 response
+                  x-microcks-default: true
+                  value:
+                    error: example_value
+                    message: example_value
+                    request_id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createInvoice
+      summary: Agave Create Invoice
+      description: Create a new accounts payable invoice in the linked source system.
+      tags:
+      - Invoices
+      parameters:
+      - name: source_system_id
+        in: header
+        required: true
+        description: The linked account source system identifier.
+        schema:
+          type: string
+        example: linked-account-abc123
+      requestBody:
+        required: true
+        description: Invoice creation payload.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceRequest'
+            examples:
+              createInvoiceRequestExample:
+                summary: Default createInvoice request
+                x-microcks-default: true
+                value:
+                  project_id: '500123'
+                  vendor_id: '500123'
+                  invoice_number: example_value
+                  amount: 99.99
+                  invoice_date: '2025-03-15'
+      responses:
+        '201':
+          description: Invoice created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+              examples:
+                createInvoice201Example:
+                  summary: Default createInvoice 201 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    project_id: '500123'
+                    vendor_id: '500123'
+                    invoice_number: example_value
+                    amount: 99.99
+                    status: draft
+                    invoice_date: '2025-03-15'
+                    due_date: '2025-03-15'
+        '400':
+          description: Invalid invoice data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                createInvoice400Example:
+                  summary: Default createInvoice 400 response
+                  x-microcks-default: true
+                  value:
+                    error: example_value
+                    message: example_value
+                    request_id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /timesheets:
+    get:
+      operationId: listTimesheets
+      summary: Agave List Timesheets
+      description: Retrieve employee timesheets from the linked source system.
+      tags:
+      - Timesheets
+      parameters:
+      - name: source_system_id
+        in: header
+        required: true
+        description: The linked account source system identifier.
+        schema:
+          type: string
+        example: linked-account-abc123
+      - name: project_id
+        in: query
+        description: Filter timesheets by project ID.
+        schema:
+          type: string
+        example: proj-500123
+      - name: date_from
+        in: query
+        description: Start date for timesheet filter (YYYY-MM-DD).
+        schema:
+          type: string
+          format: date
+        example: '2025-01-01'
+      - name: date_to
+        in: query
+        description: End date for timesheet filter (YYYY-MM-DD).
+        schema:
+          type: string
+          format: date
+        example: '2025-01-31'
+      responses:
+        '200':
+          description: A list of timesheets.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimesheetList'
+              examples:
+                listTimesheets200Example:
+                  summary: Default listTimesheets 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - {}
+                    next_cursor: example_value
+                    count: 1
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                listTimesheets401Example:
+                  summary: Default listTimesheets 401 response
+                  x-microcks-default: true
+                  value:
+                    error: example_value
+                    message: example_value
+                    request_id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /employees:
+    get:
+      operationId: listEmployees
+      summary: Agave List Employees
+      description: Retrieve employee records from the linked source system.
+      tags:
+      - Employees
+      parameters:
+      - name: source_system_id
+        in: header
+        required: true
+        description: The linked account source system identifier.
+        schema:
+          type: string
+        example: linked-account-abc123
+      - name: limit
+        in: query
+        description: Maximum number of results to return.
+        schema:
+          type: integer
+        example: 100
+      responses:
+        '200':
+          description: A list of employees.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeList'
+              examples:
+                listEmployees200Example:
+                  summary: Default listEmployees 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - {}
+                    next_cursor: example_value
+                    count: 1
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                listEmployees401Example:
+                  summary: Default listEmployees 401 response
+                  x-microcks-default: true
+                  value:
+                    error: example_value
+                    message: example_value
+                    request_id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /link-sessions:
+    post:
+      operationId: createLinkSession
+      summary: Agave Create Link Session
+      description: Create a new Agave Link session token for a user to authenticate with a source system.
+      tags:
+      - Link Sessions
+      requestBody:
+        required: true
+        description: Link session creation payload.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkSessionRequest'
+            examples:
+              createLinkSessionRequestExample:
+                summary: Default createLinkSession request
+                x-microcks-default: true
+                value:
+                  reference_id: '500123'
+                  redirect_url: https://example.com
+      responses:
+        '201':
+          description: Link session created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkSession'
+              examples:
+                createLinkSession201Example:
+                  summary: Default createLinkSession 201 response
+                  x-microcks-default: true
+                  value:
+                    link_token: example_value
+                    reference_id: '500123'
+                    expires_at: '2025-03-15T14:30:00Z'
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                createLinkSession400Example:
+                  summary: Default createLinkSession 400 response
+                  x-microcks-default: true
+                  value:
+                    error: example_value
+                    message: example_value
+                    request_id: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: API-Key
+      description: Agave API key for authentication.
+  schemas:
+    Project:
+      type: object
+      description: A construction project record from the linked source system.
+      properties:
+        id:
+          type: string
+          description: Agave unified project identifier.
+          example: proj-500123
+        source_id:
+          type: string
+          description: Project identifier in the source system.
+          example: 12345
+        name:
+          type: string
+          description: Project name.
+          example: Downtown Office Building
+        number:
+          type: string
+          description: Project number or code.
+          example: '2025-001'
+        status:
+          type: string
+          description: Project status.
+          enum:
+          - active
+          - inactive
+          - completed
+          example: active
+        address:
+          type: string
+          description: Project address.
+          example: 123 Main St, San Francisco, CA 94105
+        start_date:
+          type: string
+          format: date
+          description: Project start date.
+          example: '2025-01-15'
+        estimated_completion_date:
+          type: string
+          format: date
+          description: Estimated project completion date.
+          example: '2026-06-30'
+        total_budget:
+          type: number
+          description: Total approved project budget in USD.
+          example: 5000000.00
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was created.
+          example: '2025-01-15T09:00:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the record was last updated.
+          example: '2025-04-01T12:00:00Z'
+    ProjectList:
+      type: object
+      description: Paginated list of projects.
+      properties:
+        data:
+          type: array
+          description: Array of project records.
+          items:
+            $ref: '#/components/schemas/Project'
+          example:
+          - example_value
+        next_cursor:
+          type: string
+          description: Cursor for the next page of results.
+          example: eyJpZCI6MTIzfQ==
+        count:
+          type: integer
+          description: Number of records returned.
+          example: 50
+    Budget:
+      type: object
+      description: A budget line item for a construction project.
+      properties:
+        id:
+          type: string
+          description: Agave budget line item identifier.
+          example: bud-112233
+        project_id:
+          type: string
+          description: Associated project identifier.
+          example: proj-500123
+        cost_code_id:
+          type: string
+          description: Associated cost code identifier.
+          example: cc-445566
+        description:
+          type: string
+          description: Budget line item description.
+          example: Concrete Foundation Work
+        original_amount:
+          type: number
+          description: Original budgeted amount in USD.
+          example: 250000.00
+        revised_amount:
+          type: number
+          description: Revised budget amount including changes.
+          example: 275000.00
+        actual_cost:
+          type: number
+          description: Actual cost incurred to date.
+          example: 180000.00
+        projected_cost:
+          type: number
+          description: Total projected cost at completion.
+          example: 270000.00
+    BudgetList:
+      type: object
+      description: Paginated list of budget line items.
+      properties:
+        data:
+          type: array
+          description: Array of budget records.
+          items:
+            $ref: '#/components/schemas/Budget'
+          example:
+          - example_value
+        next_cursor:
+          type: string
+          description: Cursor for the next page.
+          example: eyJpZCI6MTIzfQ==
+        count:
+          type: integer
+          description: Number of records returned.
+          example: 100
+    Contract:
+      type: object
+      description: A prime contract for a construction project.
+      properties:
+        id:
+          type: string
+          description: Contract identifier.
+          example: con-778899
+        project_id:
+          type: string
+          description: Associated project identifier.
+          example: proj-500123
+        name:
+          type: string
+          description: Contract name.
+          example: Prime Construction Contract
+        number:
+          type: string
+          description: Contract number.
+          example: GC-2025-001
+        status:
+          type: string
+          description: Contract status.
+          enum:
+          - draft
+          - approved
+          - executed
+          - completed
+          - voided
+          example: executed
+        original_value:
+          type: number
+          description: Original contract value in USD.
+          example: 4500000.00
+        revised_value:
+          type: number
+          description: Revised contract value including change orders.
+          example: 4750000.00
+        executed_date:
+          type: string
+          format: date
+          description: Date the contract was executed.
+          example: '2025-01-20'
+    ContractList:
+      type: object
+      description: Paginated list of contracts.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contract'
+          example:
+          - example_value
+        next_cursor:
+          type: string
+          example: eyJpZCI6MTIzfQ==
+        count:
+          type: integer
+          example: 10
+    Vendor:
+      type: object
+      description: A vendor or subcontractor record.
+      properties:
+        id:
+          type: string
+          description: Vendor identifier.
+          example: ven-334455
+        name:
+          type: string
+          description: Vendor name.
+          example: ABC Concrete Contractors
+        email:
+          type: string
+          description: Primary vendor contact email.
+          example: admin@abcconcrete.com
+        phone:
+          type: string
+          description: Vendor phone number.
+          example: 14155551234
+        address:
+          type: string
+          description: Vendor address.
+          example: 456 Industrial Blvd, Oakland, CA 94601
+        tax_id:
+          type: string
+          description: Vendor tax identification number.
+          example: '12-3456789'
+        status:
+          type: string
+          description: Vendor status.
+          enum:
+          - active
+          - inactive
+          example: active
+    VendorList:
+      type: object
+      description: Paginated list of vendors.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vendor'
+          example:
+          - example_value
+        next_cursor:
+          type: string
+          example: eyJpZCI6MTIzfQ==
+        count:
+          type: integer
+          example: 50
+    CostCode:
+      type: object
+      description: A job cost code for categorizing construction costs.
+      properties:
+        id:
+          type: string
+          description: Cost code identifier.
+          example: cc-445566
+        project_id:
+          type: string
+          description: Associated project identifier.
+          example: proj-500123
+        code:
+          type: string
+          description: Cost code value.
+          example: '03-1000'
+        description:
+          type: string
+          description: Cost code description.
+          example: Concrete
+        cost_type:
+          type: string
+          description: Cost type classification.
+          enum:
+          - labor
+          - material
+          - equipment
+          - subcontract
+          - other
+          example: material
+    CostCodeList:
+      type: object
+      description: Paginated list of cost codes.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CostCode'
+          example:
+          - example_value
+        next_cursor:
+          type: string
+          example: eyJpZCI6MTIzfQ==
+        count:
+          type: integer
+          example: 200
+    Invoice:
+      type: object
+      description: An accounts payable invoice.
+      properties:
+        id:
+          type: string
+          description: Invoice identifier.
+          example: inv-667788
+        project_id:
+          type: string
+          description: Associated project identifier.
+          example: proj-500123
+        vendor_id:
+          type: string
+          description: Vendor who issued the invoice.
+          example: ven-334455
+        invoice_number:
+          type: string
+          description: Vendor invoice number.
+          example: INV-2025-1042
+        amount:
+          type: number
+          description: Invoice total amount in USD.
+          example: 85000.00
+        status:
+          type: string
+          description: Invoice processing status.
+          enum:
+          - draft
+          - submitted
+          - approved
+          - paid
+          - rejected
+          example: approved
+        invoice_date:
+          type: string
+          format: date
+          description: Invoice date.
+          example: '2025-03-01'
+        due_date:
+          type: string
+          format: date
+          description: Invoice due date.
+          example: '2025-03-31'
+    InvoiceRequest:
+      type: object
+      description: Request payload for creating an invoice.
+      required:
+      - project_id
+      - vendor_id
+      - invoice_number
+      - amount
+      - invoice_date
+      properties:
+        project_id:
+          type: string
+          description: Project to associate the invoice with.
+          example: proj-500123
+        vendor_id:
+          type: string
+          description: Vendor identifier.
+          example: ven-334455
+        invoice_number:
+          type: string
+          description: Vendor invoice number.
+          example: INV-2025-1042
+        amount:
+          type: number
+          description: Invoice amount in USD.
+          example: 85000.00
+        invoice_date:
+          type: string
+          format: date
+          description: Invoice date.
+          example: '2025-03-01'
+    InvoiceList:
+      type: object
+      description: Paginated list of invoices.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invoice'
+          example:
+          - example_value
+        next_cursor:
+          type: string
+          example: eyJpZCI6MTIzfQ==
+        count:
+          type: integer
+          example: 75
+    Timesheet:
+      type: object
+      description: An employee timesheet entry.
+      properties:
+        id:
+          type: string
+          description: Timesheet identifier.
+          example: ts-990011
+        employee_id:
+          type: string
+          description: Employee identifier.
+          example: emp-123456
+        project_id:
+          type: string
+          description: Associated project identifier.
+          example: proj-500123
+        cost_code_id:
+          type: string
+          description: Associated cost code.
+          example: cc-445566
+        date:
+          type: string
+          format: date
+          description: Timesheet date.
+          example: '2025-03-15'
+        regular_hours:
+          type: number
+          description: Regular hours worked.
+          example: 8.0
+        overtime_hours:
+          type: number
+          description: Overtime hours worked.
+          example: 2.0
+        pay_rate:
+          type: number
+          description: Hourly pay rate in USD.
+          example: 45.00
+    TimesheetList:
+      type: object
+      description: Paginated list of timesheets.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Timesheet'
+          example:
+          - example_value
+        next_cursor:
+          type: string
+          example: eyJpZCI6MTIzfQ==
+        count:
+          type: integer
+          example: 500
+    Employee:
+      type: object
+      description: An employee record.
+      properties:
+        id:
+          type: string
+          description: Employee identifier.
+          example: emp-123456
+        first_name:
+          type: string
+          description: Employee first name.
+          example: John
+        last_name:
+          type: string
+          description: Employee last name.
+          example: Doe
+        email:
+          type: string
+          description: Employee email address.
+          example: john.doe@contractor.com
+        title:
+          type: string
+          description: Employee job title.
+          example: Project Manager
+        status:
+          type: string
+          description: Employment status.
+          enum:
+          - active
+          - inactive
+          - terminated
+          example: active
+        hire_date:
+          type: string
+          format: date
+          description: Date of hire.
+          example: '2020-06-01'
+    EmployeeList:
+      type: object
+      description: Paginated list of employees.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employee'
+          example:
+          - example_value
+        next_cursor:
+          type: string
+          example: eyJpZCI6MTIzfQ==
+        count:
+          type: integer
+          example: 50
+    LinkSessionRequest:
+      type: object
+      description: Request payload for creating an Agave Link session.
+      required:
+      - reference_id
+      properties:
+        reference_id:
+          type: string
+          description: Unique identifier for the user or entity linking their account.
+          example: user-789-procore
+        redirect_url:
+          type: string
+          description: URL to redirect the user to after completing the link flow.
+          example: https://myapp.com/integration/callback
+    LinkSession:
+      type: object
+      description: An Agave Link session token.
+      properties:
+        link_token:
+          type: string
+          description: Token to initialize the Agave Link component for the user.
+          example: link-token-abc123xyz456
+        reference_id:
+          type: string
+          description: The reference ID associated with this session.
+          example: user-789-procore
+        expires_at:
+          type: string
+          format: date-time
+          description: Timestamp when the link token expires.
+          example: '2025-03-15T16:30:00Z'
+    Error:
+      type: object
+      description: API error response.
+      properties:
+        error:
+          type: string
+          description: Error code.
+          example: not_found
+        message:
+          type: string
+          description: Human-readable error description.
+          example: The requested resource was not found.
+        request_id:
+          type: string
+          description: Unique request ID for support.
+          example: req-a1b2c3d4e5

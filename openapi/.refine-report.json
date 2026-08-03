@@ -1,0 +1,30 @@
+{
+  "provider": "agave",
+  "sources": [
+    "agave-budgets-api-openapi.yml",
+    "agave-contracts-api-openapi.yml",
+    "agave-cost-codes-api-openapi.yml",
+    "agave-employees-api-openapi.yml",
+    "agave-invoices-api-openapi.yml",
+    "agave-link-sessions-api-openapi.yml",
+    "agave-projects-api-openapi.yml",
+    "agave-timesheets-api-openapi.yml",
+    "agave-vendors-api-openapi.yml"
+  ],
+  "outputs": [
+    "agave-budgets-api-openapi.yml",
+    "agave-contracts-api-openapi.yml",
+    "agave-cost-codes-api-openapi.yml",
+    "agave-employees-api-openapi.yml",
+    "agave-invoices-api-openapi.yml",
+    "agave-link-sessions-api-openapi.yml",
+    "agave-projects-api-openapi.yml",
+    "agave-timesheets-api-openapi.yml",
+    "agave-vendors-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
