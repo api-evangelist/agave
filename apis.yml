@@ -333,7 +333,7 @@ common:
   - name: CMiC
     description: Integration with CMiC enterprise construction ERP platform.
 - type: OpenAPI
-  url: openapi/agave-unified-api-openapi.yml
+  url: openapi/_original/agave-unified-api-openapi.yml
 - type: JSONSchema
   url: json-schema/unified-api-budget-list-schema.json
 - type: JSONSchema
