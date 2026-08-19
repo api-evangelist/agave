@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Agave Unified Construction Budgets Projects API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "API-Key",
+      "value": "{{API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agave List Projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agaveapi.com/v1/projects",
+            "headers": [
+              {
+                "name": "source_system_id",
+                "value": "linked-account-abc123"
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "Maximum number of results to return."
+              },
+              {
+                "name": "cursor",
+                "value": "eyJpZCI6MTIzfQ==",
+                "type": "query",
+                "description": "Pagination cursor for the next page of results."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of construction projects from the linked source system."
+        },
+        {
+          "info": {
+            "name": "Agave Get Project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agaveapi.com/v1/projects/:id",
+            "headers": [
+              {
+                "name": "source_system_id",
+                "value": "linked-account-abc123"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "proj-500123",
+                "type": "path",
+                "description": "Project identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific construction project by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

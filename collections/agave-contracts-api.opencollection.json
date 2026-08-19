@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Agave Unified Construction Budgets Contracts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "API-Key",
+      "value": "{{API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contracts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agave List Contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agaveapi.com/v1/contracts",
+            "headers": [
+              {
+                "name": "source_system_id",
+                "value": "linked-account-abc123"
+              }
+            ],
+            "params": [
+              {
+                "name": "project_id",
+                "value": "proj-500123",
+                "type": "query",
+                "description": "Filter by project ID."
+              }
+            ]
+          },
+          "docs": "Retrieve prime contracts from the linked source system."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

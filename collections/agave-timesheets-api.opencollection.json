@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Agave Unified Construction Budgets Timesheets API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "API-Key",
+      "value": "{{API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Timesheets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agave List Timesheets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agaveapi.com/v1/timesheets",
+            "headers": [
+              {
+                "name": "source_system_id",
+                "value": "linked-account-abc123"
+              }
+            ],
+            "params": [
+              {
+                "name": "project_id",
+                "value": "proj-500123",
+                "type": "query",
+                "description": "Filter timesheets by project ID."
+              },
+              {
+                "name": "date_from",
+                "value": "2025-01-01",
+                "type": "query",
+                "description": "Start date for timesheet filter (YYYY-MM-DD)."
+              },
+              {
+                "name": "date_to",
+                "value": "2025-01-31",
+                "type": "query",
+                "description": "End date for timesheet filter (YYYY-MM-DD)."
+              }
+            ]
+          },
+          "docs": "Retrieve employee timesheets from the linked source system."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

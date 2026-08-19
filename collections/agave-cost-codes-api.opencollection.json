@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Agave Unified Construction Budgets Cost Codes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "API-Key",
+      "value": "{{API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cost Codes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Agave List Cost Codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.agaveapi.com/v1/cost-codes",
+            "headers": [
+              {
+                "name": "source_system_id",
+                "value": "linked-account-abc123"
+              }
+            ],
+            "params": [
+              {
+                "name": "project_id",
+                "value": "proj-500123",
+                "type": "query",
+                "description": "Filter cost codes by project ID."
+              }
+            ]
+          },
+          "docs": "Retrieve job cost codes from the linked source system."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
