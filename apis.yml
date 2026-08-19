@@ -1,6 +1,7 @@
 aid: agave
 url: https://raw.githubusercontent.com/api-evangelist/agave/refs/heads/main/apis.yml
 name: Agave
+specificationVersion: '0.23'
 tags:
 - Accounting
 - Construction
