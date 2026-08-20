@@ -38,6 +38,10 @@ apis:
   tags:
   - Authentication
   - Construction
+  - Frontend
+  tags_raw:
+  - Authentication
+  - Construction
   - Front-End
   - OAuth
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
@@ -55,6 +59,11 @@ apis:
 - aid: agave:agave-file-manager
   name: Agave File Manager Component
   tags:
+  - Construction
+  - Documents
+  - File
+  - Frontend
+  tags_raw:
   - Construction
   - Documents
   - Files
@@ -182,6 +191,8 @@ apis:
   humanURL: https://docs.agaveapi.com/
   baseURL: https://api.agaveapi.com
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
