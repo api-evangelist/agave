@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Agave Unified Construction Budgets Link Sessions API
   description: The Agave Unified Construction API provides a single REST API to read and write data from 100+ construction and accounting software systems. It normalizes data across platforms including projects, budgets, contracts, commitments, purchase orders, invoices, cost codes, vendors, timesheets, and employees.
@@ -73,6 +73,36 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Error:
+      type: object
+      description: API error response.
+      properties:
+        error:
+          type: string
+          description: Error code.
+          example: not_found
+        message:
+          type: string
+          description: Human-readable error description.
+          example: The requested resource was not found.
+        request_id:
+          type: string
+          description: Unique request ID for support.
+          example: req-a1b2c3d4e5
+    LinkSessionRequest:
+      type: object
+      description: Request payload for creating an Agave Link session.
+      required:
+      - reference_id
+      properties:
+        reference_id:
+          type: string
+          description: Unique identifier for the user or entity linking their account.
+          example: user-789-procore
+        redirect_url:
+          type: string
+          description: URL to redirect the user to after completing the link flow.
+          example: https://myapp.com/integration/callback
     LinkSession:
       type: object
       description: An Agave Link session token.
@@ -90,36 +120,6 @@ components:
           format: date-time
           description: Timestamp when the link token expires.
           example: '2025-03-15T16:30:00Z'
-    LinkSessionRequest:
-      type: object
-      description: Request payload for creating an Agave Link session.
-      required:
-      - reference_id
-      properties:
-        reference_id:
-          type: string
-          description: Unique identifier for the user or entity linking their account.
-          example: user-789-procore
-        redirect_url:
-          type: string
-          description: URL to redirect the user to after completing the link flow.
-          example: https://myapp.com/integration/callback
-    Error:
-      type: object
-      description: API error response.
-      properties:
-        error:
-          type: string
-          description: Error code.
-          example: not_found
-        message:
-          type: string
-          description: Human-readable error description.
-          example: The requested resource was not found.
-        request_id:
-          type: string
-          description: Unique request ID for support.
-          example: req-a1b2c3d4e5
   securitySchemes:
     apiKey:
       type: apiKey

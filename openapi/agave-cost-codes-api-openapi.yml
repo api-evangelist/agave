@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Agave Unified Construction Budgets Cost Codes API
   description: The Agave Unified Construction API provides a single REST API to read and write data from 100+ construction and accounting software systems. It normalizes data across platforms including projects, budgets, contracts, commitments, purchase orders, invoices, cost codes, vendors, timesheets, and employees.
@@ -74,6 +74,38 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CostCodeList:
+      type: object
+      description: Paginated list of cost codes.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CostCode'
+          example:
+          - example_value
+        next_cursor:
+          type: string
+          example: eyJpZCI6MTIzfQ==
+        count:
+          type: integer
+          example: 200
+    Error:
+      type: object
+      description: API error response.
+      properties:
+        error:
+          type: string
+          description: Error code.
+          example: not_found
+        message:
+          type: string
+          description: Human-readable error description.
+          example: The requested resource was not found.
+        request_id:
+          type: string
+          description: Unique request ID for support.
+          example: req-a1b2c3d4e5
     CostCode:
       type: object
       description: A job cost code for categorizing construction costs.
@@ -104,38 +136,6 @@ components:
           - subcontract
           - other
           example: material
-    Error:
-      type: object
-      description: API error response.
-      properties:
-        error:
-          type: string
-          description: Error code.
-          example: not_found
-        message:
-          type: string
-          description: Human-readable error description.
-          example: The requested resource was not found.
-        request_id:
-          type: string
-          description: Unique request ID for support.
-          example: req-a1b2c3d4e5
-    CostCodeList:
-      type: object
-      description: Paginated list of cost codes.
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CostCode'
-          example:
-          - example_value
-        next_cursor:
-          type: string
-          example: eyJpZCI6MTIzfQ==
-        count:
-          type: integer
-          example: 200
   securitySchemes:
     apiKey:
       type: apiKey
