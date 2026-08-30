@@ -1,0 +1,52 @@
+generated: '2026-08-30'
+method: generated
+source: Agave developer docs (docs.agaveapi.com) grounded against operationIds in openapi/_ae-authored/agave-unified-api-from-postman-openapi.yml
+note: "Every operationId referenced in these skills was verified present in the linked OpenAPI, which\
+  \ is itself projected from the Postman collection Agave publishes. Agave publishes no skills or AGENTS.md\
+  \ of its own \u2014 probed 2026-08-30."
+skills:
+- file: agave-link-a-source-system.md
+  name: Link a construction source system to Agave
+  api: openapi/_ae-authored/agave-unified-api-from-postman-openapi.yml
+  operations:
+  - getLinkSourceSystems
+  - postLinkTokenCreate
+  - postLinkTokenExchange
+  - getLinkAccount
+  - getLinkCompanies
+  - getLinkConnection
+- file: agave-read-job-cost-position.md
+  name: Read a project's job-cost position
+  api: openapi/_ae-authored/agave-unified-api-from-postman-openapi.yml
+  operations:
+  - getProjects
+  - getProjectsByProjectId
+  - getBudgetLineItems
+  - getJobCosts
+  - getCostCodes
+  - getCostTypes
+  - getChangeOrders
+  - getCostProjections
+- file: agave-post-ap-invoice.md
+  name: Post an AP invoice with line items into the customer's ERP
+  api: openapi/_ae-authored/agave-unified-api-from-postman-openapi.yml
+  operations:
+  - getVendors
+  - getProjects
+  - getCostCodes
+  - getCostTypes
+  - postApInvoices
+  - postApInvoicesByApInvoiceIdLineItems
+  - getApInvoicesByApInvoiceId
+  - getApInvoicesByApInvoiceIdLineItems
+  - putApInvoicesByApInvoiceId
+  - deleteApInvoicesByApInvoiceId
+- file: agave-subscribe-to-webhooks.md
+  name: Subscribe to Agave webhooks and verify what arrives
+  api: openapi/_ae-authored/agave-unified-api-from-postman-openapi.yml
+  operations:
+  - postWebhooks
+  - getWebhooks
+  - getWebhooksByWebhookId
+  - deleteWebhooksByWebhookId
+  - getLinkSourceSystem

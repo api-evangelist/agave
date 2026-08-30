@@ -1,16 +1,93 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/agave-unified-api-openapi.yml
+generated: '2026-08-30'
+method: searched
+source: https://docs.agaveapi.com/agave-api/headers
+docs:
+- https://docs.agaveapi.com/agave-api/headers
+- https://docs.agaveapi.com/agave-api/identifiers
+- https://docs.agaveapi.com/agave-link/authentication-flow
+- https://docs.agaveapi.com/agave-api/api-versioning
+description: >-
+  Agave's own API authenticates with three static credential headers plus a required version header;
+  there is no OAuth, no bearer token and no token endpoint on the Agave API itself. OAuth exists in
+  the product, but one layer down: Agave Link runs the OAuth dance against each SOURCE SYSTEM
+  (Procore, Autodesk, QuickBooks, ...) on the user's behalf and hands back an opaque Account Token.
+  So a caller holds long-lived, non-expiring, non-scoped credentials that grant whatever the linked
+  user granted — there is nothing to narrow. This artifact replaces an earlier derived profile that
+  recorded a single "API-Key" header scheme; that scheme was an artefact of an API Evangelist-authored
+  spec and does not exist on the live API. Verified live 2026-08-30: GET
+  https://api.agaveapi.com/projects returns 401 {"error":"Invalid API-Version header"}.
 summary:
-  types:
-  - apiKey
-  api_key_in:
-  - header
+  types: [apiKey]
+  api_key_in: [header]
+  oauth2_flows: []
+  credential_count: 3
+  version_header_required: true
+  scopes: none
+  token_expiry: none documented
+  rotation: not documented
 schemes:
-- name: apiKey
+- name: ClientId
   type: apiKey
   in: header
-  parameter: API-Key
-  description: Agave API key for authentication.
-  sources:
-  - openapi/agave-unified-api-openapi.yml
+  parameter: Client-Id
+  required: true
+  format: 36-character UUID
+  issued_by: Agave (api-support@agaveapi.com)
+  description: Identifies the integrating application.
+  sources: [https://docs.agaveapi.com/agave-api/headers]
+- name: ClientSecret
+  type: apiKey
+  in: header
+  parameter: Client-Secret
+  required: true
+  format: 40-character string
+  issued_by: Agave (api-support@agaveapi.com)
+  description: Secret paired with Client-Id. Must never reach a browser.
+  sources: [https://docs.agaveapi.com/agave-api/headers]
+- name: AccountToken
+  type: apiKey
+  in: header
+  parameter: Account-Token
+  required: true
+  required_except: '"Link Token" requests, where it is not applicable'
+  description: >-
+    Per-linked-account token returned after exchanging the Agave Link public token. Selects WHICH
+    end-customer source-system account the request acts against.
+  sources: [https://docs.agaveapi.com/agave-api/headers]
+version_gate:
+  parameter: API-Version
+  required: true
+  current: '2021-11-21'
+  failure: 401 with {"message":"Invalid API-Version header"}
+  note: Enforced before authentication — a request without it fails 401 even with valid credentials.
+scoping_headers:
+- name: Project-Id
+  description: Agave Project UUID, scoping the request to one project in PM/field-service systems. Accepts "*" on some endpoints.
+- name: Company-Id
+  description: Agave Company UUID, used when the user granted cross-company access. Enumerate via /link/companies.
+delegated_auth:
+  mechanism: Agave Link
+  flow: >-
+    Create a Link Token (POST /link/token with a reference_id) -> open the hosted Agave Link component
+    -> the user authenticates with their source system -> onSuccess returns a publicToken -> exchange
+    it (POST /link/token/exchange) for a long-lived Account-Token.
+  docs: https://docs.agaveapi.com/agave-link/authentication-flow
+  reference_id:
+    description: >-
+      Opaque caller-chosen string, max 255 characters, that identifies the integration/user pair. One
+      reference_id belongs to exactly one integration; on-prem and hosted source systems (QuickBooks
+      Desktop, Foundation, Vista, Sage 100/300, ComputerEase, Cheops) require the SAME reference_id to
+      re-authenticate the same user, and a different one yields different Agave ids for the same
+      underlying object.
+    docs: https://docs.agaveapi.com/agave-api/reference-id
+  single_sign_on: https://docs.agaveapi.com/agave-link/single-sign-on
+gaps:
+- No OAuth 2.0 or OpenID Connect on Agave's own API — no authorization or token endpoint, no scopes.
+- No documented credential expiry, rotation procedure, or revocation endpoint for Client-Secret.
+- >-
+  Account tokens can be revoked administratively (POST /admin/accounts/{id}/revoke-tokens appears in
+  Agave's Postman collection) but that operation is not covered in the published docs.
+- Credentials are obtained by emailing api-support@agaveapi.com, not through self-serve issuance.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

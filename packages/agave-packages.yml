@@ -1,0 +1,67 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  npm registry (registry.npmjs.org), PyPI, github.com/agave-api org listing, and
+  https://docs.agaveapi.com/agave-link/component
+note: >-
+  Agave ships no server-side SDK in any language. The only first-party client artifacts are the
+  Agave Link front-end component — distributed as an UNPINNED CDN script — and an archived React
+  wrapper on npm whose last release is 2022-03-01. Every repository in the github.com/agave-api
+  organisation is archived as of this probe (2026-08-30), so the published client-library surface is
+  effectively frozen while the API itself continues to ship (see changelog/agave-changelog.yml).
+packages:
+- language: javascript
+  registry: cdn
+  name: agave-link-init
+  url: https://cdn.agaveapi.com/init.js
+  install: <script src="https://cdn.agaveapi.com/init.js"></script>
+  official: true
+  version: null
+  published: null
+  note: >-
+    Checked 2026-08-30 — HTTP 200, 102,830 bytes, text/javascript. The distribution is UNPINNED: the
+    docs require loading it directly from this URL ("rather than included in a bundle or hosted by
+    you"), the URL carries no version segment, and there is no registry metadata endpoint to query.
+    A consumer cannot tell which build they are executing, and neither can we.
+  docs: https://docs.agaveapi.com/agave-link/component
+- language: javascript
+  registry: npm
+  name: '@agave-api/react-agave-link'
+  url: https://www.npmjs.com/package/@agave-api/react-agave-link
+  install: npm install @agave-api/react-agave-link
+  official: true
+  version: 1.0.0
+  published: '2022-03-01'
+  repository: https://github.com/agave-api/react-agave-link
+  note: >-
+    Read from registry.npmjs.org on 2026-08-30: a single published version, 1.0.0, dated
+    2022-03-01. The backing GitHub repository is ARCHIVED. This React wrapper predates the current
+    API-Version (2021-11-21 is still current, but the platform has shipped continuously through
+    2026), so it is an abandonment signal rather than a maintained SDK.
+  archived: true
+registries_probed:
+- registry: npm
+  query: '@agave-api/react-agave-link'
+  result: found
+- registry: npm
+  query: agave-link (search)
+  result: only @agave-api/react-agave-link is first-party; other "agave" hits are unrelated projects
+- registry: pypi
+  query: agave
+  result: >-
+    404 for agaveapi and agave-api; pypi.org/project/agave/ exists but belongs to Cuenca
+    (github.com/cuenca-mx/agave) and is NOT this company
+- registry: pypi
+  query: agaveapi / agave-api
+  result: not found (HTTP 404)
+- registry: rubygems
+  query: agave
+  result: not probed as first-party — no Ruby SDK referenced anywhere in Agave's docs or GitHub org
+- registry: github
+  query: https://api.github.com/orgs/agave-api/repos
+  result: >-
+    4 repositories, ALL archived — react-agave-link, react-agave-link-example, laravel-ai-bedrock,
+    prism-bedrock. The latter two are AWS Bedrock providers for PHP, not API clients.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

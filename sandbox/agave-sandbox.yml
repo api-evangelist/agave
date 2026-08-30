@@ -1,0 +1,95 @@
+generated: '2026-08-30'
+method: searched
+source: https://docs.agaveapi.com/agave-api/sandbox-environments
+docs:
+- https://docs.agaveapi.com/agave-api/sandbox-environments
+- https://docs.agaveapi.com/agave-link/component
+description: >-
+  Agave's sandbox is NOT a separate Agave environment. There is no sandbox base URL — the host
+  sandbox.agaveapi.com does not resolve (checked 2026-08-30) — and no test-vs-live key prefix. Instead
+  Agave brokers access to each SOURCE SYSTEM's sandbox: the same production api.agaveapi.com
+  credentials are used, and the Link component is told to surface sandbox source systems instead of
+  production ones. That makes the test/live boundary a property of the LINKED ACCOUNT, not of the key,
+  which is an unusual and important distinction for an agent: nothing in the credential tells you
+  whether a write will land in a real ERP.
+environments:
+  base_url: https://api.agaveapi.com
+  separate_sandbox_host: false
+  test_key_prefix: null
+  live_key_prefix: null
+  switch_mechanism: >-
+    Agave Link component options — showSandboxSourceSystems: true and showProductionSourceSystems:
+    false — select which source systems a user may link. Documented at
+    https://docs.agaveapi.com/agave-link/component
+  billing_signal:
+    header: Agave-Billing-Enabled
+    description: >-
+      Response header indicating whether the linked account is treated as a "test" or "production"
+      account for billing. This is the closest thing Agave publishes to a runtime test/live flag.
+link_component_options:
+- name: showSandboxSourceSystems
+  default: false
+  description: When true, displays sandbox Source Systems. Documented as development-only.
+- name: showProductionSourceSystems
+  default: true
+  description: When false, hides production Source Systems.
+- name: sourceSystemEnvironment
+  description: Selects the source-system environment to link against.
+test_values: []
+test_values_note: >-
+  Agave publishes no magic test identifiers, test card numbers, test tokens or fixture values. There
+  is nothing of that shape to capture, and none is invented here. The Postman environment Agave ships
+  (collections/agave-api-provider.postman_environment.json) defines client_id, client_secret and
+  account_token as EMPTY secret variables the developer fills in themselves.
+time_simulation: false
+fixtures: false
+source_system_sandboxes:
+  note: >-
+    Three columns from Agave's published table are preserved: whether the source system offers a
+    self-serve sandbox, whether Agave can grant API access to a sandbox, and whether Agave can grant
+    UI access. Agave notes that API access to sandbox data is broadly available while UI access often
+    is not.
+  self_serve:
+  - Aconex
+  - BIM Track
+  - Procore
+  - QuickBooks Online
+  - ServiceTitan
+  agave_api_access: >-
+    All 36 listed systems — Aconex, Acumatica, Autodesk Build, BIM 360, BIM 360 Field, BIM Track, Box,
+    Cheops, CMiC, COINS, CompanyCam, Dropbox, Egnyte, Fieldwire, Foundation, Google Drive, Housecall
+    Pro, Hubspot, InEight, Jobpac, Jonas Premier, OneDrive, Pipedrive, Primavera Cloud, PlanGrid,
+    Procore, QuickBooks Desktop, QuickBooks Online, Sage 100 Contractor, Sage 300 CRE, Sage Intacct,
+    Salesforce, ServiceTitan, Sharepoint Online, Viewpoint Spectrum, Viewpoint Vista
+  no_agave_ui_access:
+  - Cheops
+  - Foundation
+  - Housecall Pro
+  - Jobpac
+  - Jonas Premier
+  - Primavera Cloud
+  - Sage 100 Contractor
+  - Sage 300 CRE
+  - Sage Intacct
+  - Viewpoint Spectrum
+  - Viewpoint Vista
+  external_sandbox_references:
+  - system: Aconex
+    url: https://ea1.aconex.com
+  - system: Procore
+    url: https://developers.procore.com/documentation/development-environments
+  - system: QuickBooks Online
+    url: https://developer.intuit.com/app/developer/qbo/docs/develop/sandboxes/manage-your-sandboxes
+  - system: ServiceTitan
+    url: https://integration.servicetitan.com
+  gated:
+  - system: COINS
+    note: Requires approval from COINS
+  - system: BIM Track
+    note: Sandbox supported with limitations; contact Agave
+  - system: Aconex
+    note: Sandbox has important limitations; contact Agave
+contact: support@agaveapi.com
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

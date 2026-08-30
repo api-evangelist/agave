@@ -1,4 +1,4 @@
-generated: '2026-07-11'
+generated: '2026-08-30'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
@@ -10,7 +10,7 @@ hosts:
 - host: api.agaveapi.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Oct 16 23:59:59 2026 GMT
+  cert_expires: Mar  3 23:59:59 2027 GMT
   hsts: null
 - host: sandbox.agaveapi.com
   https: false
@@ -18,9 +18,9 @@ domains:
 - domain: agaveapi.com
   dnssec: false
   caa:
+  - 0 issuewild "amazon.com"
   - 0 issue "amazon.com"
   - 0 issue "letsencrypt.org"
-  - 0 issuewild "amazon.com"
   spf: true
   dmarc: true
   dmarc_policy: none

@@ -1,0 +1,103 @@
+generated: '2026-08-30'
+method: searched
+source: https://docs.agaveapi.com/agave-api/webhooks
+docs: https://docs.agaveapi.com/agave-api/webhooks
+spec_type: Webhooks
+asyncapi_published: false
+asyncapi_note: >-
+  Agave publishes no AsyncAPI document. Probed 2026-08-30 — no /asyncapi.yaml or /asyncapi.json on
+  api.agaveapi.com or docs.agaveapi.com, no event-catalog page in the 73-URL docs sitemap, and no
+  event-spec repository in the github.com/agave-api organisation (4 repos, all archived). The webhook
+  surface below is captured from Agave's own webhooks reference; nothing about it is inferred.
+description: >-
+  Agave offers subscription webhooks that relay change events from the connected source system.
+  Subscriptions are created through the same REST API with the same credential headers, and events are
+  POSTed to a caller-supplied callback URL. Coverage is partial and Agave says so plainly: webhooks
+  exist for 7 of the 100+ supported source systems.
+endpoint: https://api.agaveapi.com/webhooks
+operations:
+  create: POST /webhooks
+  list: GET /webhooks
+  delete: DELETE /webhooks/{webhook_id}
+  note: >-
+    Enumerated from the Webhooks group of the Postman collection Agave publishes (4 requests) —
+    collections/agave-api-provider.postman_collection.json
+supported_source_systems:
+- Autodesk Build
+- BIM 360
+- HubSpot
+- Pipedrive
+- Procore
+- QuickBooks Online
+- SharePoint Online
+coverage_note: >-
+  7 of 100+ source systems. Agave directs requests for others to api-support@agaveapi.com. An agent
+  cannot assume event-driven freshness for a given customer without first checking which system that
+  customer linked.
+events:
+- CREATE
+- UPDATE
+- DELETE
+object_types:
+  documented_examples: [file, folder, rfi, submittal, vendor]
+  note: >-
+    Agave's own docs give these as EXAMPLES followed by "etc." and publish no closed list of webhook
+    object types. No fuller list is asserted here.
+subscription:
+  required_headers: [API-Version, Client-Id, Client-Secret, Account-Token]
+  optional_headers:
+  - name: Project-Id
+    note: Required when creating a project-level webhook.
+  body:
+  - field: callback_url
+    type: string
+    required: true
+    description: The URL Agave POSTs events to.
+  - field: event
+    type: string
+    required: true
+    enum: [CREATE, UPDATE, DELETE]
+  - field: type
+    type: string
+    required: true
+    description: The object type to subscribe to (file, folder, rfi, submittal, vendor, ...).
+  - field: authorization_header
+    type: string
+    required: false
+    description: >-
+      If provided, every webhook POST Agave delivers carries this value as its Authorization header.
+      This is the ONLY delivery-authentication mechanism Agave documents.
+event_payload:
+  fields:
+  - id
+  - source_id
+  - callback_url
+  - event
+  - project_id
+  - target
+  - type
+  - source_data
+  target_field: >-
+    The webhook object type followed by either an Agave UUID for one object or "*" for all objects of
+    that type — e.g. "file:*".
+  source_data: >-
+    Present when Include-Source-Data is enabled; carries the raw source-system event payload (Autodesk
+    hook envelopes, Procore payloads, and so on) alongside Agave's normalised fields.
+security_posture:
+  signature_verification: false
+  signature_note: >-
+    Agave publishes NO webhook signing secret, HMAC signature header, or timestamp/replay protection.
+    Delivery authenticity rests entirely on the optional caller-supplied static authorization_header —
+    a shared bearer or basic value echoed on every delivery. A receiver cannot cryptographically
+    verify that a payload came from Agave, and a leaked callback URL plus header is a full forgery
+    path. This is the most consequential security gap on Agave's public API surface.
+  retry_policy: null
+  retry_note: Agave documents no delivery retry schedule, backoff, or dead-letter behaviour.
+  ip_allowlist: null
+testing:
+  suggestion: >-
+    Agave's docs suggest generating a callback URL at webhook.site for testing before pointing the
+    subscription at a real endpoint.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,55 @@
+generated: '2026-08-30'
+method: searched
+status: published
+source: https://useagave.com/agave-mcp
+docs:
+- https://useagave.com/agave-mcp
+- https://useagave.com/blog/ai-analytics-and-mcp
+description: >-
+  Agave MCP is a shipped, named Agave product — "Interact with your ERP & PM data securely in
+  ChatGPT, Claude, or Copilot" — listed in the site navigation, the pricing page and the footer
+  alongside ERP Sync, AP Automation, Expense Management, AI Analytics and Vendor Compliance. It
+  exposes the same read-only construction data as Agave AI Analytics to an assistant the customer
+  already licenses. Agave publishes NO connection details: no endpoint URL, no install command, no
+  package, no tool list, and no MCP page in the developer docs. The only calls to action are "Get
+  started" and "Book a demo", and pricing for it is a platform fee plus seats quoted by sales.
+deployment:
+  mode: remote
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+  note: >-
+    mode is recorded as remote because the product is sold as a connector for ChatGPT, Claude and
+    Microsoft Copilot, all of which accept only a hosted HTTP MCP server — not because a URL was
+    observed. NO ENDPOINT IS RECORDED, deliberately: Agave does not publish one, and guessing a path
+    that happened to answer would read as a verified agent surface. Probed 2026-08-30 and all
+    missed: https://mcp.agaveapi.com/mcp and https://mcp.useagave.com/mcp do not resolve (no DNS
+    record); POST https://api.agaveapi.com/mcp returns HTTP 404
+    {"message":"This route does not exist: 'POST /mcp'"}; docs.agaveapi.com has no MCP page in its
+    sitemap (73 URLs, checked 2026-08-30). Getting the endpoint requires a sales conversation.
+server:
+  name: Agave MCP
+  vendor: Agave Tech, Inc.
+  transport: http
+  url: null
+  auth: unknown
+  access: customer-only — provisioned through sales/onboarding
+tools: []
+tools_note: >-
+  No tool list is published anywhere on Agave's public surface, so none is recorded. The marketing
+  page describes the capability in prose only ("show me all expenses coded to [job]", "what's the
+  current cost-to-complete on the [project]?", "which invoices from [vendor] are still unpaid?").
+  These are example PROMPTS, not tool names, and are not transcribed as tools here.
+capability_notes:
+  read_only: >-
+    Agave states the AI surface is read-only by design — "Agave AI Analytics can never create, edit,
+    or delete records in your ERP or PM systems" — with role-based permissions and employee/payroll
+    records excluded at the integration level so they cannot be queried.
+  data_scope: >-
+    Procore, Autodesk Build and 13+ construction ERPs, via the same integrations that back the REST
+    API.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,217 @@
+generated: '2026-08-30'
+method: searched
+source: https://docs.agaveapi.com/agave-api/headers
+docs:
+- https://docs.agaveapi.com/agave-api/headers
+- https://docs.agaveapi.com/agave-api/pagination
+- https://docs.agaveapi.com/agave-api/api-versioning
+- https://docs.agaveapi.com/agave-api/response-codes
+- https://docs.agaveapi.com/agave-api/async-requests
+- https://docs.agaveapi.com/agave-api/filters
+- https://docs.agaveapi.com/agave-api/source-data
+- https://docs.agaveapi.com/agave-api/passthrough-requests
+description: >-
+  Cross-cutting request/response semantics for the Agave unified construction API, read from Agave's
+  own developer docs on 2026-08-30. Agave's defining convention is that it is a PROXY over 100+
+  source systems, so almost every semantic has two layers - Agave's own, and the connected source
+  system's - and the headers are where that duality is exposed.
+base_url: https://api.agaveapi.com
+authentication:
+  style: static credential headers (no OAuth on Agave's own API)
+  headers:
+  - name: API-Version
+    required: true
+    value: '2021-11-21'
+    note: >-
+      Required on EVERY request. Omitting it returns 401 with a body of
+      {"message": "Invalid API-Version header"}.
+  - name: Client-Id
+    required: true
+    note: 36-character UUID. Issued by Agave (api-support@agaveapi.com).
+  - name: Client-Secret
+    required: true
+    note: 40-character string. Issued by Agave.
+  - name: Account-Token
+    required: true
+    note: Per linked user account. Not used on Link Token requests.
+  - name: Project-Id
+    required: false
+    note: >-
+      Agave Project UUID, for construction PM and field-service source systems. Some endpoints accept
+      Project-Id, "*" to return all project-level records globally.
+  - name: Company-Id
+    required: false
+    note: Agave Company UUID, when the user granted cross-company access. List via /link/companies.
+  see_also: authentication/agave-authentication.yml
+versioning:
+  scheme: date-header
+  header: API-Version
+  current: '2021-11-21'
+  required: true
+  policy_url: https://docs.agaveapi.com/agave-api/api-versioning
+  backward_compatible_changes:
+  - new endpoints
+  - new optional request parameters
+  - new response properties
+  - new values in existing enums
+  - reordered response properties
+  - changed length/format of opaque strings (object ids, error messages)
+  - new error types
+  breaking_change_policy: >-
+    "When we need to introduce breaking changes, we will release a new version of the API to ensure
+    existing clients are not impacted." No sunset window or deprecation notice period is stated.
+pagination:
+  style: page-number
+  params:
+  - name: page
+    in: query
+  - name: per_page
+    in: query
+    default: 10-100 (varies by source system)
+    max: 1000
+    min: 1
+  response_fields:
+    envelope: data
+    meta:
+      current_page: integer
+      has_more_results: 'true | false | null'
+  caveat: >-
+    Some source systems return null for has_more_results. Agave's published instruction is to keep
+    paginating until has_more_results is explicitly false — a null must NOT be treated as the end.
+  docs: https://docs.agaveapi.com/agave-api/pagination
+error_envelope:
+  shape: '{"message": "..."}' 
+  variant: '{"error": "..."} is returned by the API-Version gate (observed live 2026-08-30)'
+  problem_json: false
+  rfc9457: false
+  see_also: errors/agave-problem-types.yml
+request_tracing:
+  header: Agave-Debug-Id
+  description: >-
+    Every response carries a unique debug identifier; Agave asks for it when troubleshooting. The
+    live 404/401 JSON bodies also embed a debug_id field.
+  also: Agave-Request-Id appears in the documented example response.
+idempotency:
+  supported: true
+  confidence: medium
+  evidence: >-
+    Agave's response-codes reference documents 409 Conflict as "The request conflicts with another
+    request (perhaps due to using the same idempotent key)" —
+    https://docs.agaveapi.com/agave-api/response-codes. That is Agave stating its API enforces an
+    idempotency key on writes.
+  header: null
+  header_note: >-
+    Agave names no idempotency header, scope or retention window anywhere in its published docs, and
+    none appears in the 437-request Postman collection it distributes. So the CONTRACT is documented
+    (repeating a key conflicts) but the MECHANISM is not, and a client cannot implement against it
+    from the public docs. This is the single highest-value documentation gap on Agave's API: naming
+    the header would turn a semantic clients must discover by trial into one they can code to.
+  scope: unknown
+  retention: unknown
+field_selection:
+  include_source_data:
+    header: Include-Source-Data
+    default: false
+    description: >-
+      Set true to attach the raw source-system payload alongside Agave's normalised object, or pass a
+      comma-delimited field list to limit what is returned.
+  include_source_data_path:
+    header: Include-Source-Data-Path
+    default: true
+    description: Adds a path key to source_data with the source API path or the raw SQL query executed.
+  exclude_source_data:
+    header: Exclude-Source-Data
+    description: Comma-delimited list of source fields to strip from the response (e.g. BankAcct,RoutingId).
+  docs: https://docs.agaveapi.com/agave-api/source-data
+async:
+  header: Async-Request
+  default: false
+  description: >-
+    Set true and the request returns 202 Accepted immediately with an Agave-Async-Request-Id header;
+    poll /async-requests/{id} for the result.
+  state_header: Agave-Async-Request-State
+  states: [pending, running, executed, failure]
+  lifecycle_headers:
+  - Agave-Async-Request-Started-At
+  - Agave-Async-Request-Finished-At
+  - Agave-Async-Request-Expires-At
+  expiry: >-
+    Results are unavailable after Agave-Async-Request-Expires-At; the docs state the duration is
+    per-request and returned in the header rather than fixed.
+  docs: https://docs.agaveapi.com/agave-api/async-requests
+passthrough:
+  description: >-
+    Agave forwards a request straight to the source system's own API, handling authentication and
+    protocol translation, for capabilities the unified model does not cover.
+  docs: https://docs.agaveapi.com/agave-api/passthrough-requests
+rate_limit_signaling:
+  headers: [Agave-RateLimit-Total, Agave-RateLimit-Remaining, '{SourceSystem}-RateLimit-Total', '{SourceSystem}-RateLimit-Remaining', '{SourceSystem}-RateLimit-ResetsAtTimestamp']
+  status: 429
+  see_also: rate-limits/agave-rate-limits.yml
+other_response_headers:
+- name: Agave-Data-Retrieved-At
+  description: ISO-8601 timestamp of when the data was actually read from the source system — the freshness signal.
+- name: Agave-Warnings
+  description: Non-critical processing warnings, e.g. a Content-Type coerced from form-encoded to JSON.
+- name: Agave-Billing-Id
+  description: Identifier of the billed Linked Company.
+- name: Agave-Billing-Enabled
+  description: Whether this account counts as production (billable) or test.
+tolerance:
+  header: Ignore-Prohibited-Fields
+  default: false
+  description: >-
+    When true, Agave does not error if a CREATE/UPDATE payload carries a field the source system does
+    not support — it drops it instead. An agent doing writes should leave this false so a rejected
+    field surfaces rather than silently vanishing.
+dry_run_mode:
+  supported: false
+  note: >-
+    Agave documents no dry-run, preview or validate-only mode. The nearest available rehearsal is the
+    per-source-system sandbox (sandbox/agave-sandbox.yml), which is a separate environment rather
+    than a flag on a production call.
+reversibility:
+  grade: documented
+  applies_to: write surface
+  read_only: false
+  summary: >-
+    Agave's REST surface is read AND write — 227 of the 427 operations derived from Agave's own
+    Postman collection are POST/PUT/PATCH/DELETE, and DELETE exists for most resources. Reversal is
+    therefore a real question for an agent, and Agave answers only half of it: a DELETE-then-recreate
+    path exists for most objects, but Agave publishes NO undo, restore, void or reversal operation,
+    and NO window inside which a deletion or a posted transaction can be taken back.
+  reversal_operations:
+  - operation: delete-then-recreate
+    method: DELETE + POST on the same collection
+    operation_ids: >-
+      Present for most resources in
+      openapi/_ae-authored/agave-unified-api-from-postman-openapi.yml (64 DELETE operations).
+    window: null
+    note: >-
+      This is compensation, not reversal — the recreated record gets a new Agave id and a new source
+      id, so anything referencing the original breaks. Agave does not document it as an undo path.
+  - operation: revoke-tokens
+    method: POST /admin/accounts/{id}/revoke-tokens
+    window: null
+    note: >-
+      Reverses an ACCOUNT LINK rather than a data write. Present in Agave's Postman collection under
+      Common / Admin.
+  no_reversal_documented:
+  - AP and AR invoice creation and line items
+  - AP and AR payment creation
+  - budget transfers
+  - change orders and change events
+  - purchase orders, prime contracts and subcontracts
+  window_documented: false
+  window_note: >-
+    NO reversal window is stated anywhere in Agave's docs, and none is asserted here. Because Agave
+    writes into a customer's system of record (Procore, Sage, Viewpoint, QuickBooks), the real
+    reversal rules are the SOURCE SYSTEM's — a posted AP invoice in an ERP may be voidable, closable
+    or immutable depending on period-close state, and Agave neither surfaces nor documents which.
+    An agent must treat every Agave financial write as effectively irreversible through Agave.
+  grade_rationale: >-
+    documented (0.4) not verified (1.0) — reversal PATHS exist and are enumerable from the published
+    contract, but no window is stated for any of them.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

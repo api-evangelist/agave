@@ -4,45 +4,125 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Agave
 providerId: agave
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
+modified: '2026-08-30'
+generated: '2026-08-30'
+method: searched
+source: https://docs.agaveapi.com/agave-api/rate-limits
+docs:
+- https://docs.agaveapi.com/agave-api/rate-limits
+- https://docs.agaveapi.com/agave-api/headers
+reconciled: true
 tags:
-  - Accounting
-  - Construction
-  - Integration
-  - Rate Limiting
-description: Agave does not publish numeric rate limits for its Unified Construction API on its public
-  site. Limits and throttling behavior are defined per contract, and downstream sync throughput is
-  generally bounded by each integrated source ERP's own rate limits (Procore, Sage, Viewpoint, etc.)
-  rather than Agave-imposed ceilings. Implementation guidance is provided during 1:1 onboarding.
-notes: No public rate-limit documentation; values below are placeholder defaults pending direct vendor
-  confirmation.
-sources:
-  - https://useagave.com/contractors/pricing
-  - https://docs.agaveapi.com/
+- Accounting
+- Construction
+- Integration
+- Rate Limiting
+description: >-
+  Agave publishes numeric rate limits and returns runtime rate-limit headers. This artifact replaces
+  an earlier generated one that stated "Agave does not publish numeric rate limits" — that was wrong:
+  https://docs.agaveapi.com/agave-api/rate-limits has carried both an Agave-imposed ceiling and a
+  per-source-system table. Agave layers its own limits on top of each connected source system's, and
+  surfaces BOTH in the response headers, which is the useful part for an agent: a caller can read its
+  remaining Agave budget and its remaining Procore/QuickBooks/Intacct budget from the same response.
+limit_count: 4
 responseCodes:
   throttled: 429
   serviceUnavailable: 503
+headers:
+- name: Agave-RateLimit-Total
+  description: The number of requests allowed in a 60-second window.
+- name: Agave-RateLimit-Remaining
+  description: The number of requests remaining in the 60-second window before a 429 is returned.
+- name: '{SourceSystem}-RateLimit-Total'
+  description: >-
+    Total requests allowed against the underlying source system until its limits reset (typically 60
+    seconds). Example observed in the docs - Procore-RateLimit-Total.
+- name: '{SourceSystem}-RateLimit-Remaining'
+  description: Remaining requests against the source system until its limits reset.
+- name: '{SourceSystem}-RateLimit-ResetsAtTimestamp'
+  description: UNIX timestamp at which the source-system rate limits reset.
+retry_after_header: false
+retry_after_note: >-
+  Agave does not document a Retry-After header. The documented client guidance is exponential backoff
+  on 429.
 limits:
-  - name: Source-system passthrough
-    scope: account
-    metric: varies
-    limit: bounded by underlying ERP/source-system rate limits
-    notes: Agave proxies calls to integrated platforms; effective throughput is typically constrained
-      by the source ERP's published limits rather than an Agave-imposed cap.
+- name: Agave per-linked-account request rate
+  scope: linked-account
+  window: 60s
+  limit: 150
+  unit: requests
+  metric: requests per minute per Linked Account
+  applies_to: all source systems
+  source: https://docs.agaveapi.com/agave-api/rate-limits
+- name: Agave global concurrency
+  scope: client
+  limit: 15
+  unit: concurrent requests
+  metric: concurrent requests across all Linked Accounts
+  applies_to: >-
+    Foundation, QuickBooks Desktop, Sage 100 Contractor, Sage 300 CRE, Viewpoint Spectrum, Viewpoint
+    Vista
+  source: https://docs.agaveapi.com/agave-api/rate-limits
+- name: Agave per-linked-account concurrency
+  scope: linked-account
+  limit: 10
+  unit: concurrent requests
+  metric: concurrent requests per Linked Account
+  applies_to: >-
+    Foundation, QuickBooks Desktop, Sage 100 Contractor, Sage 300 CRE, Viewpoint Spectrum, Viewpoint
+    Vista
+  source: https://docs.agaveapi.com/agave-api/rate-limits
+- name: Serial-execution source systems
+  scope: linked-account
+  limit: 5
+  unit: queued requests
+  metric: >-
+    Requests are processed serially with a 90-second maximum execution time and a maximum of 5 queued
+    requests
+  applies_to: QuickBooks Desktop, Sage 100 Contractor, Sage 300 CRE
+  source: https://docs.agaveapi.com/agave-api/rate-limits
+source_system_limits:
+- system: Acumatica
+  limit: Varies by plan (License Monitoring Console)
+- system: Autodesk Build / BIM 360
+  limit: 50-1000 requests per minute depending on endpoint
+- system: CMiC
+  limit: Not published by CMiC; defaults to Agave's 150/min per linked account
+- system: Foundation
+  limit: Not applicable; defaults to Agave's 150/min per linked account
+  concurrency: 10 per linked account / 15 total
+- system: Procore
+  limit: 3,600 requests per hour, per user
+- system: QuickBooks Online
+  limit: 500 requests per minute and 10 concurrent requests, per linked account
+- system: QuickBooks Desktop
+  limit: Serial execution, 90s max execution, max 5 queued
+  concurrency: 10 per linked account / 15 total
+- system: Sage 100 Contractor
+  limit: Serial execution, 90s max execution, max 5 queued
+  concurrency: 10 per linked account / 15 total
+- system: Sage 300 CRE
+  limit: Serial execution, 90s max execution, max 5 queued
+  concurrency: 10 per linked account / 15 total
+- system: Sage Intacct
+  limit: 900 requests per 18 seconds (1,800 per minute)
+- system: Viewpoint Spectrum
+  limit: 10,000 write requests per day
+  concurrency: 10 per linked account / 15 total
+- system: Viewpoint Vista
+  limit: Not applicable; defaults to Agave's 150/min per linked account
+  concurrency: 10 per linked account / 15 total
+introspection:
+  endpoint: /rate-limits
+  description: >-
+    Agave documents a rate limits endpoint that returns the CURRENT rate limits of a Linked Account,
+    so a client can read its budget rather than infer it.
+  source: https://docs.agaveapi.com/agave-api/rate-limits
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter on 429 and 503 responses,
-      honoring any Retry-After header returned.
-  - name: Source-System Pacing
-    description: When syncing against rate-limited ERPs (Procore, Sage Intacct, etc.), pace calls to
-      stay within the source platform's published limits even when Agave does not throttle.
-  - name: Contractual Limits
-    description: Throughput, burst, and concurrency expectations are negotiated as part of the customer
-      contract; contact your Agave implementation expert to raise limits.
+- name: Exponential backoff
+  description: >-
+    Agave's published guidance - "We recommend adding an exponential backoff to your requests to
+    ensure retry requests do not get rate-limited."
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

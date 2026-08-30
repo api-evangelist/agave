@@ -1,0 +1,70 @@
+generated: '2026-08-30'
+method: derived
+source: mcp/agave-mcp.yml + openapi/_ae-authored/agave-unified-api-from-postman-openapi.yml
+status: unbindable
+note: >-
+  Agave ships BOTH an MCP product (Agave MCP) and a large REST surface, so a crosswalk is in scope —
+  but not one row can be bound. Agave publishes no MCP tool list, no MCP endpoint, and no
+  authenticated tools/list is reachable anonymously, so there are zero named tools to bind to the
+  427 REST operations. This file records that divergence explicitly rather than inventing plausible
+  tool names: a fabricated crosswalk would assert an agent contract Agave has not published. It is
+  the artifact to revisit the moment Agave documents its MCP tools.
+surfaces:
+  openapi:
+    file: openapi/_ae-authored/agave-unified-api-from-postman-openapi.yml
+    operations: 427
+    paths: 228
+    gated: false
+    note: >-
+      Derived by API Evangelist from the Postman collection Agave publishes; the verbatim collection
+      is at collections/agave-api-provider.postman_collection.json. Agave publishes no OpenAPI.
+  graphql:
+    endpoint: null
+    gated: n/a
+    note: >-
+      Agave ships no GraphQL API. graphql/agave-schema.graphql in this repo is an API
+      Evangelist-authored CONCEPTUAL model of the REST domain, not a provider endpoint, and it says
+      so in its own header.
+  mcp:
+    url: null
+    gated: true
+    reason: >-
+      Endpoint not published; product is provisioned through sales. tools/list could not be attempted
+      because there is no address to POST to.
+crosswalk: []
+mcp_only: []
+rest_only:
+- capability: Financials Management
+  operations: 267
+  note: >-
+    AP/AR invoices and payments, budgets and budget transfers, change orders and change events, cost
+    codes and cost types, purchase orders, prime contracts, subcontracts, job costs, ledger accounts
+    and journals, timecard entries, WBS, compliance records.
+- capability: Project Management
+  operations: 73
+  note: Projects, RFIs, submittals, drawings, issues, observations, checklists, contacts, locations, work logs, vendors.
+- capability: Common
+  operations: 30
+  note: Link tokens and sessions, source systems, async requests, admin account management, cache repopulation.
+- capability: File Management
+  operations: 21
+  note: Folders, files, file versions, photos.
+- capability: Customer Management
+  operations: 20
+  note: Activities, appointments, customers, leads, opportunities.
+- capability: Service Management
+  operations: 12
+  note: Work orders, service sites, jobs (deprecated).
+- capability: Webhooks
+  operations: 4
+  note: Webhook subscription CRUD — see asyncapi/agave-webhooks.yml.
+coverage:
+  tools_named: 0
+  tools_bound: 0
+  mcp_only: 0
+  rest_operations_total: 427
+  rest_operations_with_tool: 0
+  binding_confidence: none
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,887 @@
+generated: '2026-08-30'
+method: derived
+source: openapi/_ae-authored/agave-unified-api-from-postman-openapi.yml (itself derived from collections/agave-api-provider.postman_collection.json)
+description: 'Entity graph of the Agave unified construction data model, derived from the 228 paths in
+  the OpenAPI projected from Agave''s own Postman collection. Agave''s model is deliberately FLAT: 73
+  top-level collections, each addressed by its own Agave-assigned UUID, with containment expressed as
+  sub-resources (line-items, attachments, versions, contacts, viewpoints) rather than as $ref links between
+  schemas. Cross-entity relationships live in ID FIELDS inside payloads, which the Postman collection
+  does not enumerate, so this file records the containment graph it can prove and does not invent the
+  reference graph it cannot.'
+identity:
+  scheme: Agave-assigned UUID per object, plus the source system's own identifier
+  fields:
+  - field: id
+    description: Agave UUID, stable per linked account. Documented at https://docs.agaveapi.com/agave-api/identifiers
+  - field: source_id
+    description: The object's native identifier in the connected source system.
+  caveat: 'Agave ids are derived per Reference ID: the SAME underlying source-system object linked under
+    a different reference_id yields a DIFFERENT Agave id. Agave states this explicitly at https://docs.agaveapi.com/agave-api/reference-id.
+    An agent must not treat an Agave id as a global key for a real-world object.'
+  prefixes: null
+  prefixes_note: Agave uses bare UUIDs with no type prefix, so an id carries no type information.
+envelope:
+  list: data[] + meta{current_page, has_more_results}
+  single: object
+  raw_passthrough: source_data (opt-in via Include-Source-Data)
+domains:
+- name: Financials Management
+  resources: 267
+  description: AP/AR invoices and payments, budgets and transfers, change orders and events, cost codes
+    and types, purchase orders, prime contracts, subcontracts, job costs, ledger accounts and journals,
+    timecards, WBS, compliance records.
+- name: Project Management
+  resources: 73
+  description: Projects, RFIs, submittals, drawings, issues, observations, checklists, contacts, locations,
+    work logs, vendors.
+- name: Common
+  resources: 30
+  description: Link tokens and sessions, source systems, async requests, admin accounts, cache.
+- name: File Management
+  resources: 21
+  description: Folders, files, file versions, photos.
+- name: Customer Management
+  resources: 20
+  description: Activities, appointments, customers, leads, opportunities.
+- name: Service Management
+  resources: 12
+  description: Work orders, service sites, jobs (deprecated).
+- name: Webhooks
+  resources: 4
+  description: Event subscriptions.
+entities:
+- resource: activities
+  tag: Customer Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 3
+  identifiers:
+  - activity_id
+  sub_resources:
+  - attachments
+- resource: actual-production-quantities
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - actual_production_quantity_id
+  sub_resources: []
+- resource: admin
+  tag: Common
+  methods:
+  - GET
+  - POST
+  path_count: 7
+  identifiers:
+  - id
+  sub_resources:
+  - accounts
+  - events
+  - link-tokens
+  - requests
+  - revoke-tokens
+  - sessions
+- resource: ap-invoices
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 4
+  identifiers:
+  - ap_invoice_id
+  - ap_invoice_line_item_id
+  sub_resources:
+  - line-items
+- resource: ap-payments
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 4
+  identifiers:
+  - ap_payment_id
+  - ap_payment_line_item_id
+  sub_resources:
+  - line-items
+- resource: appointments
+  tag: Customer Management
+  methods:
+  - GET
+  path_count: 2
+  identifiers:
+  - appointment_id
+  sub_resources: []
+- resource: ar-invoices
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 4
+  identifiers:
+  - ar_invoice_id
+  - ar_invoice_line_item_id
+  sub_resources:
+  - line-items
+- resource: ar-payments
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 4
+  identifiers:
+  - ar_payment_id
+  - ar_payment_line_item_id
+  sub_resources:
+  - line-items
+- resource: assets
+  tag: Financials Management
+  methods:
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - asset_id
+  sub_resources: []
+- resource: async-requests
+  tag: Common
+  methods:
+  - GET
+  path_count: 1
+  identifiers:
+  - async_request_id
+  sub_resources: []
+- resource: bank-accounts
+  tag: Financials Management
+  methods:
+  - GET
+  path_count: 2
+  identifiers:
+  - bank_account_id
+  sub_resources: []
+- resource: batches
+  tag: Financials Management
+  methods:
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - batch_id
+  sub_resources: []
+- resource: budget-line-items
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - PATCH
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - budget_line_item_id
+  sub_resources: []
+- resource: budget-production-quantities
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - budget_production_quantity_id
+  sub_resources: []
+- resource: budget-transfers
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  path_count: 4
+  identifiers:
+  - budget_transfer_id
+  - budget_transfer_line_item_id
+  sub_resources:
+  - line-items
+- resource: cache
+  tag: Common
+  methods:
+  - GET
+  - POST
+  path_count: 3
+  identifiers:
+  - cache_id
+  sub_resources:
+  - latest
+  - repopulate
+- resource: change-events
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 5
+  identifiers:
+  - change_event_id
+  - change_event_line_item_id
+  sub_resources:
+  - attachments
+  - line-items
+- resource: change-orders
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - PATCH
+  - POST
+  - PUT
+  path_count: 4
+  identifiers:
+  - change_order_id
+  - change_order_line_item_id
+  sub_resources:
+  - line-items
+- resource: checklist-templates
+  tag: Project Management
+  methods:
+  - GET
+  path_count: 2
+  identifiers:
+  - checklist_template_id
+  sub_resources: []
+- resource: checklists
+  tag: Project Management
+  methods:
+  - GET
+  path_count: 2
+  identifiers:
+  - checklist_id
+  sub_resources: []
+- resource: contacts
+  tag: Project Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - contact_id
+  sub_resources: []
+- resource: coordination-issues
+  tag: Project Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 4
+  identifiers:
+  - coordination_issue_id
+  sub_resources:
+  - attachments
+  - viewpoints
+- resource: cost-codes
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - cost_code_id
+  sub_resources: []
+- resource: cost-projections
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - cost_projection_id
+  sub_resources: []
+- resource: cost-types
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - cost_type_id
+  sub_resources: []
+- resource: customers
+  tag: Customer Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 4
+  identifiers:
+  - contact_id
+  - customer_id
+  sub_resources:
+  - contacts
+- resource: departments
+  tag: Financials Management
+  methods:
+  - GET
+  path_count: 2
+  identifiers:
+  - department_id
+  sub_resources: []
+- resource: drawing-areas
+  tag: Project Management
+  methods:
+  - GET
+  path_count: 2
+  identifiers:
+  - drawing_area_id
+  sub_resources: []
+- resource: drawings
+  tag: Project Management
+  methods:
+  - GET
+  path_count: 4
+  identifiers:
+  - drawing_id
+  - drawing_version_id
+  sub_resources:
+  - versions
+- resource: employees
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - employee_id
+  sub_resources: []
+- resource: estimates
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 4
+  identifiers:
+  - estimate_id
+  - estimate_line_item_id
+  sub_resources:
+  - line-items
+- resource: expenses
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 4
+  identifiers:
+  - expense_id
+  - expense_line_item_id
+  sub_resources:
+  - line-items
+- resource: file-transfers
+  tag: File Management
+  methods:
+  - GET
+  path_count: 1
+  identifiers:
+  - file_transfer_id
+  sub_resources: []
+- resource: files
+  tag: File Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 4
+  identifiers:
+  - file_id
+  - file_version_id
+  sub_resources:
+  - transfer
+  - versions
+- resource: folders
+  tag: File Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 4
+  identifiers:
+  - folder_id
+  sub_resources:
+  - files
+  - transfer
+- resource: inventory-locations
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - inventory_location_id
+  sub_resources: []
+- resource: issues
+  tag: Project Management
+  methods:
+  - GET
+  path_count: 1
+  identifiers: []
+  sub_resources: []
+- resource: item-receipts
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 4
+  identifiers:
+  - item_receipt_id
+  - item_receipt_line_item_id
+  sub_resources:
+  - line-items
+- resource: items
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - item_id
+  sub_resources: []
+- resource: job-costs
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - job_cost_id
+  sub_resources: []
+- resource: jobs
+  tag: Service Management
+  methods:
+  - GET
+  path_count: 2
+  identifiers:
+  - job_id
+  sub_resources: []
+- resource: leads
+  tag: Customer Management
+  methods:
+  - GET
+  path_count: 2
+  identifiers:
+  - lead_id
+  sub_resources: []
+- resource: ledger-accounts
+  tag: Financials Management
+  methods:
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - ledger_account_id
+  sub_resources: []
+- resource: ledger-journal-entries
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 4
+  identifiers:
+  - ledger_journal_entry_id
+  - ledger_journal_entry_line_item_id
+  sub_resources:
+  - line-items
+- resource: ledger-journals
+  tag: Financials Management
+  methods:
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - ledger_journal_id
+  sub_resources: []
+- resource: link
+  tag: Common
+  methods:
+  - GET
+  - POST
+  path_count: 17
+  identifiers: []
+  sub_resources:
+  - account
+  - companies
+  - company
+  - connection
+  - create
+  - debug
+  - edit
+  - exchange
+  - expire
+  - extend
+  - rate-limits
+  - revoke-tokens
+  - session
+  - sessions
+  - source-system
+  - source-systems
+  - token
+  - user
+  - xxx
+- resource: locations
+  tag: Project Management
+  methods:
+  - GET
+  path_count: 2
+  identifiers:
+  - location_id
+  sub_resources: []
+- resource: observations
+  tag: Project Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 3
+  identifiers:
+  - observation_id
+  sub_resources:
+  - attachments
+- resource: opportunities
+  tag: Customer Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - opportunity_id
+  sub_resources: []
+- resource: photos
+  tag: File Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - photo_id
+  sub_resources: []
+- resource: ping
+  tag: Common
+  methods:
+  - GET
+  path_count: 1
+  identifiers: []
+  sub_resources: []
+- resource: prime-contracts
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 5
+  identifiers:
+  - prime_contract_id
+  - prime_contract_line_item_id
+  sub_resources:
+  - change-orders
+  - line-items
+- resource: projects
+  tag: Project Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - project_id
+  sub_resources: []
+- resource: purchase-orders
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - PATCH
+  - POST
+  - PUT
+  path_count: 7
+  identifiers:
+  - purchase_order_compliance_id
+  - purchase_order_id
+  - purchase_order_line_item_id
+  sub_resources:
+  - compliances
+  - line-items
+- resource: rfis
+  tag: Project Management
+  methods:
+  - GET
+  - POST
+  path_count: 4
+  identifiers:
+  - rfi_id
+  sub_resources:
+  - attachments
+  - responses
+- resource: root-folder
+  tag: File Management
+  methods:
+  - GET
+  path_count: 1
+  identifiers: []
+  sub_resources: []
+- resource: service-sites
+  tag: Service Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - service_site_id
+  sub_resources: []
+- resource: specification-sections
+  tag: Project Management
+  methods:
+  - GET
+  path_count: 4
+  identifiers:
+  - specification_section_id
+  - specification_section_version_id
+  sub_resources:
+  - versions
+- resource: sub-jobs
+  tag: Financials Management
+  methods:
+  - GET
+  path_count: 2
+  identifiers:
+  - sub_job_id
+  sub_resources: []
+- resource: subcontract-claims
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 4
+  identifiers:
+  - subcontract_claim_id
+  - subcontract_claim_line_item_id
+  sub_resources:
+  - line-items
+- resource: subcontracts
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 8
+  identifiers:
+  - subcontract_compliance_id
+  - subcontract_id
+  - subcontract_line_item_id
+  sub_resources:
+  - change-orders
+  - compliances
+  - line-items
+- resource: submittal-packages
+  tag: Project Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 3
+  identifiers:
+  - id
+  - submittal_package_id
+  sub_resources: []
+- resource: submittals
+  tag: Project Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 5
+  identifiers:
+  - id
+  - submittal_id
+  sub_resources:
+  - attachments
+  - submittal-reviewers
+- resource: tax-codes
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - tax_code_id
+  sub_resources: []
+- resource: timecard-entries
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - timecard_entry_id
+  sub_resources: []
+- resource: transmittals
+  tag: Project Management
+  methods:
+  - GET
+  path_count: 2
+  identifiers:
+  - transmittal_id
+  sub_resources: []
+- resource: units-of-measure
+  tag: Financials Management
+  methods:
+  - GET
+  path_count: 2
+  identifiers:
+  - unit_of_measure_id
+  sub_resources: []
+- resource: vendors
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - PATCH
+  - POST
+  - PUT
+  path_count: 8
+  identifiers:
+  - contact_id
+  - vendor_compliance_id
+  - vendor_id
+  sub_resources:
+  - compliances
+  - contacts
+  - source_id:3404938
+- resource: wbs
+  tag: Financials Management
+  methods:
+  - GET
+  - POST
+  path_count: 2
+  identifiers:
+  - wbs_id
+  sub_resources: []
+- resource: wbs-segments
+  tag: Financials Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 4
+  identifiers:
+  - wbs_segment_id
+  - wbs_segment_item_id
+  sub_resources:
+  - items
+- resource: webhooks
+  tag: Webhooks
+  methods:
+  - DELETE
+  - GET
+  - POST
+  path_count: 2
+  identifiers:
+  - webhook_id
+  sub_resources: []
+- resource: work-logs
+  tag: Project Management
+  methods:
+  - GET
+  path_count: 1
+  identifiers: []
+  sub_resources: []
+- resource: work-orders
+  tag: Service Management
+  methods:
+  - DELETE
+  - GET
+  - POST
+  - PUT
+  path_count: 2
+  identifiers:
+  - work_order_id
+  sub_resources: []
+relationships: []
+relationships_note: Containment relationships are recorded on each entity as sub_resources — e.g. ap-invoices
+  has_many line-items at /ap-invoices/{ap_invoice_id}/line-items, customers has_many contacts, coordination-issues
+  has_many viewpoints and attachments, drawings has_many versions. belongs_to edges (an invoice's project_id,
+  a budget line's cost_code_id) are carried in request and response BODIES; Agave publishes no schema
+  for those bodies and the Postman collection only supplies per-request examples, so the field-level reference
+  graph is NOT asserted here. Recovering it would require an authenticated crawl, which this pipeline
+  does not perform.
+scoping:
+  project: Project-Id header scopes PM and field-service resources to one Agave project UUID; "*" returns
+    all project-level records on supporting endpoints.
+  company: Company-Id header selects the company when cross-company access was granted.
+  account: Account-Token selects the linked source-system account — the top of every scope chain.
+render: null
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

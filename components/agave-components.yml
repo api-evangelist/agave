@@ -1,0 +1,101 @@
+generated: '2026-08-30'
+method: searched
+source: https://docs.agaveapi.com/agave-link/component
+description: >-
+  Agave ships a client-side embeddable component — Agave Link — that handles the OAuth and credential
+  flows for every supported source system inside the customer's own application. It is the piece that
+  makes the unified API adoptable: the integrating developer never implements Procore, Autodesk,
+  QuickBooks or Sage authentication themselves.
+families:
+- name: Agave Link
+  kind: hosted-embedded-widget
+  docs: https://docs.agaveapi.com/agave-link/component
+  quickstart: https://docs.agaveapi.com/agave-link/quickstart
+  loader:
+    type: cdn-script
+    url: https://cdn.agaveapi.com/init.js
+    snippet: <script src="https://cdn.agaveapi.com/init.js"></script>
+    pinning: unpinned
+    hosting_rule: >-
+      Agave requires the script be loaded directly from cdn.agaveapi.com — "rather than included in a
+      bundle or hosted by you."
+    global: AgaveLink
+  entrypoint: AgaveLink.openLink(options)
+  options:
+  - name: linkToken
+    type: string
+    required: true
+    description: Link token returned by POST /link/token.
+  - name: onSuccess
+    type: function
+    required: true
+    description: Called with the publicToken once a user links an account.
+  - name: onExit
+    type: function
+    required: false
+    description: Called when the user closes the popup or an uncaught exception occurs.
+  - name: showSandboxSourceSystems
+    type: boolean
+    required: false
+    default: false
+  - name: showProductionSourceSystems
+    type: boolean
+    required: false
+    default: true
+  - name: sourceSystem
+    type: string | string[]
+    required: false
+    description: >-
+      Open Link directly into one or more source systems (procore, plangrid, service-titan,
+      quick-books-online, or others from /link/source-systems) instead of the selection screen.
+  - name: sourceSystemEnvironment
+    type: string
+    required: false
+  - name: sourceSystemOptions
+    type: object
+    required: false
+  - name: category
+    type: string
+    required: false
+  - name: primaryColor
+    type: string
+    required: false
+    description: Brand colour for the hosted UI.
+  wrappers:
+  - language: react
+    package: '@agave-api/react-agave-link'
+    registry: npm
+    version: 1.0.0
+    published: '2022-03-01'
+    repository: https://github.com/agave-api/react-agave-link
+    archived: true
+    note: >-
+      First-party React wrapper. Archived on GitHub and unreleased since 2022 — integrate against the
+      CDN script directly rather than this package. See packages/agave-packages.yml.
+  - language: react
+    package: null
+    repository: https://github.com/agave-api/react-agave-link-example
+    archived: true
+    note: Example application, also archived.
+  related_endpoints:
+  - POST /link/token
+  - POST /link/token/exchange
+  - GET /link/source-systems
+  - GET /link/companies
+  - POST /link/sessions
+- name: Agave File Manager
+  kind: hosted-embedded-widget
+  status: docs-page-missing
+  docs: null
+  note: >-
+    apis.yml has carried a "Agave File Manager Component" API entry pointing at
+    https://docs.agaveapi.com/agave-file-manager/component since this repo was created. That URL
+    returns HTTP 404 as of 2026-08-30 and no agave-file-manager path appears in the docs sitemap (73
+    URLs). The underlying capability still exists — the Postman collection Agave publishes carries a
+    File Management group with folders, files, file versions and photos, and Agave Link exposes a
+    "file-picker" session mode — but the component's documentation page has been withdrawn. No
+    replacement URL is asserted here because none is published.
+    Evidence: https://docs.agaveapi.com/agave-file-manager/component -> 404.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

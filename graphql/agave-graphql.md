@@ -1,5 +1,13 @@
 # Agave GraphQL Schema
 
+> **NOT A PROVIDER ENDPOINT.** Agave ships no GraphQL API. This document and
+> `agave-schema.graphql` are an API Evangelist-authored *conceptual* model of the Agave REST domain,
+> written to reason about the data model — they describe nothing Agave serves. The `type: GraphQL`
+> pointers that used to sit on nine `apis.yml` entries were removed on 2026-08-30 for exactly that
+> reason: they asserted a contract the company does not publish. Agave's real machine-readable
+> contract is the Postman collection at
+> `collections/agave-api-provider.postman_collection.json`.
+
 ## Overview
 
 This conceptual GraphQL schema represents the Agave Unified Construction API domain model. Agave provides a single API layer that normalizes data across 100+ construction and accounting software systems including Procore, Autodesk Build, QuickBooks, Sage 100 Contractor, Sage Intacct, Viewpoint Vista, Foundation, ServiceTitan, Acumatica, and CMiC.

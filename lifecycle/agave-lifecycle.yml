@@ -1,0 +1,75 @@
+generated: '2026-08-30'
+method: searched
+source: https://docs.agaveapi.com/agave-api/api-versioning
+versioning:
+  scheme: date-header
+  header: API-Version
+  current: '2021-11-21'
+  required: true
+  docs: https://docs.agaveapi.com/agave-api/api-versioning
+  note: >-
+    The current API version has been 2021-11-21 since launch — nearly five years without a version
+    bump, which is a stability claim rather than a staleness signal given Agave's stated policy of
+    shipping additive changes without a new version. Every request must carry the header; omitting it
+    is a 401, not a default-to-latest.
+change_policy:
+  backward_compatible_without_new_version: true
+  documented_additive_changes:
+  - new API endpoints
+  - new optional request parameters
+  - new response properties
+  - new enum values
+  - reordered response properties
+  - changed length or format of opaque strings (object ids, error messages)
+  - new error types
+  breaking_change_handling: >-
+    "When we need to introduce breaking changes, we will release a new version of the API to ensure
+    existing clients are not impacted."
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    Agave publishes NO deprecation policy, no notice period, and no RFC 8594 Sunset/Deprecation header
+    support. The only deprecation marker found anywhere on its public surface is a resource group
+    literally named "Jobs [Deprecated]" in the Postman collection Agave distributes — a label, with no
+    stated removal date and no migration guidance. No `Deprecation` pointer is emitted for this
+    provider because there is no policy to point at.
+  deprecated_surfaces:
+  - name: Jobs
+    evidence: >-
+      Group "Jobs [Deprecated]" under Service Management in
+      collections/agave-api-provider.postman_collection.json (Agave-published, exported 2024-09-10)
+    replacement: Work Orders (documented alongside it in the same group)
+    sunset_date: null
+deprecated_operations: []
+status_page:
+  url: https://status.agaveapi.com
+  status: 200
+  provider: Oh Dear
+  components:
+  - Developer Docs
+  - API
+  - App Portal
+  - Home Page
+  subscriptions: [Email, Slack, RSS, JSON, XML]
+  history: 7-day incident view plus full history
+  observed: '2026-08-30 — "No problems detected", all four components Online'
+sla:
+  url: null
+  uptime_target: '99% (with credits)'
+  note: >-
+    Agave's contractual 99% uptime guarantee with credits is described in sales material rather than a
+    published SLA document; no SLA URL is served on the public site, so none is asserted here.
+support:
+  email: api-support@agaveapi.com
+  general: support@agaveapi.com
+  contact: contact@agaveapi.com
+changelog: https://useagave.com/product-updates
+see_also:
+- changelog/agave-changelog.yml
+- conventions/agave-conventions.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,130 @@
+generated: '2026-08-30'
+method: derived
+source: >-
+  openapi/_ae-authored/agave-unified-api-from-postman-openapi.yml, Agave's published developer docs,
+  and https://security.agaveapi.com/
+description: >-
+  Which cross-cutting and domain standards the Agave API actually conforms to, judged from the
+  contract and the docs rather than from marketing copy. Agave sits in construction technology, a
+  sector whose data-exchange standards (buildingSMART IFC/BCF, COBie, CSI MasterFormat/UniFormat,
+  agcXML) describe MODELS and DOCUMENTS rather than REST APIs, and Agave's product is deliberately a
+  vendor-normalised layer over 100+ proprietary ERPs — its normalisation vocabulary is its own, not a
+  published standard. No domain-standard conformance is claimed here because none is declared in the
+  contract; that is a neutral finding, not a deduction.
+standards:
+- id: oauth2
+  conforms: false
+  evidence: >-
+    Agave's own API uses static Client-Id / Client-Secret / Account-Token headers. No authorization
+    or token endpoint, no scopes. OAuth is performed by Agave AGAINST the source systems inside Agave
+    Link, and is never exposed to the API caller.
+- id: oidc
+  conforms: false
+  evidence: No OpenID Connect discovery document; /.well-known/openid-configuration returns 403 on the API host.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors are a bare vendor envelope, {"message": "..."} or {"error": "..."}, served as
+    application/json. No type URI, no title/detail/instance, no application/problem+json.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: No /.well-known/security.txt on any Agave host (403 on api.agaveapi.com, 404 elsewhere).
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation header support and no deprecation policy published.
+- id: rfc8615-well-known
+  conforms: false
+  evidence: The entire /.well-known/ namespace returns 403 on api.agaveapi.com and 404 on the docs and marketing hosts.
+- id: pagination
+  conforms: true
+  evidence: >-
+    Documented page/per_page query parameters with a meta.current_page and meta.has_more_results
+    envelope. https://docs.agaveapi.com/agave-api/pagination
+- id: idempotency
+  conforms: partial
+  evidence: >-
+    409 Conflict is documented as arising from "using the same idempotent key"
+    (https://docs.agaveapi.com/agave-api/response-codes), so the server enforces one — but Agave never
+    names the header, its scope or its retention, so a client cannot implement against it.
+- id: rate-limit-headers
+  conforms: true
+  evidence: >-
+    Agave-RateLimit-Total / Agave-RateLimit-Remaining plus per-source-system
+    {SourceSystem}-RateLimit-Total/-Remaining/-ResetsAtTimestamp. Not the IETF RateLimit draft field
+    names, but a real runtime signal.
+- id: ietf-ratelimit-headers-draft
+  conforms: false
+  evidence: Agave uses vendor-prefixed header names, not RateLimit-Limit/Remaining/Reset.
+- id: webhooks-signed-delivery
+  conforms: false
+  evidence: >-
+    No HMAC signature, signing secret or timestamp header on webhook delivery — only an optional
+    caller-supplied static Authorization value. See asyncapi/agave-webhooks.yml.
+- id: openapi
+  conforms: false
+  evidence: >-
+    Agave publishes no OpenAPI. Probed 2026-08-30 across api.agaveapi.com and docs.agaveapi.com:
+    /openapi.json, /openapi.yaml, /swagger.json, /v1/openapi.json, /api-docs, /docs, /redoc all miss.
+    Its machine-readable contract is a Postman Collection v2.1.0 (437 requests) at
+    https://docs.agaveapi.com/postman/AgaveAPI-2024-09-10.zip
+- id: postman-collection-v2.1
+  conforms: true
+  evidence: >-
+    schema https://schema.getpostman.com/json/collection/v2.1.0/collection.json, saved verbatim at
+    collections/agave-api-provider.postman_collection.json
+- id: asyncapi
+  conforms: false
+  evidence: No AsyncAPI document published; webhooks are documented in prose only.
+- id: graphql
+  conforms: false
+  evidence: Agave ships no GraphQL endpoint.
+- id: mcp
+  conforms: partial
+  evidence: >-
+    Agave MCP is a shipped product (https://useagave.com/agave-mcp) but no endpoint, tool list or
+    OAuth resource metadata is published, so conformance to the MCP specification cannot be observed.
+- id: soc2
+  conforms: true
+  evidence: >-
+    SOC 2 named on Agave's trust centre, https://security.agaveapi.com/ (Cloudflare-challenged to
+    non-browser clients; recorded from the earlier probe in security/agave-trust-center.yml).
+- id: gdpr
+  conforms: true
+  evidence: GDPR named on https://security.agaveapi.com/
+domain_standards:
+  sector: construction technology / vertical iPaaS
+  probed:
+  - id: buildingsmart-ifc
+    conforms: false
+    note: >-
+      No IFC entity names, GUIDs or IfcOwnerHistory shapes anywhere in the contract. Agave's scope is
+      project financials and PM records, not model geometry.
+  - id: bcf-api
+    conforms: false
+    note: >-
+      buildingSMART's BCF REST API is the one true REST standard in this sector. Agave's coordination
+      -issues and viewpoints resources (/coordination-issues/{id}/viewpoints) cover the same ground as
+      BCF Topics and Viewpoints, but with Agave's own field names and no BCF version negotiation,
+      /bcf/{version} routing or bcfSnippet/perspective_camera structures. A near miss, not a conformance.
+  - id: cobie
+    conforms: false
+    note: No COBie worksheet or facility-handover shapes in the contract.
+  - id: csi-masterformat-uniformat
+    conforms: false
+    note: >-
+      Cost codes are modelled as free-form source-system codes (/cost-codes, /cost-types) with no
+      MasterFormat or UniFormat division/section identifiers declared.
+  - id: agcxml
+    conforms: false
+    note: No agcXML message types; the contract is JSON over REST.
+  - id: iso-20022
+    conforms: false
+    note: >-
+      Agave moves AP/AR invoices and payments but models them as its own JSON objects, not ISO 20022
+      pain/camt messages.
+  conclusion: >-
+    Reward-only check: Agave's market has candidate standards (BCF API is the closest) and Agave
+    declares none of them. Nothing is invented to fill the slot.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

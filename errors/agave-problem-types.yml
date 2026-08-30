@@ -1,0 +1,89 @@
+generated: '2026-08-30'
+method: searched
+source: https://docs.agaveapi.com/agave-api/response-codes
+docs: https://docs.agaveapi.com/agave-api/response-codes
+format: vendor-json
+rfc9457: false
+envelope:
+  shape: '{"message": "<human-readable string>"}'
+  observed_variant: '{"error": "<human-readable string>"}'
+  observed_note: >-
+    Probed live 2026-08-30 - GET https://api.agaveapi.com/projects without an API-Version header
+    returns 401 {"error":"Invalid API-Version header"}, while GET https://api.agaveapi.com/v1/projects
+    returns 404 {"message":"This route does not exist: 'GET /v1/projects'","debug_id":"..."}. Agave
+    therefore emits TWO error key names, `error` and `message`, and only `message` is documented. A
+    client parsing a single key will read one of the two classes as an empty error.
+  correlation_field: debug_id
+  correlation_header: Agave-Debug-Id
+description: >-
+  Agave standardises every error returned by the 100+ connected source systems into one HTTP status
+  vocabulary, which it states explicitly - "Agave API standardizes all errors returned from Source
+  Systems, allowing you to only need to account for one form of error management in your
+  application." That normalisation is the product. What Agave does NOT publish is a machine-readable
+  error-code registry beneath the HTTP status: there is no error `code`, `type` URI, or enumerated
+  reason list, so a client can tell that a write failed but not why in a way it can branch on.
+problems:
+- status: 400
+  title: Bad Request
+  description: The request was unacceptable, often due to a missing required parameter.
+  retryable: false
+- status: 401
+  title: Unauthorized
+  description: >-
+    No valid API key provided, or the API key does not have permission to perform the request. Also
+    returned when the required API-Version header is missing or wrong.
+  retryable: false
+  remediation: >-
+    Confirm API-Version, Client-Id, Client-Secret and Account-Token are all present. See
+    https://docs.agaveapi.com/agave-api/headers
+- status: 403
+  title: Forbidden
+  description: No valid API key provided, or the API key does not have permissions to perform the request.
+  retryable: false
+  note: Agave documents 401 and 403 with the SAME description, so the two are not distinguishable from the docs.
+- status: 404
+  title: Not Found
+  description: The requested resource does not exist.
+  retryable: false
+- status: 409
+  title: Conflict
+  description: >-
+    The request conflicts with another request, perhaps due to using the same idempotent key. This is
+    the only place Agave acknowledges an idempotency contract; the key's header name is not published.
+  retryable: false
+  see_also: conventions/agave-conventions.yml
+- status: 429
+  title: Too Many Requests
+  description: >-
+    Too many requests hit the API too quickly, or the source system rejected the request. Read
+    Agave-RateLimit-Remaining and {SourceSystem}-RateLimit-Remaining on the response.
+  retryable: true
+  remediation: Exponential backoff, per Agave's published guidance. No Retry-After header is documented.
+  see_also: rate-limits/agave-rate-limits.yml
+- status: 500
+  title: Internal Server Error
+  description: Something went wrong on Agave's end or with the source system's API.
+  retryable: true
+- status: 503
+  title: Service Unavailable
+  description: Something went wrong on Agave's end or with the source system's API.
+  retryable: true
+success_codes:
+- status: 200
+  title: OK
+- status: 201
+  title: Created
+- status: 202
+  title: Accepted
+  note: Returned for Async-Request calls, with Agave-Async-Request-Id set.
+- status: 204
+  title: No Content
+  description: Typically returned when a resource is deleted.
+gaps:
+- No error `code` or `type` field - errors cannot be branched on programmatically beyond the HTTP status.
+- No RFC 9457 application/problem+json media type.
+- 401 and 403 carry identical published descriptions.
+- The `error` vs `message` envelope split is undocumented.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

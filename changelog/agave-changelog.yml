@@ -1,0 +1,83 @@
+generated: '2026-08-30'
+method: searched
+source: https://useagave.com/product-updates
+docs: https://useagave.com/product-updates
+scheme: dated product updates, tagged by product line
+api_version_current: '2021-11-21'
+description: >-
+  Agave publishes a dated product changelog at https://useagave.com/product-updates, paginated (3
+  pages at the time of capture) and filterable by product — ERP Sync, Vendor Compliance, Agave MCP,
+  AI Analytics, Expense Management, AP Automation. It is a PRODUCT changelog, not an API changelog:
+  entries describe portal and workflow features, and none of them state an API-Version change,
+  endpoint addition or field addition. A developer tracking the REST contract has no dated feed to
+  follow — the API version has not moved since 2021-11-21 and additive endpoint changes ship silently
+  by Agave's own stated policy.
+window: recent (most recent page captured 2026-08-30)
+entries:
+- date: '2026-08-24'
+  product: Expense Management
+  title: Coding policies
+  type: addition
+  breaking: false
+  summary: Policy-based rules for how expenses get coded.
+- date: '2026-08-20'
+  product: AP Automation
+  title: Discount date reminders
+  type: addition
+  breaking: false
+  summary: >-
+    Reviewers can be notified about upcoming early-payment discounts so invoices are approved in time
+    to capture the discount.
+- date: '2026-08-10'
+  product: Expense Management
+  title: Expense Management for QuickBooks Online and Viewpoint Spectrum
+  type: addition
+  breaking: false
+  summary: >-
+    Expense Management now syncs to QuickBooks Online and Viewpoint Spectrum; the QBO connection
+    includes coding fields, location and receipt attachments.
+- date: '2026-07-17'
+  product: AP Automation
+  title: Auto-Tagging
+  type: addition
+  breaking: false
+  summary: >-
+    Tags apply themselves from plain-language descriptions during invoice processing, with a preview
+    that tests prompts against recent invoices.
+- date: '2026-06-16'
+  product: AP Automation
+  title: New Bulk Export
+  type: change
+  breaking: false
+  summary: >-
+    Export tool rebuilt with filtering by project, vendor, tag, status, amount and date range,
+    customisable package contents, folder structures and file-naming conventions.
+- date: '2026-05-28'
+  product: AI Analytics
+  title: Introducing AI Dashboards
+  type: addition
+  breaking: false
+  summary: >-
+    Describe a report in plain language and Agnes — Agave's AI — builds an interactive dashboard from
+    live construction data.
+- date: '2026-05-21'
+  product: AP Automation
+  title: Tags
+  type: addition
+  breaking: false
+  summary: Custom tags to organise invoices beyond workflow statuses, with filtering and sorting.
+- date: '2026-05-19'
+  product: AP Automation
+  title: Delivery Tickets
+  type: addition
+  breaking: false
+  summary: >-
+    Delivery tickets and proof-of-delivery documents route to a dedicated inbox tab; Agave AI links
+    them to invoices by matching contracts, vendors, projects or line items.
+api_changelog: null
+api_changelog_note: >-
+  No API-specific changelog or release-notes feed is published on docs.agaveapi.com — its 73-URL
+  sitemap contains no changelog, releases or what's-new page (checked 2026-08-30).
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

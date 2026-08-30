@@ -1,0 +1,83 @@
+generated: '2026-08-30'
+method: probed
+source: live GET of each /.well-known/ path on every Agave host in apis.yml and openapi servers[]
+hit_count: 0
+note: >-
+  No /.well-known/ discovery document is served on any Agave host. Two distinct negative shapes were
+  observed and both are recorded below rather than collapsed. (1) api.agaveapi.com — the real API
+  host, which answers a JSON 404 for unknown routes at the root — returns HTTP 403 with a 520-byte
+  text/html body for EVERY /.well-known/* path, i.e. an edge rule blocks the whole namespace before
+  the application sees it. (2) docs.agaveapi.com (Docusaurus on GitHub Pages) and useagave.com
+  (Webflow) return their ordinary 404 pages. Because nothing returned a 200 carrying a real
+  document, NO WellKnown and NO SecurityTxt pointer is emitted for this provider. The 8,098-byte
+  docs body and the 88-byte useagave.com body are the sites' standard 404 pages, not catch-all 200s.
+hosts:
+- host: https://api.agaveapi.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/api-catalog
+    status: 403
+  - path: /.well-known/ai-plugin.json
+    status: 403
+  - path: /.well-known/agent-card.json
+    status: 403
+  - path: /.well-known/agent.json
+    status: 403
+- host: https://docs.agaveapi.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://useagave.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://sandbox.agaveapi.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 0
+    note: >-
+      Host does not resolve — dig returns no A or CNAME record. This hostname appeared in the
+      servers[] block of the API Evangelist-authored OpenAPI documents in this repo; it was removed
+      from those specs on 2026-08-30 because it is not a host Agave operates.
+soft_404_control:
+  api.agaveapi.com:
+    probe: https://api.agaveapi.com/
+    status: 404
+    body: '{"message":"This route does not exist: ''GET \/\/''", "debug_id": "..."}'
+    note: The API host answers JSON 404s at the root, so its 403 on /.well-known/* is an edge rule, not a soft 404.
+  useagave.com:
+    probe: https://useagave.com/.well-known/api-catalog
+    status: 404
+    bytes: 88
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

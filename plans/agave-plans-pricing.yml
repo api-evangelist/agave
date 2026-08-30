@@ -4,54 +4,84 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Agave
 providerId: agave
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
+method: searched
+modified: '2026-08-30'
+reconciled: true
 tags:
-  - Accounting
-  - Construction
-  - Integration
-description: Agave does not publish list prices for its Unified Construction API. Pricing is custom and
-  modular, derived from four variables (systems integrated, number of companies, sync modules, and
-  customizations). All engagements include unlimited users/projects, 1:1 onboarding, post-implementation
-  support, a 99% uptime guarantee with credits, and SOC 2 Type I/II compliance. Contact sales for a
-  quote.
-notes: No public pricing page; values below are placeholders pending a sales quote. Module list reflects
-  Agave's published Sync product packaging (Core required; AP, AR, Workforce, Forecast optional).
+- Accounting
+- Construction
+- Integration
+description: 'Agave publishes NO list prices and no tiers. The pricing page (https://useagave.com/pricing,
+  HTTP 200 on 2026-08-30 — the older https://www.agaveapi.com/software-vendors/pricing/ now redirects
+  here) describes a three-step sales motion instead: discovery call, personalised demo, custom proposal.
+  Six products are named with their pricing SHAPE but no number attached, so plan_count is 0 — an honest
+  zero, not a gap in this artifact. Every product is sold standalone with bundling discounts, and the
+  subscription is sized to the customer''s business rather than to a fixed tier.'
+notes: Replaces a 2026-05-04 generated artifact that invented a single "agave-custom" plan with a module
+  list and contract entitlements not present on any current Agave page. Those entitlements (99% uptime
+  with credits, SOC 2 Type I/II, annual penetration testing, the Core/AP/AR/Workforce/Forecast module
+  split) are NOT published on useagave.com/pricing today and have been removed rather than carried forward.
+  The pricing shapes below are quoted from the live page.
 sources:
-  - https://useagave.com/contractors/pricing
-plans:
-  - id: agave-custom
-    name: Custom (Contact Sales)
-    type: enterprise
-    description: Quoted engagement for ERP sync. Cost depends on systems integrated, number of companies,
-      modules selected, and customizations. Includes unlimited users/projects, dedicated onboarding,
-      ongoing support, 99% uptime guarantee, SOC 2 Type I/II, and annual penetration testing.
-    entries:
-      - label: Custom contract
-        name: custom_contract
-        type: subscription
-        metric: contract
-        limit: -1
-        timeFrame: month
-        geo: global
-        unit: 1
-        price: contact sales
-        userMultiplied: false
-    elements:
-      - name: Core module (Projects, Cost Codes, Vendors, Cost Types, Customers, Budgets, Sub Jobs)
-      - name: Accounts Payable module (optional)
-      - name: Accounts Receivable module (optional)
-      - name: Workforce module (optional)
-      - name: Forecast module (optional)
-      - name: Unlimited users and projects
-      - name: 1:1 onboarding with implementation expert
-      - name: Unlimited post-implementation support
-      - name: 99% uptime guarantee with credits
-      - name: SOC 2 Type I & II certification
-      - name: Annual penetration testing
+- https://useagave.com/pricing
+- https://useagave.com/agave-mcp
+plans: []
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
+generated: '2026-08-30'
+source: https://useagave.com/pricing
+plan_count: 0
+pricing_model: custom-quote
+public_prices: false
+products:
+- name: ERP Sync
+  pricing_shape:
+  - Flexible subscription based on your business size
+  - Scales with the modules you need
+  - Available standalone
+  description: Keep jobs, financials, timesheets and more in sync across PM and ERP systems.
+- name: AP Invoice Automation
+  pricing_shape:
+  - Flexible subscription based on your business size
+  - One-time implementation fee
+  - Available standalone
+  description: AI captures invoices, matches job and cost code, routes approvals, syncs to the ERP.
+- name: Expense Management
+  pricing_shape:
+  - Flexible subscription based on your business size
+  - One-time implementation fee
+  - Available standalone
+  description: Capture receipts and auto-code to job, cost code and GL.
+- name: AI Analytics
+  pricing_shape:
+  - Platform fee based on your business size
+  - Seat-based pricing by seat type
+  - Available standalone
+  description: Interactive reports built from plain-English prompts. View-only readers are unlimited and
+    free.
+- name: Agave MCP
+  pricing_shape:
+  - Platform fee based on your business size
+  - Seat-based pricing by seat type
+  description: Read-only ERP and PM data in ChatGPT, Claude or Microsoft Copilot.
+- name: Vendor Compliance
+  pricing_shape:
+  - Quoted with the rest of the platform
+  description: Parses CoIs, W-9s and lien waivers from the inbox and keeps compliance docs current.
+sales_process:
+- step: 1
+  name: Quick Discovery
+  detail: Agave responds within one business day to establish trades, team size, ERP and PM systems.
+- step: 2
+  name: Personalized demo
+  detail: 30-minute walkthrough on the prospect's own software stack.
+- step: 3
+  name: Custom proposal
+  detail: Priced on the products selected, with bundling discounts, sized to the business rather than
+    a fixed tier.
+api_metering: null
+api_metering_note: No per-request, per-call or per-connection API price is published anywhere. The one
+  usage signal Agave exposes at runtime is the Agave-Billing-Id / Agave-Billing-Enabled header pair, which
+  identifies the linked company being billed and whether it counts as production — implying billing is
+  per active monthly Linked Account, but Agave does not state a rate.

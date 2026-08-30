@@ -8,12 +8,14 @@ info:
     url: https://docs.agaveapi.com
   x-generated-from: documentation
 servers:
-- url: https://api.agaveapi.com/v1
-  description: Production Server
-- url: https://sandbox.agaveapi.com/v1
-  description: Sandbox Server
+- url: https://api.agaveapi.com
+  description: Production Server (verified 2026-08-30 — https://api.agaveapi.com/projects returns 401
+    "Invalid API-Version header"; the /v1 prefix previously carried here 404s and sandbox.agaveapi.com
+    does not resolve)
 security:
-- apiKey: []
+- ClientId: []
+  ClientSecret: []
+  AccountToken: []
 tags:
 - name: Timesheets
   description: Employee timesheet and labor tracking.
@@ -158,8 +160,18 @@ components:
           type: integer
           example: 500
   securitySchemes:
-    apiKey:
+    ClientId:
       type: apiKey
       in: header
-      name: API-Key
-      description: Agave API key for authentication.
+      name: Client-Id
+      description: Your Agave Client Identifier, always a 36-character UUID. Source https://docs.agaveapi.com/agave-api/headers
+    ClientSecret:
+      type: apiKey
+      in: header
+      name: Client-Secret
+      description: Your Agave Client Secret, a 40-character string. Source https://docs.agaveapi.com/agave-api/headers
+    AccountToken:
+      type: apiKey
+      in: header
+      name: Account-Token
+      description: The unique Account Token associated with the linked User account. Not used on Link Token requests. Source https://docs.agaveapi.com/agave-api/headers

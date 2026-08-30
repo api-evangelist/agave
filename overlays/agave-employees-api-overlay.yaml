@@ -1,0 +1,90 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Agave Unified Construction Budgets Employees API
+  version: 1.0.0
+extends: openapi/agave-employees-api-openapi.yml
+x-generated: '2026-08-30'
+x-method: generated
+x-source: https://docs.agaveapi.com/agave-api/headers + https://docs.agaveapi.com/agave-api/pagination
+actions:
+- target: $.info
+  update:
+    x-apievangelist-profile: https://apis.io/provider/agave
+    x-api-version-header: '2021-11-21'
+    x-contract-provenance: Agave publishes no OpenAPI; its machine-readable contract is a Postman Collection v2.1.0
+      at https://docs.agaveapi.com/agave-api/postman-collection
+- target: $.servers
+  update:
+  - url: https://api.agaveapi.com
+    description: 'Production. Verified 2026-08-30 — /projects returns 401 "Invalid API-Version header". There is
+      no sandbox host: sandbox.agaveapi.com does not resolve, and testing is done by linking a source-system sandbox
+      account (see sandbox/agave-sandbox.yml).'
+- target: $.paths.*.*
+  update:
+    x-required-headers:
+    - API-Version
+    - Client-Id
+    - Client-Secret
+    - Account-Token
+    x-rate-limit-headers:
+    - Agave-RateLimit-Total
+    - Agave-RateLimit-Remaining
+    x-error-envelope: '{"message": "..."} or {"error": "..."} — not RFC 9457'
+- target: $.components
+  update:
+    parameters:
+      ApiVersion:
+        name: API-Version
+        in: header
+        required: true
+        schema:
+          type: string
+          default: '2021-11-21'
+        description: Required on every request. Omitting it returns 401. https://docs.agaveapi.com/agave-api/api-versioning
+      ProjectId:
+        name: Project-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Agave Project UUID. Some endpoints accept "*" for all project-level records.
+      CompanyId:
+        name: Company-Id
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Agave Company UUID, when cross-company access was granted.
+      IncludeSourceData:
+        name: Include-Source-Data
+        in: header
+        required: false
+        schema:
+          type: string
+          default: 'false'
+        description: true, or a comma-delimited field list, to attach the raw source-system payload.
+      AsyncRequest:
+        name: Async-Request
+        in: header
+        required: false
+        schema:
+          type: boolean
+          default: false
+        description: true returns 202 with Agave-Async-Request-Id; poll /async-requests/{id}.
+      Page:
+        name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+      PerPage:
+        name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+        description: Default varies by source system (10-100). Paginate until meta.has_more_results is false; null
+          does NOT mean done.
