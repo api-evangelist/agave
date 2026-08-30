@@ -20,6 +20,17 @@ tags:
 - Integration
 - ERP
 - Project Management
+- Unified-API
+- iPaaS
+- Webhook
+- Field Service
+- Invoicing
+tags_raw:
+- Accounting
+- Construction
+- Integration
+- ERP
+- Project Management
 - Unified API
 - iPaaS
 - Webhooks
@@ -57,7 +68,7 @@ apis:
   tags:
   - Authentication
   - Construction
-  - Frontend
+  - Front-End
   tags_raw:
   - Authentication
   - Construction
@@ -81,7 +92,7 @@ apis:
   - Construction
   - Documents
   - File
-  - Frontend
+  - Front-End
   tags_raw:
   - Construction
   - Documents
