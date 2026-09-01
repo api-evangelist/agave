@@ -68,7 +68,7 @@ apis:
   tags:
   - Authentication
   - Construction
-  - Front-End
+  - Frontend
   tags_raw:
   - Authentication
   - Construction
@@ -92,7 +92,7 @@ apis:
   - Construction
   - Documents
   - File
-  - Front-End
+  - Frontend
   tags_raw:
   - Construction
   - Documents
