@@ -258,6 +258,76 @@ apis:
     url: https://docs.agaveapi.com/reference
   - type: GettingStarted
     url: https://docs.agaveapi.com/quickstart
+- aid: agave:agave-common-api
+  name: Agave Common API
+  description: Common resources in the Agave unified construction API.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Common
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-common-api-openapi.yml
+- aid: agave:agave-customer-management-api
+  name: Agave Customer Management API
+  description: Customer Management resources in the Agave unified construction API.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Customer Management
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-customer-management-api-openapi.yml
+- aid: agave:agave-file-management-api
+  name: Agave File Management API
+  description: File Management resources in the Agave unified construction API.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - File Management
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-file-management-api-openapi.yml
+- aid: agave:agave-financials-management-api
+  name: Agave Financials Management API
+  description: Financials Management resources in the Agave unified construction API.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Financials Management
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-financials-management-api-openapi.yml
+- aid: agave:agave-project-management-api
+  name: Agave Project Management API
+  description: Project Management resources in the Agave unified construction API.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Project Management
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-project-management-api-openapi.yml
+- aid: agave:agave-service-management-api
+  name: Agave Service Management API
+  description: Service Management resources in the Agave unified construction API.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Service Management
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-service-management-api-openapi.yml
+- aid: agave:agave-webhooks-api
+  name: Agave Webhooks API
+  description: Webhooks resources in the Agave unified construction API.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-webhooks-api-openapi.yml
 common:
 - type: AgenticAccess
   url: agentic-access/agave-agentic-access.yml
