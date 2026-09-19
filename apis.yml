@@ -14,6 +14,10 @@ deliveryModel:
   generated: '2026-08-28'
   method: derived
 specificationVersion: '0.23'
+x-docs-platform: docusaurus
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-17
+x-docs-hosting: github-pages
 tags:
 - Accounting
 - Construction
@@ -324,6 +328,8 @@ apis:
   humanURL: https://docs.agaveapi.com/
   baseURL: https://api.agaveapi.com
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
