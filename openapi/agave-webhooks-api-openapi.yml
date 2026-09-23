@@ -1,0 +1,114 @@
+openapi: 3.2.0
+info:
+  title: Agave Unified Construction API (derived from the provider…
+  version: '2021-11-21'
+  description: Machine-readable OpenAPI DERIVED by API Evangelist from the Postman collection Agave publishes at https://docs.agaveapi.com/agave-api/postman-collection (AgaveAPI-2024-09-10.zip, collection exported 2024-09-10, 437 requests).
+  contact:
+    name: Agave API Support
+    email: api-support@agaveapi.com
+    url: https://docs.agaveapi.com
+  x-derived-from: collections/agave-api-provider.postman_collection.json
+  x-method: derived
+  x-generated: '2026-08-30'
+servers:
+- url: https://api.agaveapi.com
+  description: Production
+security:
+- ClientId: []
+  ClientSecret: []
+  AccountToken: []
+tags:
+- name: Webhooks
+  description: Webhooks resources in the Agave unified construction API.
+paths:
+  /webhooks:
+    get:
+      operationId: getWebhooks
+      summary: List Webhooks
+      tags:
+      - Webhooks
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    post:
+      operationId: postWebhooks
+      summary: New Webhook
+      tags:
+      - Webhooks
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              callback_url: https://webhook.site/246a1376-0023-45f7-b685-1fbe9634a8b8
+              event: UPDATE
+              type: submittal
+  /webhooks/{webhook_id}:
+    get:
+      operationId: getWebhooksByWebhookId
+      summary: Show Webhook
+      tags:
+      - Webhooks
+      parameters:
+      - name: webhook_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the webhook.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    delete:
+      operationId: deleteWebhooksByWebhookId
+      summary: Delete Webhook
+      tags:
+      - Webhooks
+      parameters:
+      - name: webhook_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the webhook.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+components:
+  securitySchemes:
+    ClientId:
+      type: apiKey
+      in: header
+      name: Client-Id
+      description: 36-character UUID client identifier.
+    ClientSecret:
+      type: apiKey
+      in: header
+      name: Client-Secret
+      description: 40-character client secret.
+    AccountToken:
+      type: apiKey
+      in: header
+      name: Account-Token
+      description: Account Token for the linked user account.

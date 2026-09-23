@@ -1,0 +1,298 @@
+openapi: 3.2.0
+info:
+  title: Agave Unified Construction API (derived from the provider…
+  version: '2021-11-21'
+  description: Machine-readable OpenAPI DERIVED by API Evangelist from the Postman collection Agave publishes at https://docs.agaveapi.com/agave-api/postman-collection (AgaveAPI-2024-09-10.zip, collection exported 2024-09-10, 437 requests).
+  contact:
+    name: Agave API Support
+    email: api-support@agaveapi.com
+    url: https://docs.agaveapi.com
+  x-derived-from: collections/agave-api-provider.postman_collection.json
+  x-method: derived
+  x-generated: '2026-08-30'
+servers:
+- url: https://api.agaveapi.com
+  description: Production
+security:
+- ClientId: []
+  ClientSecret: []
+  AccountToken: []
+tags:
+- name: Service Management
+  description: Service Management resources in the Agave unified construction API.
+paths:
+  /jobs:
+    get:
+      operationId: getJobs
+      summary: List Jobs
+      tags:
+      - Service Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /jobs/{job_id}:
+    get:
+      operationId: getJobsByJobId
+      summary: Show Job
+      tags:
+      - Service Management
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the job.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /work-orders:
+    get:
+      operationId: getWorkOrders
+      summary: List Work Orders
+      tags:
+      - Service Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    post:
+      operationId: postWorkOrders
+      summary: New Work Order
+      tags:
+      - Service Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+  /work-orders/{work_order_id}:
+    get:
+      operationId: getWorkOrdersByWorkOrderId
+      summary: Show Work Order
+      tags:
+      - Service Management
+      parameters:
+      - name: work_order_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the work order.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    put:
+      operationId: putWorkOrdersByWorkOrderId
+      summary: Update Work Order
+      tags:
+      - Service Management
+      parameters:
+      - name: work_order_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the work order.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              contact_name: Jack
+              contact_phone: '42155512345'
+              description: Update Title
+              order_date: '2024-02-10'
+              request_date: '2024-02-11'
+              request_time_of_day: '12:22'
+              technician_employee_id: source_id:2
+              source_data:
+                RequestedBy: API
+                Certified: Y
+                Notes: Extra notes
+    delete:
+      operationId: deleteWorkOrdersByWorkOrderId
+      summary: Delete Work Order
+      tags:
+      - Service Management
+      parameters:
+      - name: work_order_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the work order.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /service-sites:
+    get:
+      operationId: getServiceSites
+      summary: List Service Sites
+      tags:
+      - Service Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    post:
+      operationId: postServiceSites
+      summary: New Service Site
+      tags:
+      - Service Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              address:
+                city: Springfield
+                postal_code: '62701'
+                state: IL
+                street_1: 1234 Elm Street
+                street_2: Apt 5B
+              code: '5'
+              customer_id: source_id:145
+              name: Main Office
+              tax_code_id: source_id:1
+  /service-sites/{service_site_id}:
+    get:
+      operationId: getServiceSitesByServiceSiteId
+      summary: Show Service Site
+      tags:
+      - Service Management
+      parameters:
+      - name: service_site_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the service site.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    put:
+      operationId: putServiceSitesByServiceSiteId
+      summary: Update Service Site
+      tags:
+      - Service Management
+      parameters:
+      - name: service_site_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the service site.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              contact_name: Jack
+              contact_phone: '42155512345'
+              description: Update Title
+              order_date: '2024-02-10'
+              request_date: '2024-02-11'
+              request_time_of_day: '12:22'
+              technician_employee_id: source_id:2
+              source_data:
+                RequestedBy: API
+                Certified: Y
+                Notes: Extra notes
+    delete:
+      operationId: deleteServiceSitesByServiceSiteId
+      summary: Delete Service Site
+      tags:
+      - Service Management
+      parameters:
+      - name: service_site_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the service site.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+components:
+  securitySchemes:
+    ClientId:
+      type: apiKey
+      in: header
+      name: Client-Id
+      description: 36-character UUID client identifier.
+    ClientSecret:
+      type: apiKey
+      in: header
+      name: Client-Secret
+      description: 40-character client secret.
+    AccountToken:
+      type: apiKey
+      in: header
+      name: Account-Token
+      description: Account Token for the linked user account.

@@ -1,17 +1,17 @@
 {
   "provider": "agave",
   "sources": [
-    "agave-budgets-api-openapi.yml",
-    "agave-contracts-api-openapi.yml",
-    "agave-cost-codes-api-openapi.yml",
-    "agave-employees-api-openapi.yml",
-    "agave-invoices-api-openapi.yml",
-    "agave-link-sessions-api-openapi.yml",
-    "agave-projects-api-openapi.yml",
-    "agave-timesheets-api-openapi.yml",
-    "agave-vendors-api-openapi.yml"
+    "_ae-authored/agave-unified-api-from-postman-openapi.yml",
+    "_ae-authored/agave-unified-api-openapi.yml"
   ],
   "outputs": [
+    "agave-common-api-openapi.yml",
+    "agave-customer-management-api-openapi.yml",
+    "agave-file-management-api-openapi.yml",
+    "agave-financials-management-api-openapi.yml",
+    "agave-project-management-api-openapi.yml",
+    "agave-service-management-api-openapi.yml",
+    "agave-webhooks-api-openapi.yml",
     "agave-budgets-api-openapi.yml",
     "agave-contracts-api-openapi.yml",
     "agave-cost-codes-api-openapi.yml",
@@ -26,7 +26,27 @@
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "agave-unified-api-from-postman-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "agave-unified-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "agave-budgets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agave-common-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agave-contracts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agave-cost-codes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agave-customer-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agave-employees-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agave-file-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agave-financials-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agave-invoices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agave-link-sessions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agave-project-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agave-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agave-service-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agave-timesheets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agave-vendors-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agave-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

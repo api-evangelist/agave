@@ -1,0 +1,635 @@
+openapi: 3.2.0
+info:
+  title: Agave Unified Construction API (derived from the provider…
+  version: '2021-11-21'
+  description: Machine-readable OpenAPI DERIVED by API Evangelist from the Postman collection Agave publishes at https://docs.agaveapi.com/agave-api/postman-collection (AgaveAPI-2024-09-10.zip, collection exported 2024-09-10, 437 requests).
+  contact:
+    name: Agave API Support
+    email: api-support@agaveapi.com
+    url: https://docs.agaveapi.com
+  x-derived-from: collections/agave-api-provider.postman_collection.json
+  x-method: derived
+  x-generated: '2026-08-30'
+servers:
+- url: https://api.agaveapi.com
+  description: Production
+security:
+- ClientId: []
+  ClientSecret: []
+  AccountToken: []
+tags:
+- name: Common
+  description: Common resources in the Agave unified construction API.
+paths:
+  /ping:
+    get:
+      operationId: getPing
+      summary: Enable
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /link/token/create:
+    post:
+      operationId: postLinkTokenCreate
+      summary: Create
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              reference_id: user-12345
+  /link/token/exchange:
+    post:
+      operationId: postLinkTokenExchange
+      summary: Exchange
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              public_token: iaZytJMCQnfkEfOfHXL1eNAdRbor2UjoBQFt8x6U
+  /link/sessions:
+    post:
+      operationId: postLinkSessions
+      summary: Create (Mode)
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              name: test session
+              ttl: '21600'
+              mode: file-picker
+    get:
+      operationId: getLinkSessions
+      summary: List
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              reference_id: user-12345
+  /link/sessions/xxx/extend:
+    post:
+      operationId: postLinkSessionsXxxExtend
+      summary: Extend
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              reference_id: user-12345
+  /link/sessions/xxx/expire:
+    post:
+      operationId: postLinkSessionsXxxExpire
+      summary: Expire
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              reference_id: user-12345
+  /link/account:
+    get:
+      operationId: getLinkAccount
+      summary: Linked Account
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /link/edit:
+    post:
+      operationId: postLinkEdit
+      summary: Edit Link
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+  /link/source-system:
+    get:
+      operationId: getLinkSourceSystem
+      summary: Source System
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /link/source-systems:
+    get:
+      operationId: getLinkSourceSystems
+      summary: Source Systems
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /link/connection:
+    get:
+      operationId: getLinkConnection
+      summary: Connection
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /link/rate-limits:
+    get:
+      operationId: getLinkRateLimits
+      summary: Rate Limits
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /link/company:
+    get:
+      operationId: getLinkCompany
+      summary: Linked Company
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /link/companies:
+    get:
+      operationId: getLinkCompanies
+      summary: List All Companies
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /link/user:
+    get:
+      operationId: getLinkUser
+      summary: Linked User
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /link/account/create:
+    post:
+      operationId: postLinkAccountCreate
+      summary: Create OAuth2 Account
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              reference_id: xxxxx-from-postman
+              source_system: pipedrive
+              connection:
+                type: oauth2
+                properties:
+                  grant_type: authorization_code
+                  code: xxxxxxxx
+  /link/debug/session:
+    post:
+      operationId: postLinkDebugSession
+      summary: Create Debug Session
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              reference_id: xxx-ref
+              source_system: foundation-hosted
+  /link/revoke-tokens:
+    post:
+      operationId: postLinkRevokeTokens
+      summary: Revoke All Tokens
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+  /async-requests/{async_request_id}:
+    get:
+      operationId: getAsyncRequestsByAsyncRequestId
+      summary: Get Async Request
+      tags:
+      - Common
+      parameters:
+      - name: async_request_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the async request.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /admin/accounts/{id}:
+    get:
+      operationId: getAdminAccountsById
+      summary: Show Account
+      tags:
+      - Common
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the id.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              reference_id: user-12345
+  /admin/accounts/{id}/sessions:
+    get:
+      operationId: getAdminAccountsByIdSessions
+      summary: List Account Sessions
+      tags:
+      - Common
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the id.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              reference_id: user-12345
+  /admin/accounts/{id}/events:
+    get:
+      operationId: getAdminAccountsByIdEvents
+      summary: List Account Events
+      tags:
+      - Common
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the id.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              reference_id: user-12345
+  /admin/accounts/{id}/requests:
+    get:
+      operationId: getAdminAccountsByIdRequests
+      summary: List Account Requests
+      tags:
+      - Common
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the id.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              reference_id: user-12345
+  /admin/accounts:
+    get:
+      operationId: getAdminAccounts
+      summary: List Accounts
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              reference_id: user-12345
+  /admin/link-tokens:
+    get:
+      operationId: getAdminLinkTokens
+      summary: Link Tokens
+      tags:
+      - Common
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              reference_id: user-12345
+  /admin/accounts/{id}/revoke-tokens:
+    post:
+      operationId: postAdminAccountsByIdRevokeTokens
+      summary: Revoke All Tokens For Account
+      tags:
+      - Common
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the id.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+  /cache/repopulate:
+    post:
+      operationId: postCacheRepopulate
+      summary: Cache
+      tags:
+      - Common
+      parameters:
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+  /cache/{cache_id}:
+    get:
+      operationId: getCacheByCacheId
+      summary: Cache Status
+      tags:
+      - Common
+      parameters:
+      - name: cache_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the cache.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /cache/repopulate/latest:
+    get:
+      operationId: getCacheRepopulateLatest
+      summary: Cache Latest Status
+      tags:
+      - Common
+      parameters:
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+components:
+  securitySchemes:
+    ClientId:
+      type: apiKey
+      in: header
+      name: Client-Id
+      description: 36-character UUID client identifier.
+    ClientSecret:
+      type: apiKey
+      in: header
+      name: Client-Secret
+      description: 40-character client secret.
+    AccountToken:
+      type: apiKey
+      in: header
+      name: Account-Token
+      description: Account Token for the linked user account.

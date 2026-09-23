@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Agave Unified Construction Budgets Projects API
+  title: Agave Unified Construction Projects API
   description: The Agave Unified Construction API provides a single REST API to read and write data from 100+ construction and accounting software systems. It normalizes data across platforms including projects, budgets, contracts, commitments, purchase orders, invoices, cost codes, vendors, timesheets, and employees.
   version: '1.0'
   contact:
@@ -9,9 +9,7 @@ info:
   x-generated-from: documentation
 servers:
 - url: https://api.agaveapi.com
-  description: Production Server (verified 2026-08-30 — https://api.agaveapi.com/projects returns 401
-    "Invalid API-Version header"; the /v1 prefix previously carried here 404s and sandbox.agaveapi.com
-    does not resolve)
+  description: Production Server (verified 2026-08-30 — https://api.agaveapi.com/projects returns 401 "Invalid API-Version header"; the /v1 prefix previously carried here 404s and sandbox.agaveapi.com does not resolve)
 security:
 - ClientId: []
   ClientSecret: []

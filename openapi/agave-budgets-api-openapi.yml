@@ -9,9 +9,7 @@ info:
   x-generated-from: documentation
 servers:
 - url: https://api.agaveapi.com
-  description: Production Server (verified 2026-08-30 — https://api.agaveapi.com/projects returns 401
-    "Invalid API-Version header"; the /v1 prefix previously carried here 404s and sandbox.agaveapi.com
-    does not resolve)
+  description: Production Server (verified 2026-08-30 — https://api.agaveapi.com/projects returns 401 "Invalid API-Version header"; the /v1 prefix previously carried here 404s and sandbox.agaveapi.com does not resolve)
 security:
 - ClientId: []
   ClientSecret: []

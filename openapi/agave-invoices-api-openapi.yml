@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Agave Unified Construction Budgets Invoices API
+  title: Agave Unified Construction Invoices API
   description: The Agave Unified Construction API provides a single REST API to read and write data from 100+ construction and accounting software systems. It normalizes data across platforms including projects, budgets, contracts, commitments, purchase orders, invoices, cost codes, vendors, timesheets, and employees.
   version: '1.0'
   contact:
@@ -9,9 +9,7 @@ info:
   x-generated-from: documentation
 servers:
 - url: https://api.agaveapi.com
-  description: Production Server (verified 2026-08-30 — https://api.agaveapi.com/projects returns 401
-    "Invalid API-Version header"; the /v1 prefix previously carried here 404s and sandbox.agaveapi.com
-    does not resolve)
+  description: Production Server (verified 2026-08-30 — https://api.agaveapi.com/projects returns 401 "Invalid API-Version header"; the /v1 prefix previously carried here 404s and sandbox.agaveapi.com does not resolve)
 security:
 - ClientId: []
   ClientSecret: []
@@ -144,37 +142,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    InvoiceRequest:
-      type: object
-      description: Request payload for creating an invoice.
-      required:
-      - project_id
-      - vendor_id
-      - invoice_number
-      - amount
-      - invoice_date
-      properties:
-        project_id:
-          type: string
-          description: Project to associate the invoice with.
-          example: proj-500123
-        vendor_id:
-          type: string
-          description: Vendor identifier.
-          example: ven-334455
-        invoice_number:
-          type: string
-          description: Vendor invoice number.
-          example: INV-2025-1042
-        amount:
-          type: number
-          description: Invoice amount in USD.
-          example: 85000.0
-        invoice_date:
-          type: string
-          format: date
-          description: Invoice date.
-          example: '2025-03-01'
     Invoice:
       type: object
       description: An accounts payable invoice.
@@ -235,6 +202,37 @@ components:
           type: string
           description: Unique request ID for support.
           example: req-a1b2c3d4e5
+    InvoiceRequest:
+      type: object
+      description: Request payload for creating an invoice.
+      required:
+      - project_id
+      - vendor_id
+      - invoice_number
+      - amount
+      - invoice_date
+      properties:
+        project_id:
+          type: string
+          description: Project to associate the invoice with.
+          example: proj-500123
+        vendor_id:
+          type: string
+          description: Vendor identifier.
+          example: ven-334455
+        invoice_number:
+          type: string
+          description: Vendor invoice number.
+          example: INV-2025-1042
+        amount:
+          type: number
+          description: Invoice amount in USD.
+          example: 85000.0
+        invoice_date:
+          type: string
+          format: date
+          description: Invoice date.
+          example: '2025-03-01'
     InvoiceList:
       type: object
       description: Paginated list of invoices.

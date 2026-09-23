@@ -1,0 +1,504 @@
+openapi: 3.2.0
+info:
+  title: Agave Unified Construction API (derived from the provider…
+  version: '2021-11-21'
+  description: Machine-readable OpenAPI DERIVED by API Evangelist from the Postman collection Agave publishes at https://docs.agaveapi.com/agave-api/postman-collection (AgaveAPI-2024-09-10.zip, collection exported 2024-09-10, 437 requests).
+  contact:
+    name: Agave API Support
+    email: api-support@agaveapi.com
+    url: https://docs.agaveapi.com
+  x-derived-from: collections/agave-api-provider.postman_collection.json
+  x-method: derived
+  x-generated: '2026-08-30'
+servers:
+- url: https://api.agaveapi.com
+  description: Production
+security:
+- ClientId: []
+  ClientSecret: []
+  AccountToken: []
+tags:
+- name: File Management
+  description: File Management resources in the Agave unified construction API.
+paths:
+  /root-folder:
+    get:
+      operationId: getRootFolder
+      summary: Show Root Folder
+      tags:
+      - File Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /folders/{folder_id}:
+    get:
+      operationId: getFoldersByFolderId
+      summary: Show Folder
+      tags:
+      - File Management
+      parameters:
+      - name: folder_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the folder.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    put:
+      operationId: putFoldersByFolderId
+      summary: Update Folder
+      tags:
+      - File Management
+      parameters:
+      - name: folder_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the folder.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              name: test rename
+    delete:
+      operationId: deleteFoldersByFolderId
+      summary: Delete Folder
+      tags:
+      - File Management
+      parameters:
+      - name: folder_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the folder.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /folders:
+    post:
+      operationId: postFolders
+      summary: New Folder
+      tags:
+      - File Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              name: 01 Design Files
+              parent_id: '{{folder_id}}'
+  /folders/{folder_id}/files:
+    get:
+      operationId: getFoldersByFolderIdFiles
+      summary: List Files in Folder
+      tags:
+      - File Management
+      parameters:
+      - name: folder_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the folder.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    post:
+      operationId: postFoldersByFolderIdFiles
+      summary: Upload File
+      tags:
+      - File Management
+      parameters:
+      - name: folder_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the folder.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+  /files/{file_id}:
+    get:
+      operationId: getFilesByFileId
+      summary: Show File
+      tags:
+      - File Management
+      parameters:
+      - name: file_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the file.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    put:
+      operationId: putFilesByFileId
+      summary: Update File
+      tags:
+      - File Management
+      parameters:
+      - name: file_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the file.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              name: new-name.pdf
+    delete:
+      operationId: deleteFilesByFileId
+      summary: Delete File
+      tags:
+      - File Management
+      parameters:
+      - name: file_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the file.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /folders/{folder_id}/transfer:
+    post:
+      operationId: postFoldersByFolderIdTransfer
+      summary: Transfer To New File
+      tags:
+      - File Management
+      parameters:
+      - name: folder_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the folder.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              source:
+                url: https://dc-lidar-2018.s3.amazonaws.com/Classified_LAS/2007.las
+              target:
+                name: 132421.las
+                content_type: application/object
+  /files/{file_id}/transfer:
+    post:
+      operationId: postFilesByFileIdTransfer
+      summary: Transfer To Existing File
+      tags:
+      - File Management
+      parameters:
+      - name: file_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the file.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              source:
+                url: https://www.agaveapi.com/assets/img/link/logo-square-dropbox.png
+              target:
+                name: random file.png
+                content_type: image/png
+  /file-transfers/{file_transfer_id}:
+    get:
+      operationId: getFileTransfersByFileTransferId
+      summary: Transfer File Status
+      tags:
+      - File Management
+      parameters:
+      - name: file_transfer_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the file transfer.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /files/{file_id}/versions:
+    get:
+      operationId: getFilesByFileIdVersions
+      summary: List File Versions
+      tags:
+      - File Management
+      parameters:
+      - name: file_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the file.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    post:
+      operationId: postFilesByFileIdVersions
+      summary: Upload File Version
+      tags:
+      - File Management
+      parameters:
+      - name: file_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the file.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+  /files/{file_id}/versions/{file_version_id}:
+    get:
+      operationId: getFilesByFileIdVersionsByFileVersionId
+      summary: Show File Version
+      tags:
+      - File Management
+      parameters:
+      - name: file_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the file.
+      - name: file_version_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the file version.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /photos:
+    get:
+      operationId: getPhotos
+      summary: List Photos
+      tags:
+      - File Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    post:
+      operationId: postPhotos
+      summary: Upload Photo
+      tags:
+      - File Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+  /photos/{photo_id}:
+    get:
+      operationId: getPhotosByPhotoId
+      summary: Show Photo
+      tags:
+      - File Management
+      parameters:
+      - name: photo_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the photo.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    put:
+      operationId: putPhotosByPhotoId
+      summary: Update Photo
+      tags:
+      - File Management
+      parameters:
+      - name: photo_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the photo.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              description: updated description
+    delete:
+      operationId: deletePhotosByPhotoId
+      summary: Delete Photo
+      tags:
+      - File Management
+      parameters:
+      - name: photo_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the photo.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+components:
+  securitySchemes:
+    ClientId:
+      type: apiKey
+      in: header
+      name: Client-Id
+      description: 36-character UUID client identifier.
+    ClientSecret:
+      type: apiKey
+      in: header
+      name: Client-Secret
+      description: 40-character client secret.
+    AccountToken:
+      type: apiKey
+      in: header
+      name: Account-Token
+      description: Account Token for the linked user account.

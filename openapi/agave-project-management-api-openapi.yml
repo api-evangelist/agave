@@ -1,0 +1,1756 @@
+openapi: 3.2.0
+info:
+  title: Agave Unified Construction API (derived from the provider…
+  version: '2021-11-21'
+  description: Machine-readable OpenAPI DERIVED by API Evangelist from the Postman collection Agave publishes at https://docs.agaveapi.com/agave-api/postman-collection (AgaveAPI-2024-09-10.zip, collection exported 2024-09-10, 437 requests).
+  contact:
+    name: Agave API Support
+    email: api-support@agaveapi.com
+    url: https://docs.agaveapi.com
+  x-derived-from: collections/agave-api-provider.postman_collection.json
+  x-method: derived
+  x-generated: '2026-08-30'
+servers:
+- url: https://api.agaveapi.com
+  description: Production
+security:
+- ClientId: []
+  ClientSecret: []
+  AccountToken: []
+tags:
+- name: Project Management
+  description: Project Management resources in the Agave unified construction API.
+paths:
+  /projects:
+    get:
+      operationId: getProjects
+      summary: List Projects
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    post:
+      operationId: postProjects
+      summary: New Project
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              address:
+                street_1: 123 Main Street
+                street_2: Unit B
+                city: AnyTown
+                state: CA
+                postal_code: '19703'
+              amount: '500000.00'
+              completion_date: '2025-01-01'
+              name: AnyCompany dredging Project
+              number: JZ-102
+              start_date: '2022-01-01'
+              status: Active
+              type: Fixed Price
+              source_data:
+                Taxable_Flag: Y
+                Cost_Center: '1010'
+  /projects/{project_id}:
+    get:
+      operationId: getProjectsByProjectId
+      summary: Show Project
+      tags:
+      - Project Management
+      parameters:
+      - name: project_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the project.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    put:
+      operationId: putProjectsByProjectId
+      summary: Update Project
+      tags:
+      - Project Management
+      parameters:
+      - name: project_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the project.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              name: Test update 2
+              number: PA-001
+    delete:
+      operationId: deleteProjectsByProjectId
+      summary: Delete Project
+      tags:
+      - Project Management
+      parameters:
+      - name: project_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the project.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /checklists:
+    get:
+      operationId: getChecklists
+      summary: List Checklists
+      tags:
+      - Project Management
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /checklists/{checklist_id}:
+    get:
+      operationId: getChecklistsByChecklistId
+      summary: Show Checklist
+      tags:
+      - Project Management
+      parameters:
+      - name: checklist_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the checklist.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /checklist-templates:
+    get:
+      operationId: getChecklistTemplates
+      summary: List Checklist Templates
+      tags:
+      - Project Management
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              filters:
+              - field: type
+                operator: '='
+                value: Punch List
+  /checklist-templates/{checklist_template_id}:
+    get:
+      operationId: getChecklistTemplatesByChecklistTemplateId
+      summary: Show Checklist Template
+      tags:
+      - Project Management
+      parameters:
+      - name: checklist_template_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the checklist template.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /contacts:
+    get:
+      operationId: getContacts
+      summary: List Contacts (Company)
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    post:
+      operationId: postContacts
+      summary: New Contact (Company)
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              address:
+                city: San Francisco2
+                country: USA2
+                postal_code: '6666667'
+                state: CA2
+                street_1: street3
+              customer_id: null
+              email: email223@email.com
+              first_name: name6
+              image_url: test.com/logo.png
+              job_title: Salesperson
+              last_name: lastname
+              phone: 1-666-666-6668
+  /vendors/{vendor_id}/contacts:
+    get:
+      operationId: getVendorsByVendorIdContacts
+      summary: List Contacts (Vendor)
+      tags:
+      - Project Management
+      parameters:
+      - name: vendor_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the vendor.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /customers/{customer_id}/contacts:
+    get:
+      operationId: getCustomersByCustomerIdContacts
+      summary: List Contacts (Customer)
+      tags:
+      - Project Management
+      parameters:
+      - name: customer_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the customer.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    post:
+      operationId: postCustomersByCustomerIdContacts
+      summary: New Contact (Customer)
+      tags:
+      - Project Management
+      parameters:
+      - name: customer_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the customer.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              email: test-1@agaveapitest.com
+              full_name: Test {{$randomFullName}}
+              job_title: Salesperson
+              mobile_phone: '1235550101'
+              phone: '1235550102'
+  /contacts/{contact_id}:
+    get:
+      operationId: getContactsByContactId
+      summary: Show Contact (Company)
+      tags:
+      - Project Management
+      parameters:
+      - name: contact_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the contact.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    put:
+      operationId: putContactsByContactId
+      summary: Update Contact (Company)
+      tags:
+      - Project Management
+      parameters:
+      - name: contact_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the contact.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              address:
+                city: San Francisco2
+                country: USA2
+                postal_code: '6666667'
+                state: CA2
+                street_1: street3
+              customer_id: null
+              email: email223@email.com
+              first_name: name6
+              image_url: test.com/logo.png
+              job_title: Salesperson
+              last_name: lastname
+              phone: 1-666-666-6668
+    delete:
+      operationId: deleteContactsByContactId
+      summary: Delete Contact (Company)
+      tags:
+      - Project Management
+      parameters:
+      - name: contact_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the contact.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /vendors/{vendor_id}/contacts/{contact_id}:
+    get:
+      operationId: getVendorsByVendorIdContactsByContactId
+      summary: Show Contact (Vendor)
+      tags:
+      - Project Management
+      parameters:
+      - name: vendor_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the vendor.
+      - name: contact_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the contact.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /customers/{customer_id}/contacts/{contact_id}:
+    get:
+      operationId: getCustomersByCustomerIdContactsByContactId
+      summary: Show Contact (Customer)
+      tags:
+      - Project Management
+      parameters:
+      - name: customer_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the customer.
+      - name: contact_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the contact.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    put:
+      operationId: putCustomersByCustomerIdContactsByContactId
+      summary: Update Contact (Customer)
+      tags:
+      - Project Management
+      parameters:
+      - name: customer_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the customer.
+      - name: contact_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the contact.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              address:
+                city: San Francisco2
+                country: USA2
+                postal_code: '6666667'
+                state: CA2
+                street_1: street3
+              customer_id: null
+              email: email223@email.com
+              first_name: name6
+              image_url: test.com/logo.png
+              job_title: Salesperson
+              last_name: lastname
+              phone: 1-666-666-6668
+    delete:
+      operationId: deleteCustomersByCustomerIdContactsByContactId
+      summary: Delete Contact (Customer)
+      tags:
+      - Project Management
+      parameters:
+      - name: customer_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the customer.
+      - name: contact_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the contact.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /coordination-issues:
+    get:
+      operationId: getCoordinationIssues
+      summary: List Coordination Issues
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    post:
+      operationId: postCoordinationIssues
+      summary: New Coordination Issue
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+  /coordination-issues/{coordination_issue_id}:
+    get:
+      operationId: getCoordinationIssuesByCoordinationIssueId
+      summary: Show Coordination Issue
+      tags:
+      - Project Management
+      parameters:
+      - name: coordination_issue_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the coordination issue.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    put:
+      operationId: putCoordinationIssuesByCoordinationIssueId
+      summary: Update Coordination Issue
+      tags:
+      - Project Management
+      parameters:
+      - name: coordination_issue_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the coordination issue.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              assignee_id: '{{contact_id}}'
+              description: Updated Description
+              due_date: '2022-12-25'
+              name: Updated Title 2
+              status: Open
+              type: Issue
+    delete:
+      operationId: deleteCoordinationIssuesByCoordinationIssueId
+      summary: Delete Coordination Issue
+      tags:
+      - Project Management
+      parameters:
+      - name: coordination_issue_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the coordination issue.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /coordination-issues/{coordination_issue_id}/attachments:
+    post:
+      operationId: postCoordinationIssuesByCoordinationIssueIdAttachments
+      summary: New Attachment
+      tags:
+      - Project Management
+      parameters:
+      - name: coordination_issue_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the coordination issue.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+  /coordination-issues/{coordination_issue_id}/viewpoints:
+    post:
+      operationId: postCoordinationIssuesByCoordinationIssueIdViewpoints
+      summary: New Viewpoint
+      tags:
+      - Project Management
+      parameters:
+      - name: coordination_issue_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the coordination issue.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+  /drawings:
+    get:
+      operationId: getDrawings
+      summary: List Drawings
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /drawings/{drawing_id}:
+    get:
+      operationId: getDrawingsByDrawingId
+      summary: Show Drawing
+      tags:
+      - Project Management
+      parameters:
+      - name: drawing_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the drawing.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /drawings/{drawing_id}/versions:
+    get:
+      operationId: getDrawingsByDrawingIdVersions
+      summary: List Drawing Versions
+      tags:
+      - Project Management
+      parameters:
+      - name: drawing_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the drawing.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /drawings/{drawing_id}/versions/{drawing_version_id}:
+    get:
+      operationId: getDrawingsByDrawingIdVersionsByDrawingVersionId
+      summary: Show Drawing Version
+      tags:
+      - Project Management
+      parameters:
+      - name: drawing_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the drawing.
+      - name: drawing_version_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the drawing version.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /drawing-areas:
+    get:
+      operationId: getDrawingAreas
+      summary: List Drawing Areas
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /drawing-areas/{drawing_area_id}:
+    get:
+      operationId: getDrawingAreasByDrawingAreaId
+      summary: Show Drawing Folder
+      tags:
+      - Project Management
+      parameters:
+      - name: drawing_area_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the drawing area.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /issues:
+    get:
+      operationId: getIssues
+      summary: List Issues
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /locations:
+    get:
+      operationId: getLocations
+      summary: List Locations
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /locations/{location_id}:
+    get:
+      operationId: getLocationsByLocationId
+      summary: Show Location
+      tags:
+      - Project Management
+      parameters:
+      - name: location_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the location.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /observations:
+    get:
+      operationId: getObservations
+      summary: List Observations
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    post:
+      operationId: postObservations
+      summary: New Observation
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              assignee_id: '{{user_id}}'
+              description: austin test description
+              due_date: '2022-03-25'
+              name: austin test observation 2
+              location_id: '{{location_id}}'
+              root_cause: Communication
+              status: initiated
+              type: Commissioning
+              source_data:
+                priority: Medium
+  /observations/{observation_id}:
+    get:
+      operationId: getObservationsByObservationId
+      summary: Show Observation
+      tags:
+      - Project Management
+      parameters:
+      - name: observation_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the observation.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    put:
+      operationId: putObservationsByObservationId
+      summary: Update Observation
+      tags:
+      - Project Management
+      parameters:
+      - name: observation_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the observation.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              assignee_id: '{{user_id}}'
+              description: pooria test description
+              due_date: '2022-03-25'
+              name: pooria test observation 2
+              location_id: '{{location_id}}'
+              root_cause: Communication
+              status: closed
+              type: Commissioning
+    delete:
+      operationId: deleteObservationsByObservationId
+      summary: Delete Observation
+      tags:
+      - Project Management
+      parameters:
+      - name: observation_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the observation.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /observations/{observation_id}/attachments:
+    post:
+      operationId: postObservationsByObservationIdAttachments
+      summary: New Attachment
+      tags:
+      - Project Management
+      parameters:
+      - name: observation_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the observation.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+  /rfis:
+    get:
+      operationId: getRfis
+      summary: List RFIs
+      tags:
+      - Project Management
+      parameters:
+      - name: expand
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    post:
+      operationId: postRfis
+      summary: New RFI
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              subject: Unexpected pipe near side window
+              creator_id: '{{user_id}}'
+              cost_impact:
+                code: USD
+                amount: '1240.60'
+              assignee_ids:
+              - '{{user_id}}'
+              question: see title
+              number: R-{{$randomInt}}
+              due_date: '2022-09-07'
+  /rfis/{rfi_id}:
+    get:
+      operationId: getRfisByRfiId
+      summary: Show RFI
+      tags:
+      - Project Management
+      parameters:
+      - name: rfi_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the rfi.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /rfis/{rfi_id}/attachments:
+    post:
+      operationId: postRfisByRfiIdAttachments
+      summary: New Attachment
+      tags:
+      - Project Management
+      parameters:
+      - name: rfi_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the rfi.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+  /rfis/{rfi_id}/responses:
+    post:
+      operationId: postRfisByRfiIdResponses
+      summary: New RFI Response
+      tags:
+      - Project Management
+      parameters:
+      - name: rfi_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the rfi.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              creator_id: '{{user_id}}'
+              text: on the third floor!!
+              is_official: true
+  /specification-sections:
+    get:
+      operationId: getSpecificationSections
+      summary: List Specification Sections
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /specification-sections/{specification_section_id}:
+    get:
+      operationId: getSpecificationSectionsBySpecificationSectionId
+      summary: Show Specification Section
+      tags:
+      - Project Management
+      parameters:
+      - name: specification_section_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the specification section.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /specification-sections/{specification_section_id}/versions:
+    get:
+      operationId: getSpecificationSectionsBySpecificationSectionIdVersions
+      summary: List Specification Section Versions
+      tags:
+      - Project Management
+      parameters:
+      - name: specification_section_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the specification section.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /specification-sections/{specification_section_id}/versions/{specification_section_version_id}:
+    get:
+      operationId: getSpecificationSectionsBySpecificationSectionIdVersionsBySpecificationSectionVersionId
+      summary: Show Specification Section Version
+      tags:
+      - Project Management
+      parameters:
+      - name: specification_section_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the specification section.
+      - name: specification_section_version_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the specification section version.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /submittals:
+    get:
+      operationId: getSubmittals
+      summary: List Submittals
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    post:
+      operationId: postSubmittals
+      summary: New Submittal
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              description: austin test description
+              distribution_contacts:
+              - '{{contact_id}}'
+              name: pooria test name
+              number: '12345'
+              package_id: '{{submittal_package_id}}'
+              reviewers:
+              - - role: Submitter
+                  contact_id: '{{contact_id}}'
+                - role: Approver
+                  contact_id: '{{contact_id}}'
+                  due_date: '2022-12-30'
+              - - role: Approver
+                  contact_id: '{{contact_id}}'
+                  due_date: '2022-12-31'
+              - - role: Submitter
+                  contact_id: '{{contact_id}}'
+                  due_date: '2022-12-31'
+              status: Draft
+              type: pooria test type
+  /submittals/{submittal_id}:
+    get:
+      operationId: getSubmittalsBySubmittalId
+      summary: Show Submittal
+      tags:
+      - Project Management
+      parameters:
+      - name: submittal_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the submittal.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    put:
+      operationId: putSubmittalsBySubmittalId
+      summary: Update Submittal
+      tags:
+      - Project Management
+      parameters:
+      - name: submittal_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the submittal.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              number: '12345'
+              name: pooria update name
+              reviewers:
+              - - id: 73b5249c-cd07-5818-9e94-129de83940ba
+                  review_status: Revise and Resubmit
+  /submittals/{submittal_id}/attachments:
+    post:
+      operationId: postSubmittalsBySubmittalIdAttachments
+      summary: Attach to Submittal
+      tags:
+      - Project Management
+      parameters:
+      - name: submittal_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the submittal.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+  /submittals/{submittal_id}/submittal-reviewers/{id}/attachments:
+    post:
+      operationId: postSubmittalsBySubmittalIdSubmittalReviewersByIdAttachments
+      summary: Attach to Submittal Reviewer
+      tags:
+      - Project Management
+      parameters:
+      - name: submittal_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the submittal.
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the id.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+  /submittals/{id}:
+    delete:
+      operationId: deleteSubmittalsById
+      summary: Delete Submittal
+      tags:
+      - Project Management
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the id.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /submittal-packages:
+    get:
+      operationId: getSubmittalPackages
+      summary: List Submittal Packages
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    post:
+      operationId: postSubmittalPackages
+      summary: New Submittal Package
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              description: austin test description
+              name: austin test name
+              number: '12345'
+              submittal_ids: []
+  /submittal-packages/{submittal_package_id}:
+    get:
+      operationId: getSubmittalPackagesBySubmittalPackageId
+      summary: Show Submittal Package
+      tags:
+      - Project Management
+      parameters:
+      - name: submittal_package_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the submittal package.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    put:
+      operationId: putSubmittalPackagesBySubmittalPackageId
+      summary: Update Submittal Package
+      tags:
+      - Project Management
+      parameters:
+      - name: submittal_package_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the submittal package.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              description: austin test description
+              name: austin test name
+              number: '12345'
+              submittal_ids:
+              - '{{submittal_id}}'
+  /submittal-packages/{id}:
+    delete:
+      operationId: deleteSubmittalPackagesById
+      summary: Delete Submittal Package
+      tags:
+      - Project Management
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the id.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /transmittals:
+    get:
+      operationId: getTransmittals
+      summary: List Transmittals
+      tags:
+      - Project Management
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              filters:
+              - field: sent_date
+                operator: '>='
+                value: '2022-07-20'
+  /transmittals/{transmittal_id}:
+    get:
+      operationId: getTransmittalsByTransmittalId
+      summary: Show Transmittal
+      tags:
+      - Project Management
+      parameters:
+      - name: transmittal_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the transmittal.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /vendors:
+    get:
+      operationId: getVendors
+      summary: List Vendors (Company)
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    post:
+      operationId: postVendors
+      summary: New Vendor
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              address:
+                street_1: '{{$randomStreetName}}'
+                city: '{{$randomCity}}'
+                state: CA
+                postal_code: '89434'
+              phone: '{{$randomPhoneNumber}}'
+              name: PA {{$randomCompanyName}}
+              website: '{{$randomUrl}}'
+    patch:
+      operationId: patchVendors
+      summary: Bulk Write Vendors
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              creates:
+              - address:
+                  street_1: Fave Street 1
+                  country: US
+                  city: San Francisco 1
+                  postal_code: '11111'
+                alternate_name: Test 1
+                email: email2@email.com
+                fax: 1-111-111-1111
+                name: Liam Test 1
+                phone: 1-111-222-1111
+                tax_number: '111111111'
+                website: https://www.liamtest1.com
+                source_data:
+                  business_register:
+                    type: ein
+              - name: Liam vendor that should fail
+                source_data:
+                  business_phone: asdfasdfasdfasdfasdf
+              - address:
+                  street_1: Fave Street 2
+                  country: US
+                  city: San Francisco 2
+                  postal_code: '22222'
+                alternate_name: Test 2
+                email: email2@email.com
+                fax: 1-222-222-22222
+                name: Liam Test 1
+                phone: 1-222-111-22222
+                tax_number: '222222222'
+                website: https://www.liamtest2.com
+                source_data:
+                  business_register:
+                    type: ein
+              updates:
+              - id: source_id:234128
+                email: contact+edited1@agaveapi.com
+              - id: source_id:123123123123123
+                name: Update should Fail
+              - id: source_id:234210
+                email: contact+edited2@agaveapi.com
+  /vendors/{vendor_id}:
+    get:
+      operationId: getVendorsByVendorId
+      summary: Show Vendor
+      tags:
+      - Project Management
+      parameters:
+      - name: vendor_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the vendor.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+    delete:
+      operationId: deleteVendorsByVendorId
+      summary: Delete Project Vendor
+      tags:
+      - Project Management
+      parameters:
+      - name: vendor_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Agave identifier for the vendor.
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+  /vendors/source_id:3404938:
+    put:
+      operationId: putVendorsSourceId3404938
+      summary: Update Vendor
+      tags:
+      - Project Management
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              name: Vendor from Brazil (updated)
+              source_data:
+                BpvenPayContactName: Vendor from Brazil (updated)
+                BpvenShpinstDesc: Vendor from Brazil (updated)
+  /work-logs:
+    get:
+      operationId: getWorkLogs
+      summary: List Work Logs
+      tags:
+      - Project Management
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response
+        '401':
+          description: Unauthorized - missing or invalid Client-Id / Client-Secret / Account-Token / API-Version header
+        '429':
+          description: Too Many Requests - Agave or source-system rate limit reached
+components:
+  securitySchemes:
+    ClientId:
+      type: apiKey
+      in: header
+      name: Client-Id
+      description: 36-character UUID client identifier.
+    ClientSecret:
+      type: apiKey
+      in: header
+      name: Client-Secret
+      description: 40-character client secret.
+    AccountToken:
+      type: apiKey
+      in: header
+      name: Account-Token
+      description: Account Token for the linked user account.
