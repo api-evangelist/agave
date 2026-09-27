@@ -74,22 +74,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    EmployeeList:
-      type: object
-      description: Paginated list of employees.
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Employee'
-          example:
-          - example_value
-        next_cursor:
-          type: string
-          example: eyJpZCI6MTIzfQ==
-        count:
-          type: integer
-          example: 50
     Error:
       type: object
       description: API error response.
@@ -143,6 +127,22 @@ components:
           format: date
           description: Date of hire.
           example: '2020-06-01'
+    EmployeeList:
+      type: object
+      description: Paginated list of employees.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employee'
+          example:
+          - example_value
+        next_cursor:
+          type: string
+          example: eyJpZCI6MTIzfQ==
+        count:
+          type: integer
+          example: 50
   securitySchemes:
     ClientId:
       type: apiKey
