@@ -116,6 +116,22 @@ components:
           type: number
           description: Total projected cost at completion.
           example: 270000.0
+    Error:
+      type: object
+      description: API error response.
+      properties:
+        error:
+          type: string
+          description: Error code.
+          example: not_found
+        message:
+          type: string
+          description: Human-readable error description.
+          example: The requested resource was not found.
+        request_id:
+          type: string
+          description: Unique request ID for support.
+          example: req-a1b2c3d4e5
     BudgetList:
       type: object
       description: Paginated list of budget line items.
@@ -135,22 +151,6 @@ components:
           type: integer
           description: Number of records returned.
           example: 100
-    Error:
-      type: object
-      description: API error response.
-      properties:
-        error:
-          type: string
-          description: Error code.
-          example: not_found
-        message:
-          type: string
-          description: Human-readable error description.
-          example: The requested resource was not found.
-        request_id:
-          type: string
-          description: Unique request ID for support.
-          example: req-a1b2c3d4e5
   securitySchemes:
     ClientId:
       type: apiKey

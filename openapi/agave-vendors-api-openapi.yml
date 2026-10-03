@@ -74,6 +74,22 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Error:
+      type: object
+      description: API error response.
+      properties:
+        error:
+          type: string
+          description: Error code.
+          example: not_found
+        message:
+          type: string
+          description: Human-readable error description.
+          example: The requested resource was not found.
+        request_id:
+          type: string
+          description: Unique request ID for support.
+          example: req-a1b2c3d4e5
     Vendor:
       type: object
       description: A vendor or subcontractor record.
@@ -125,22 +141,6 @@ components:
         count:
           type: integer
           example: 50
-    Error:
-      type: object
-      description: API error response.
-      properties:
-        error:
-          type: string
-          description: Error code.
-          example: not_found
-        message:
-          type: string
-          description: Human-readable error description.
-          example: The requested resource was not found.
-        request_id:
-          type: string
-          description: Unique request ID for support.
-          example: req-a1b2c3d4e5
   securitySchemes:
     ClientId:
       type: apiKey
