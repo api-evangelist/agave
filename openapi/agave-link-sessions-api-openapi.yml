@@ -73,23 +73,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    LinkSession:
-      type: object
-      description: An Agave Link session token.
-      properties:
-        link_token:
-          type: string
-          description: Token to initialize the Agave Link component for the user.
-          example: link-token-abc123xyz456
-        reference_id:
-          type: string
-          description: The reference ID associated with this session.
-          example: user-789-procore
-        expires_at:
-          type: string
-          format: date-time
-          description: Timestamp when the link token expires.
-          example: '2025-03-15T16:30:00Z'
     Error:
       type: object
       description: API error response.
@@ -120,6 +103,23 @@ components:
           type: string
           description: URL to redirect the user to after completing the link flow.
           example: https://myapp.com/integration/callback
+    LinkSession:
+      type: object
+      description: An Agave Link session token.
+      properties:
+        link_token:
+          type: string
+          description: Token to initialize the Agave Link component for the user.
+          example: link-token-abc123xyz456
+        reference_id:
+          type: string
+          description: The reference ID associated with this session.
+          example: user-789-procore
+        expires_at:
+          type: string
+          format: date-time
+          description: Timestamp when the link token expires.
+          example: '2025-03-15T16:30:00Z'
   securitySchemes:
     ClientId:
       type: apiKey

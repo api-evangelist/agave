@@ -90,6 +90,22 @@ components:
           type: string
           description: Unique request ID for support.
           example: req-a1b2c3d4e5
+    CostCodeList:
+      type: object
+      description: Paginated list of cost codes.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CostCode'
+          example:
+          - example_value
+        next_cursor:
+          type: string
+          example: eyJpZCI6MTIzfQ==
+        count:
+          type: integer
+          example: 200
     CostCode:
       type: object
       description: A job cost code for categorizing construction costs.
@@ -120,22 +136,6 @@ components:
           - subcontract
           - other
           example: material
-    CostCodeList:
-      type: object
-      description: Paginated list of cost codes.
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CostCode'
-          example:
-          - example_value
-        next_cursor:
-          type: string
-          example: eyJpZCI6MTIzfQ==
-        count:
-          type: integer
-          example: 200
   securitySchemes:
     ClientId:
       type: apiKey
