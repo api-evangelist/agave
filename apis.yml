@@ -336,6 +336,8 @@ apis:
   - type: OpenAPI
     url: openapi/agave-webhooks-api-openapi.yml
 common:
+- type: FinOps
+  url: finops/agave-finops.yml
 - type: AgenticAccess
   url: agentic-access/agave-agentic-access.yml
 - type: TrustCenter
