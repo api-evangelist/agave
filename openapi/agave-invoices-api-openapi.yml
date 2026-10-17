@@ -142,6 +142,37 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    InvoiceRequest:
+      type: object
+      description: Request payload for creating an invoice.
+      required:
+      - project_id
+      - vendor_id
+      - invoice_number
+      - amount
+      - invoice_date
+      properties:
+        project_id:
+          type: string
+          description: Project to associate the invoice with.
+          example: proj-500123
+        vendor_id:
+          type: string
+          description: Vendor identifier.
+          example: ven-334455
+        invoice_number:
+          type: string
+          description: Vendor invoice number.
+          example: INV-2025-1042
+        amount:
+          type: number
+          description: Invoice amount in USD.
+          example: 85000.0
+        invoice_date:
+          type: string
+          format: date
+          description: Invoice date.
+          example: '2025-03-01'
     Error:
       type: object
       description: API error response.
@@ -202,37 +233,6 @@ components:
           format: date
           description: Invoice due date.
           example: '2025-03-31'
-    InvoiceRequest:
-      type: object
-      description: Request payload for creating an invoice.
-      required:
-      - project_id
-      - vendor_id
-      - invoice_number
-      - amount
-      - invoice_date
-      properties:
-        project_id:
-          type: string
-          description: Project to associate the invoice with.
-          example: proj-500123
-        vendor_id:
-          type: string
-          description: Vendor identifier.
-          example: ven-334455
-        invoice_number:
-          type: string
-          description: Vendor invoice number.
-          example: INV-2025-1042
-        amount:
-          type: number
-          description: Invoice amount in USD.
-          example: 85000.0
-        invoice_date:
-          type: string
-          format: date
-          description: Invoice date.
-          example: '2025-03-01'
     InvoiceList:
       type: object
       description: Paginated list of invoices.
