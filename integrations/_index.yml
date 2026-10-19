@@ -47,3 +47,16 @@
     detected: '2026-10-18'
   status: not-a-workflow
   arazzo: null
+- slug: agave-autodesk-own
+  label: Autodesk (own)
+  partner: autodesk
+  partner_name: Autodesk (own)
+  category: ACCBD5K/BIM360/BM36DP
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.autodesk.com/apps/bcad733d-ca9f-4c2e-8150-b6786e495ac1
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
