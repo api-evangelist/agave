@@ -1,6 +1,7 @@
 generated: '2026-10-14'
 method: searched
 checked:
+- autodesk/integrations/autodesk-integration-edges.yml
 - https://api.nuget.org/v3
 - https://crates.io/api/v1
 - https://marketplace.autodesk.com/sitemap.xml
@@ -9,27 +10,9 @@ checked:
 - https://registry.npmjs.org
 - https://repo1.maven.org/maven2
 - https://rubygems.org/api/v1
-- procore/integrations/procore-integration-edges.yml
 source:
-- procore/integrations/procore-integration-edges.yml
+- autodesk/integrations/autodesk-integration-edges.yml
 edges:
-- partner_name: Procore (own)
-  partner: procore
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://marketplace.procore.com/apps/agave-api
-  mirror_of: procore/integrations/procore-integration-edges.yml
-  apps:
-  - Procore ERP Connector by Agave
-  listing_count: 1
-  detected: '2026-10-14'
-  detected_by: mirror-platform-listings.py
-  category: Accounting
 - partner_name: npm registry
   partner: npm
   partner_match: register
