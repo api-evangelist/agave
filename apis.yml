@@ -336,6 +336,8 @@ apis:
   - type: OpenAPI
     url: openapi/agave-webhooks-api-openapi.yml
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/agave/overview
 - type: FinOps
   url: finops/agave-finops.yml
 - type: AgenticAccess
