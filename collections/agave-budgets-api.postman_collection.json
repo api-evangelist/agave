@@ -1,48 +1,28 @@
 {
+  "info": {
+    "_postman_id": "282fe8d8-1d13-466c-9d95-9f2b7467710e",
+    "name": "Agave Unified Construction Budgets API",
+    "description": "The Agave Unified Construction API provides a single REST API to read and write data from 100+ construction and accounting software systems. It normalizes data across platforms including projects, budgets, contracts, commitments, purchase orders, invoices, cost codes, vendors, timesheets, and employees.\n\nContact Support:\n Name: Agave API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:36:56.000Z",
+    "updatedAt": "2026-10-21T20:36:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-282fe8d8-1d13-466c-9d95-9f2b7467710e"
+  },
   "item": [
     {
-      "id": "63d2b1fa-3e5b-471a-ba7d-d00b6a3b677e",
-      "name": "Budgets",
-      "description": {
-        "content": "Project budget and cost management resources.",
-        "type": "text/plain"
-      },
+      "name": "budgets",
       "item": [
         {
-          "id": "92997f84-4c51-4364-8cff-73711194f44e",
           "name": "Agave List Budgets",
+          "id": "2f3235d6-7801-4fb5-959d-cdf932ec5d04",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Agave List Budgets",
-            "description": {
-              "content": "Retrieve budget line items for projects in the linked source system.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "budgets"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "project_id",
-                  "value": "<string>",
-                  "description": "Filter budgets by project ID."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "<integer>",
-                  "description": "Maximum number of results to return."
-                }
-              ],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
-                "disabled": false,
                 "description": "(Required) The linked account source system identifier.",
                 "key": "source_system_id",
                 "value": "<string>"
@@ -52,142 +32,158 @@
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/budgets?project_id=<string>&limit=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "budgets"
+              ],
+              "query": [
+                {
+                  "description": "Filter budgets by project ID.",
+                  "key": "project_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of results to return.",
+                  "key": "limit",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Retrieve budget line items for projects in the linked source system."
           },
           "response": [
             {
-              "id": "f532e840-1fb5-4402-8aee-f39290f0acb2",
+              "id": "4814df63-0fa7-46da-a7c2-f3b2b127d583",
               "name": "A list of budget line items.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "budgets"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "project_id",
-                      "value": "proj-500123"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "100"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "API-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "(Required) The linked account source system identifier.",
                     "key": "source_system_id",
-                    "value": "linked-account-abc123"
+                    "value": "<string>"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Client-Id",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/budgets?project_id=<string>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "budgets"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter budgets by project ID.",
+                      "key": "project_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of results to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {}\n  ],\n  \"next_cursor\": \"example_value\",\n  \"count\": 1\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"cost_code_id\": \"<string>\",\n      \"description\": \"<string>\",\n      \"original_amount\": \"<number>\",\n      \"revised_amount\": \"<number>\",\n      \"actual_cost\": \"<number>\",\n      \"projected_cost\": \"<number>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"cost_code_id\": \"<string>\",\n      \"description\": \"<string>\",\n      \"original_amount\": \"<number>\",\n      \"revised_amount\": \"<number>\",\n      \"actual_cost\": \"<number>\",\n      \"projected_cost\": \"<number>\"\n    }\n  ],\n  \"next_cursor\": \"<string>\",\n  \"count\": \"<integer>\"\n}",
+              "createdAt": "2026-10-21T20:36:57.000Z",
+              "updatedAt": "2026-10-21T20:36:57.000Z",
+              "uid": "35240-4814df63-0fa7-46da-a7c2-f3b2b127d583"
             },
             {
-              "id": "2a4bd405-f470-40bd-808e-28f6b6f1f3c1",
+              "id": "b4ecdc4e-571e-4aa8-b4cd-f6c05bbe2c58",
               "name": "Unauthorized.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "budgets"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "project_id",
-                      "value": "proj-500123"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "100"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "API-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "(Required) The linked account source system identifier.",
                     "key": "source_system_id",
-                    "value": "linked-account-abc123"
+                    "value": "<string>"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Client-Id",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/budgets?project_id=<string>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "budgets"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter budgets by project ID.",
+                      "key": "project_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of results to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"example_value\",\n  \"message\": \"example_value\",\n  \"request_id\": \"500123\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:36:57.000Z",
+              "updatedAt": "2026-10-21T20:36:57.000Z",
+              "uid": "35240-b4ecdc4e-571e-4aa8-b4cd-f6c05bbe2c58"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:36:57.000Z",
+          "updatedAt": "2026-10-21T20:36:57.000Z",
+          "uid": "35240-2f3235d6-7801-4fb5-959d-cdf932ec5d04"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.agaveapi.com/v1",
-      "key": "baseUrl"
+      "id": "1773b1a0-4121-4de6-a672-b907df06801f",
+      "createdAt": "2026-10-21T20:36:57.000Z",
+      "updatedAt": "2026-10-21T20:36:57.000Z",
+      "uid": "35240-1773b1a0-4121-4de6-a672-b907df06801f"
     }
   ],
   "auth": {
@@ -195,25 +191,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "API-Key"
+        "value": "Client-Id",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "005c1876-a8c6-43d3-9768-d6c4dac7738d",
-    "name": "Agave Unified Construction Budgets API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Agave Unified Construction API provides a single REST API to read and write data from 100+ construction and accounting software systems. It normalizes data across platforms including projects, budgets, contracts, commitments, purchase orders, invoices, cost codes, vendors, timesheets, and employees.\n\nContact Support:\n Name: Agave API Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agaveapi.com"
     }
-  }
+  ]
 }

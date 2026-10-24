@@ -1,42 +1,28 @@
 {
+  "info": {
+    "_postman_id": "7f495a63-43af-41cc-8e98-ede47ef89c28",
+    "name": "Agave Unified Construction Employees API",
+    "description": "The Agave Unified Construction API provides a single REST API to read and write data from 100+ construction and accounting software systems. It normalizes data across platforms including projects, budgets, contracts, commitments, purchase orders, invoices, cost codes, vendors, timesheets, and employees.\n\nContact Support:\n Name: Agave API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:37:17.000Z",
+    "updatedAt": "2026-10-21T20:37:17.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7f495a63-43af-41cc-8e98-ede47ef89c28"
+  },
   "item": [
     {
-      "id": "6b1cc0c1-a341-461d-85f3-c43127f68501",
-      "name": "Employees",
-      "description": {
-        "content": "Employee records and workforce management.",
-        "type": "text/plain"
-      },
+      "name": "employees",
       "item": [
         {
-          "id": "87625a39-0739-4f66-b895-e4e8475c665a",
           "name": "Agave List Employees",
+          "id": "fed69c81-5fe0-4ce7-bdfe-721cc7a2f68f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Agave List Employees",
-            "description": {
-              "content": "Retrieve employee records from the linked source system.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "employees"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "<integer>",
-                  "description": "Maximum number of results to return."
-                }
-              ],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
-                "disabled": false,
                 "description": "(Required) The linked account source system identifier.",
                 "key": "source_system_id",
                 "value": "<string>"
@@ -46,134 +32,143 @@
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/employees?limit=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "employees"
+              ],
+              "query": [
+                {
+                  "description": "Maximum number of results to return.",
+                  "key": "limit",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Retrieve employee records from the linked source system."
           },
           "response": [
             {
-              "id": "6d620e89-425a-4de7-8c42-c290bef5b58b",
+              "id": "f894dd69-aaf8-4b23-ac47-4ac9bd52cb21",
               "name": "A list of employees.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "employees"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "100"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "API-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "(Required) The linked account source system identifier.",
                     "key": "source_system_id",
-                    "value": "linked-account-abc123"
+                    "value": "<string>"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Client-Id",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/employees?limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "employees"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {}\n  ],\n  \"next_cursor\": \"example_value\",\n  \"count\": 1\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"title\": \"<string>\",\n      \"status\": \"inactive\",\n      \"hire_date\": \"<date>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"title\": \"<string>\",\n      \"status\": \"terminated\",\n      \"hire_date\": \"<date>\"\n    }\n  ],\n  \"next_cursor\": \"<string>\",\n  \"count\": \"<integer>\"\n}",
+              "createdAt": "2026-10-21T20:37:17.000Z",
+              "updatedAt": "2026-10-21T20:37:17.000Z",
+              "uid": "35240-f894dd69-aaf8-4b23-ac47-4ac9bd52cb21"
             },
             {
-              "id": "80997c8f-6bee-4ff9-b05a-2d01705e189e",
+              "id": "53332034-79b6-4ede-8eb8-36f7e76accb0",
               "name": "Unauthorized.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "employees"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "100"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "API-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "(Required) The linked account source system identifier.",
                     "key": "source_system_id",
-                    "value": "linked-account-abc123"
+                    "value": "<string>"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Client-Id",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/employees?limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "employees"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"example_value\",\n  \"message\": \"example_value\",\n  \"request_id\": \"500123\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:37:17.000Z",
+              "updatedAt": "2026-10-21T20:37:17.000Z",
+              "uid": "35240-53332034-79b6-4ede-8eb8-36f7e76accb0"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:37:17.000Z",
+          "updatedAt": "2026-10-21T20:37:17.000Z",
+          "uid": "35240-fed69c81-5fe0-4ce7-bdfe-721cc7a2f68f"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.agaveapi.com/v1",
-      "key": "baseUrl"
+      "id": "ddd555ea-0f4c-4d0f-8ad0-c3fb4adcb33b",
+      "createdAt": "2026-10-21T20:37:17.000Z",
+      "updatedAt": "2026-10-21T20:37:17.000Z",
+      "uid": "35240-ddd555ea-0f4c-4d0f-8ad0-c3fb4adcb33b"
     }
   ],
   "auth": {
@@ -181,25 +176,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "API-Key"
+        "value": "Client-Id",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "adbf94a9-e629-4c9a-8124-4252778113b6",
-    "name": "Agave Unified Construction Budgets Employees API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Agave Unified Construction API provides a single REST API to read and write data from 100+ construction and accounting software systems. It normalizes data across platforms including projects, budgets, contracts, commitments, purchase orders, invoices, cost codes, vendors, timesheets, and employees.\n\nContact Support:\n Name: Agave API Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agaveapi.com"
     }
-  }
+  ]
 }

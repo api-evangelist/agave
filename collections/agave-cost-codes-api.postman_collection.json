@@ -1,42 +1,28 @@
 {
+  "info": {
+    "_postman_id": "14ab6a7a-cb0c-4dc1-8017-904085125cc1",
+    "name": "Agave Unified Construction Cost Codes API",
+    "description": "The Agave Unified Construction API provides a single REST API to read and write data from 100+ construction and accounting software systems. It normalizes data across platforms including projects, budgets, contracts, commitments, purchase orders, invoices, cost codes, vendors, timesheets, and employees.\n\nContact Support:\n Name: Agave API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:37:10.000Z",
+    "updatedAt": "2026-10-21T20:37:10.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-14ab6a7a-cb0c-4dc1-8017-904085125cc1"
+  },
   "item": [
     {
-      "id": "6baac790-b250-4f9b-96de-4583462a8618",
-      "name": "Cost Codes",
-      "description": {
-        "content": "Job cost codes and cost types.",
-        "type": "text/plain"
-      },
+      "name": "cost-codes",
       "item": [
         {
-          "id": "93b57ff3-9d1d-40db-9de6-0dc56bd18966",
           "name": "Agave List Cost Codes",
+          "id": "a4af1611-bb10-4f8f-bc03-5549ae8d3e40",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Agave List Cost Codes",
-            "description": {
-              "content": "Retrieve job cost codes from the linked source system.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "cost-codes"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "project_id",
-                  "value": "<string>",
-                  "description": "Filter cost codes by project ID."
-                }
-              ],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
-                "disabled": false,
                 "description": "(Required) The linked account source system identifier.",
                 "key": "source_system_id",
                 "value": "<string>"
@@ -46,134 +32,143 @@
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/cost-codes?project_id=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cost-codes"
+              ],
+              "query": [
+                {
+                  "description": "Filter cost codes by project ID.",
+                  "key": "project_id",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieve job cost codes from the linked source system."
           },
           "response": [
             {
-              "id": "79e372ae-b565-408a-b178-9e6f14d8d93a",
+              "id": "d681dad7-cf5d-4c91-a89f-323160c219a6",
               "name": "A list of cost codes.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "cost-codes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "project_id",
-                      "value": "proj-500123"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "API-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "(Required) The linked account source system identifier.",
                     "key": "source_system_id",
-                    "value": "linked-account-abc123"
+                    "value": "<string>"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Client-Id",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/cost-codes?project_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cost-codes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter cost codes by project ID.",
+                      "key": "project_id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {}\n  ],\n  \"next_cursor\": \"example_value\",\n  \"count\": 1\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"code\": \"<string>\",\n      \"description\": \"<string>\",\n      \"cost_type\": \"subcontract\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"code\": \"<string>\",\n      \"description\": \"<string>\",\n      \"cost_type\": \"other\"\n    }\n  ],\n  \"next_cursor\": \"<string>\",\n  \"count\": \"<integer>\"\n}",
+              "createdAt": "2026-10-21T20:37:11.000Z",
+              "updatedAt": "2026-10-21T20:37:11.000Z",
+              "uid": "35240-d681dad7-cf5d-4c91-a89f-323160c219a6"
             },
             {
-              "id": "86fca28b-bbb9-4ec1-95ef-233e1b0131cd",
+              "id": "0ecc5b3e-8110-4538-85c8-a64926f1c6d7",
               "name": "Unauthorized.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "cost-codes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "project_id",
-                      "value": "proj-500123"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "API-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "(Required) The linked account source system identifier.",
                     "key": "source_system_id",
-                    "value": "linked-account-abc123"
+                    "value": "<string>"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Client-Id",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/cost-codes?project_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "cost-codes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter cost codes by project ID.",
+                      "key": "project_id",
+                      "value": "<string>"
+                    }
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"example_value\",\n  \"message\": \"example_value\",\n  \"request_id\": \"500123\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:37:11.000Z",
+              "updatedAt": "2026-10-21T20:37:11.000Z",
+              "uid": "35240-0ecc5b3e-8110-4538-85c8-a64926f1c6d7"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:37:11.000Z",
+          "updatedAt": "2026-10-21T20:37:11.000Z",
+          "uid": "35240-a4af1611-bb10-4f8f-bc03-5549ae8d3e40"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.agaveapi.com/v1",
-      "key": "baseUrl"
+      "id": "b6ce6f36-8852-4fcb-b42f-0b7acafde0f4",
+      "createdAt": "2026-10-21T20:37:11.000Z",
+      "updatedAt": "2026-10-21T20:37:11.000Z",
+      "uid": "35240-b6ce6f36-8852-4fcb-b42f-0b7acafde0f4"
     }
   ],
   "auth": {
@@ -181,25 +176,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "API-Key"
+        "value": "Client-Id",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "9c7e3a91-6d67-42b1-a500-cb0bb0975d33",
-    "name": "Agave Unified Construction Budgets Cost Codes API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Agave Unified Construction API provides a single REST API to read and write data from 100+ construction and accounting software systems. It normalizes data across platforms including projects, budgets, contracts, commitments, purchase orders, invoices, cost codes, vendors, timesheets, and employees.\n\nContact Support:\n Name: Agave API Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agaveapi.com"
     }
-  }
+  ]
 }

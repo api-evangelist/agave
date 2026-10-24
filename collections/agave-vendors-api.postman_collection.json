@@ -1,42 +1,28 @@
 {
+  "info": {
+    "_postman_id": "573c1fdb-3eb8-4559-aa47-d138ecd575b7",
+    "name": "Agave Unified Construction Vendors API",
+    "description": "The Agave Unified Construction API provides a single REST API to read and write data from 100+ construction and accounting software systems. It normalizes data across platforms including projects, budgets, contracts, commitments, purchase orders, invoices, cost codes, vendors, timesheets, and employees.\n\nContact Support:\n Name: Agave API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:38:00.000Z",
+    "updatedAt": "2026-10-21T20:38:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-573c1fdb-3eb8-4559-aa47-d138ecd575b7"
+  },
   "item": [
     {
-      "id": "9ba515d8-2feb-48f7-b4ce-3d938aa97264",
-      "name": "Vendors",
-      "description": {
-        "content": "Vendor and subcontractor management.",
-        "type": "text/plain"
-      },
+      "name": "vendors",
       "item": [
         {
-          "id": "83b369d3-0f7b-4b3b-8194-e0411e01c372",
           "name": "Agave List Vendors",
+          "id": "55fb4d08-66d4-434c-996c-a6816adbf2b5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Agave List Vendors",
-            "description": {
-              "content": "Retrieve vendors and subcontractors from the linked source system.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "vendors"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "<integer>",
-                  "description": "Maximum number of results to return."
-                }
-              ],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
-                "disabled": false,
                 "description": "(Required) The linked account source system identifier.",
                 "key": "source_system_id",
                 "value": "<string>"
@@ -46,134 +32,143 @@
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/vendors?limit=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendors"
+              ],
+              "query": [
+                {
+                  "description": "Maximum number of results to return.",
+                  "key": "limit",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Retrieve vendors and subcontractors from the linked source system."
           },
           "response": [
             {
-              "id": "1f8f440a-a6e1-4b88-bf57-a514a5056768",
+              "id": "7d31e510-574a-475c-8af9-69b827ef280d",
               "name": "A list of vendors.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendors"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "100"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "API-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "(Required) The linked account source system identifier.",
                     "key": "source_system_id",
-                    "value": "linked-account-abc123"
+                    "value": "<string>"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Client-Id",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/vendors?limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vendors"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {}\n  ],\n  \"next_cursor\": \"example_value\",\n  \"count\": 1\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"address\": \"<string>\",\n      \"tax_id\": \"<string>\",\n      \"status\": \"active\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"address\": \"<string>\",\n      \"tax_id\": \"<string>\",\n      \"status\": \"active\"\n    }\n  ],\n  \"next_cursor\": \"<string>\",\n  \"count\": \"<integer>\"\n}",
+              "createdAt": "2026-10-21T20:38:01.000Z",
+              "updatedAt": "2026-10-21T20:38:01.000Z",
+              "uid": "35240-7d31e510-574a-475c-8af9-69b827ef280d"
             },
             {
-              "id": "84c9fd98-7fb0-4402-a957-08409af1d51f",
+              "id": "2f5795ee-ab1e-40a1-a1ba-fec86deb55ea",
               "name": "Unauthorized.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "vendors"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "100"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "API-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "(Required) The linked account source system identifier.",
                     "key": "source_system_id",
-                    "value": "linked-account-abc123"
+                    "value": "<string>"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Client-Id",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/vendors?limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "vendors"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"example_value\",\n  \"message\": \"example_value\",\n  \"request_id\": \"500123\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:38:01.000Z",
+              "updatedAt": "2026-10-21T20:38:01.000Z",
+              "uid": "35240-2f5795ee-ab1e-40a1-a1ba-fec86deb55ea"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:38:01.000Z",
+          "updatedAt": "2026-10-21T20:38:01.000Z",
+          "uid": "35240-55fb4d08-66d4-434c-996c-a6816adbf2b5"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.agaveapi.com/v1",
-      "key": "baseUrl"
+      "id": "a2681170-7ad9-44e5-a043-7138a0b5b06b",
+      "createdAt": "2026-10-21T20:38:01.000Z",
+      "updatedAt": "2026-10-21T20:38:01.000Z",
+      "uid": "35240-a2681170-7ad9-44e5-a043-7138a0b5b06b"
     }
   ],
   "auth": {
@@ -181,25 +176,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "API-Key"
+        "value": "Client-Id",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "3f57ecd4-0513-4516-afc2-15c6033c0b09",
-    "name": "Agave Unified Construction Budgets Vendors API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Agave Unified Construction API provides a single REST API to read and write data from 100+ construction and accounting software systems. It normalizes data across platforms including projects, budgets, contracts, commitments, purchase orders, invoices, cost codes, vendors, timesheets, and employees.\n\nContact Support:\n Name: Agave API Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agaveapi.com"
     }
-  }
+  ]
 }

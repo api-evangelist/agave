@@ -1,359 +1,349 @@
 {
+  "info": {
+    "_postman_id": "4d4ed341-ca4d-44ae-9286-2d092f41ffa9",
+    "name": "Agave Unified Construction Projects API",
+    "description": "The Agave Unified Construction API provides a single REST API to read and write data from 100+ construction and accounting software systems. It normalizes data across platforms including projects, budgets, contracts, commitments, purchase orders, invoices, cost codes, vendors, timesheets, and employees.\n\nContact Support:\n Name: Agave API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:37:46.000Z",
+    "updatedAt": "2026-10-21T20:37:46.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4d4ed341-ca4d-44ae-9286-2d092f41ffa9"
+  },
   "item": [
     {
-      "id": "98966d57-cf89-4e2d-923c-88e73502ecd2",
-      "name": "Projects",
-      "description": {
-        "content": "Construction project management resources.",
-        "type": "text/plain"
-      },
+      "name": "projects",
       "item": [
         {
-          "id": "d7ccd7a7-ff20-41c7-a5a7-54e4d24353c6",
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Agave Get Project",
+              "id": "8660be2e-1862-4841-96a6-075b1f5dc98c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The linked account source system identifier.",
+                    "key": "source_system_id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/projects/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "dd190fee-3ef3-4247-b7c8-ef18b2304c4d",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) Project identifier."
+                    }
+                  ]
+                },
+                "description": "Retrieve a specific construction project by ID."
+              },
+              "response": [
+                {
+                  "id": "f2d25184-384e-4533-92a6-1f03f4ddb88b",
+                  "name": "Project details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The linked account source system identifier.",
+                        "key": "source_system_id",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Client-Id",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"source_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"number\": \"<string>\",\n  \"status\": \"active\",\n  \"address\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"estimated_completion_date\": \"<date>\",\n  \"total_budget\": \"<number>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-10-21T20:37:47.000Z",
+                  "updatedAt": "2026-10-21T20:37:47.000Z",
+                  "uid": "35240-f2d25184-384e-4533-92a6-1f03f4ddb88b"
+                },
+                {
+                  "id": "ea770259-e65f-4a90-83b4-1bb1481999fb",
+                  "name": "Project not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The linked account source system identifier.",
+                        "key": "source_system_id",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Client-Id",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/projects/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "projects",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:37:47.000Z",
+                  "updatedAt": "2026-10-21T20:37:47.000Z",
+                  "uid": "35240-ea770259-e65f-4a90-83b4-1bb1481999fb"
+                }
+              ],
+              "createdAt": "2026-10-21T20:37:47.000Z",
+              "updatedAt": "2026-10-21T20:37:47.000Z",
+              "uid": "35240-8660be2e-1862-4841-96a6-075b1f5dc98c"
+            }
+          ],
+          "id": "866a1f76-8412-49e4-9e75-a813f3836d1a",
+          "createdAt": "2026-10-21T20:37:47.000Z",
+          "updatedAt": "2026-10-21T20:37:47.000Z",
+          "uid": "35240-866a1f76-8412-49e4-9e75-a813f3836d1a"
+        },
+        {
           "name": "Agave List Projects",
+          "id": "ee3fd2e2-fea7-44cb-9762-f361e0e9217b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Agave List Projects",
-            "description": {
-              "content": "Retrieve a list of construction projects from the linked source system.",
-              "type": "text/plain"
-            },
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) The linked account source system identifier.",
+                "key": "source_system_id",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/projects?limit=<integer>&cursor=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "projects"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "Maximum number of results to return.",
                   "key": "limit",
-                  "value": "<integer>",
-                  "description": "Maximum number of results to return."
+                  "value": "<integer>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Pagination cursor for the next page of results.",
                   "key": "cursor",
-                  "value": "<string>",
-                  "description": "Pagination cursor for the next page of results."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) The linked account source system identifier.",
-                "key": "source_system_id",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "8ea0f690-60d6-4d6e-b1a5-2c99d63a8c39",
-              "name": "A paginated list of projects.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "projects"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "100"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "eyJpZCI6MTIzfQ=="
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "API-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) The linked account source system identifier.",
-                    "key": "source_system_id",
-                    "value": "linked-account-abc123"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {}\n  ],\n  \"next_cursor\": \"example_value\",\n  \"count\": 1\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1197e3f7-96ab-4ad9-aa7a-89d1149dc94d",
-              "name": "Unauthorized.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "projects"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "100"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "eyJpZCI6MTIzfQ=="
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "API-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
-                    "description": "(Required) The linked account source system identifier.",
-                    "key": "source_system_id",
-                    "value": "linked-account-abc123"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"example_value\",\n  \"message\": \"example_value\",\n  \"request_id\": \"500123\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c2463f4e-f283-4c04-b5ff-961ee5fb6063",
-          "name": "Agave Get Project",
-          "request": {
-            "name": "Agave Get Project",
-            "description": {
-              "content": "Retrieve a specific construction project by ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "projects",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) Project identifier."
+                  "value": "<string>"
                 }
               ]
             },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) The linked account source system identifier.",
-                "key": "source_system_id",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Retrieve a list of construction projects from the linked source system."
           },
           "response": [
             {
-              "id": "d10d169e-2bee-4012-9d5b-ac85d42d0c18",
-              "name": "Project details.",
+              "id": "76a0d529-b8b8-4814-a9ad-a83fc6aed4eb",
+              "name": "A paginated list of projects.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "projects",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Project identifier."
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "API-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "(Required) The linked account source system identifier.",
                     "key": "source_system_id",
-                    "value": "linked-account-abc123"
+                    "value": "<string>"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Client-Id",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/projects?limit=<integer>&cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination cursor for the next page of results.",
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"500123\",\n  \"source_id\": \"500123\",\n  \"name\": \"Example Name\",\n  \"number\": \"example_value\",\n  \"status\": \"active\",\n  \"address\": \"example_value\",\n  \"start_date\": \"2025-03-15\",\n  \"estimated_completion_date\": \"2025-03-15\",\n  \"total_budget\": 99.99,\n  \"created_at\": \"2025-03-15T14:30:00Z\",\n  \"updated_at\": \"2025-03-15T14:30:00Z\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"source_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"number\": \"<string>\",\n      \"status\": \"inactive\",\n      \"address\": \"<string>\",\n      \"start_date\": \"<date>\",\n      \"estimated_completion_date\": \"<date>\",\n      \"total_budget\": \"<number>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"source_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"number\": \"<string>\",\n      \"status\": \"inactive\",\n      \"address\": \"<string>\",\n      \"start_date\": \"<date>\",\n      \"estimated_completion_date\": \"<date>\",\n      \"total_budget\": \"<number>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ],\n  \"next_cursor\": \"<string>\",\n  \"count\": \"<integer>\"\n}",
+              "createdAt": "2026-10-21T20:37:47.000Z",
+              "updatedAt": "2026-10-21T20:37:47.000Z",
+              "uid": "35240-76a0d529-b8b8-4814-a9ad-a83fc6aed4eb"
             },
             {
-              "id": "fdfd0b79-7b47-4a34-8ebb-b78b789a53c1",
-              "name": "Project not found.",
+              "id": "c04d9a80-c90c-4273-bc42-d3293749b765",
+              "name": "Unauthorized.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "projects",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) Project identifier."
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "API-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "(Required) The linked account source system identifier.",
                     "key": "source_system_id",
-                    "value": "linked-account-abc123"
+                    "value": "<string>"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Client-Id",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/projects?limit=<integer>&cursor=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "projects"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination cursor for the next page of results.",
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ]
+                }
               },
-              "status": "Not Found",
-              "code": 404,
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"example_value\",\n  \"message\": \"example_value\",\n  \"request_id\": \"500123\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:37:47.000Z",
+              "updatedAt": "2026-10-21T20:37:47.000Z",
+              "uid": "35240-c04d9a80-c90c-4273-bc42-d3293749b765"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:37:47.000Z",
+          "updatedAt": "2026-10-21T20:37:47.000Z",
+          "uid": "35240-ee3fd2e2-fea7-44cb-9762-f361e0e9217b"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.agaveapi.com/v1",
-      "key": "baseUrl"
+      "id": "26a7be98-c0a4-4260-b990-da84e57814e2",
+      "createdAt": "2026-10-21T20:37:47.000Z",
+      "updatedAt": "2026-10-21T20:37:47.000Z",
+      "uid": "35240-26a7be98-c0a4-4260-b990-da84e57814e2"
     }
   ],
   "auth": {
@@ -361,25 +351,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "API-Key"
+        "value": "Client-Id",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "782f5620-e529-49c7-bf4b-e83d22c9b773",
-    "name": "Agave Unified Construction Budgets Projects API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Agave Unified Construction API provides a single REST API to read and write data from 100+ construction and accounting software systems. It normalizes data across platforms including projects, budgets, contracts, commitments, purchase orders, invoices, cost codes, vendors, timesheets, and employees.\n\nContact Support:\n Name: Agave API Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agaveapi.com"
     }
-  }
+  ]
 }

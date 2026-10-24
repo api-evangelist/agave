@@ -1,54 +1,28 @@
 {
+  "info": {
+    "_postman_id": "8bd271d7-200d-4864-a848-62d288ecd4c1",
+    "name": "Agave Unified Construction Timesheets API",
+    "description": "The Agave Unified Construction API provides a single REST API to read and write data from 100+ construction and accounting software systems. It normalizes data across platforms including projects, budgets, contracts, commitments, purchase orders, invoices, cost codes, vendors, timesheets, and employees.\n\nContact Support:\n Name: Agave API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:37:53.000Z",
+    "updatedAt": "2026-10-21T20:37:53.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8bd271d7-200d-4864-a848-62d288ecd4c1"
+  },
   "item": [
     {
-      "id": "43a7852e-43fe-44dd-9c98-eda79ea7c348",
-      "name": "Timesheets",
-      "description": {
-        "content": "Employee timesheet and labor tracking.",
-        "type": "text/plain"
-      },
+      "name": "timesheets",
       "item": [
         {
-          "id": "a9618182-74a0-4205-906c-f6b609722637",
           "name": "Agave List Timesheets",
+          "id": "fbb247ac-f905-44b4-b684-a1fefd6013bb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Agave List Timesheets",
-            "description": {
-              "content": "Retrieve employee timesheets from the linked source system.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "timesheets"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "project_id",
-                  "value": "<string>",
-                  "description": "Filter timesheets by project ID."
-                },
-                {
-                  "disabled": false,
-                  "key": "date_from",
-                  "value": "<date>",
-                  "description": "Start date for timesheet filter (YYYY-MM-DD)."
-                },
-                {
-                  "disabled": false,
-                  "key": "date_to",
-                  "value": "<date>",
-                  "description": "End date for timesheet filter (YYYY-MM-DD)."
-                }
-              ],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
-                "disabled": false,
                 "description": "(Required) The linked account source system identifier.",
                 "key": "source_system_id",
                 "value": "<string>"
@@ -58,150 +32,173 @@
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/timesheets?project_id=<string>&date_from=<date>&date_to=<date>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "timesheets"
+              ],
+              "query": [
+                {
+                  "description": "Filter timesheets by project ID.",
+                  "key": "project_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Start date for timesheet filter (YYYY-MM-DD).",
+                  "key": "date_from",
+                  "value": "<date>"
+                },
+                {
+                  "description": "End date for timesheet filter (YYYY-MM-DD).",
+                  "key": "date_to",
+                  "value": "<date>"
+                }
+              ]
+            },
+            "description": "Retrieve employee timesheets from the linked source system."
           },
           "response": [
             {
-              "id": "a8d28205-5548-424d-8ec8-87ce81f91d9d",
+              "id": "6a85d3e3-4aad-456f-9843-7d3f5bf53bb0",
               "name": "A list of timesheets.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "timesheets"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "project_id",
-                      "value": "proj-500123"
-                    },
-                    {
-                      "key": "date_from",
-                      "value": "2025-01-01"
-                    },
-                    {
-                      "key": "date_to",
-                      "value": "2025-01-31"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "API-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "(Required) The linked account source system identifier.",
                     "key": "source_system_id",
-                    "value": "linked-account-abc123"
+                    "value": "<string>"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Client-Id",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/timesheets?project_id=<string>&date_from=<date>&date_to=<date>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "timesheets"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter timesheets by project ID.",
+                      "key": "project_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Start date for timesheet filter (YYYY-MM-DD).",
+                      "key": "date_from",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "End date for timesheet filter (YYYY-MM-DD).",
+                      "key": "date_to",
+                      "value": "<date>"
+                    }
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {}\n  ],\n  \"next_cursor\": \"example_value\",\n  \"count\": 1\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"employee_id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"cost_code_id\": \"<string>\",\n      \"date\": \"<date>\",\n      \"regular_hours\": \"<number>\",\n      \"overtime_hours\": \"<number>\",\n      \"pay_rate\": \"<number>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"employee_id\": \"<string>\",\n      \"project_id\": \"<string>\",\n      \"cost_code_id\": \"<string>\",\n      \"date\": \"<date>\",\n      \"regular_hours\": \"<number>\",\n      \"overtime_hours\": \"<number>\",\n      \"pay_rate\": \"<number>\"\n    }\n  ],\n  \"next_cursor\": \"<string>\",\n  \"count\": \"<integer>\"\n}",
+              "createdAt": "2026-10-21T20:37:54.000Z",
+              "updatedAt": "2026-10-21T20:37:54.000Z",
+              "uid": "35240-6a85d3e3-4aad-456f-9843-7d3f5bf53bb0"
             },
             {
-              "id": "7abca359-27ad-44f3-8e7b-966e74a39e6b",
+              "id": "e5d47e81-6b21-429a-91e1-cae9d148f2df",
               "name": "Unauthorized.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "timesheets"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "project_id",
-                      "value": "proj-500123"
-                    },
-                    {
-                      "key": "date_from",
-                      "value": "2025-01-01"
-                    },
-                    {
-                      "key": "date_to",
-                      "value": "2025-01-31"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "API-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "disabled": false,
                     "description": "(Required) The linked account source system identifier.",
                     "key": "source_system_id",
-                    "value": "linked-account-abc123"
+                    "value": "<string>"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Client-Id",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/timesheets?project_id=<string>&date_from=<date>&date_to=<date>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "timesheets"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter timesheets by project ID.",
+                      "key": "project_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Start date for timesheet filter (YYYY-MM-DD).",
+                      "key": "date_from",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "End date for timesheet filter (YYYY-MM-DD).",
+                      "key": "date_to",
+                      "value": "<date>"
+                    }
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": \"example_value\",\n  \"message\": \"example_value\",\n  \"request_id\": \"500123\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\",\n  \"request_id\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:37:54.000Z",
+              "updatedAt": "2026-10-21T20:37:54.000Z",
+              "uid": "35240-e5d47e81-6b21-429a-91e1-cae9d148f2df"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:37:54.000Z",
+          "updatedAt": "2026-10-21T20:37:54.000Z",
+          "uid": "35240-fbb247ac-f905-44b4-b684-a1fefd6013bb"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.agaveapi.com/v1",
-      "key": "baseUrl"
+      "id": "975e46b5-06be-4673-b1ba-7d2f5519cac0",
+      "createdAt": "2026-10-21T20:37:54.000Z",
+      "updatedAt": "2026-10-21T20:37:54.000Z",
+      "uid": "35240-975e46b5-06be-4673-b1ba-7d2f5519cac0"
     }
   ],
   "auth": {
@@ -209,25 +206,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "API-Key"
+        "value": "Client-Id",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "b130bdf6-c13d-46a6-a21c-3155e505b8ec",
-    "name": "Agave Unified Construction Budgets Timesheets API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Agave Unified Construction API provides a single REST API to read and write data from 100+ construction and accounting software systems. It normalizes data across platforms including projects, budgets, contracts, commitments, purchase orders, invoices, cost codes, vendors, timesheets, and employees.\n\nContact Support:\n Name: Agave API Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.agaveapi.com"
     }
-  }
+  ]
 }
