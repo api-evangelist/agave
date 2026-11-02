@@ -1,0 +1,659 @@
+aid: agave
+url: https://raw.githubusercontent.com/api-evangelist/agave/refs/heads/main/apis.yml
+name: Agave
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
+specificationVersion: '0.23'
+x-docs-platform: docusaurus
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-17
+x-docs-hosting: github-pages
+tags:
+- Accounting
+- Construction
+- Integration
+- ERP
+- Project Management
+- Unified API
+- iPaaS
+- Webhook
+- Field Service Management
+- Invoicing
+tags_raw:
+- Accounting
+- Construction
+- Integration
+- ERP
+- Project Management
+- Unified API
+- iPaaS
+- Webhooks
+- Field Service
+- Invoicing
+- Unified-API
+kind: contract
+accessModel:
+  pricing: paid
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Paid
+  confidence: high
+  source:
+  - finops
+  - authentication
+  - rate-limits
+  - security
+  - sandbox
+  generated: '2026-09-03'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/agave.png
+access: 3rd-Party
+created: '2025-03-01'
+modified: '2026-08-30'
+position: Consuming
+description: Agave is a unified API platform for the construction industry, enabling
+  software companies and contractors to read and write data across 100+ construction
+  and accounting software systems including Procore, Autodesk Build, QuickBooks, Sage,
+  Viewpoint, and more.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+apis:
+- aid: agave:agave-link
+  name: Agave Link Component
+  tags:
+  - Authentication
+  - Construction
+  - Frontend
+  - OAuth
+  tags_raw:
+  - Authentication
+  - Construction
+  - Front-End
+  - OAuth
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  baseURL: https://api.agaveapi.com
+  humanURL: https://docs.agaveapi.com/
+  properties:
+  - url: https://docs.agaveapi.com/
+    type: Documentation
+  - url: https://github.com/agave-api/react-agave-link
+    type: SDKs
+  description: >-
+    Agave Link is a front-end component that enables users to select source systems, authenticate with
+    their construction software accounts, and share data with your application, handling OAuth flows for
+    all supported platforms.
+- aid: agave:agave-file-manager
+  name: Agave File Manager Component
+  tags:
+  - Construction
+  - Documents
+  - File
+  - Frontend
+  tags_raw:
+  - Construction
+  - Documents
+  - Files
+  - Front-End
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  baseURL: https://api.agaveapi.com
+  humanURL: https://docs.agaveapi.com/
+  properties:
+  - url: https://docs.agaveapi.com/
+    type: Documentation
+  - url: components/agave-components.yml
+    type: Components
+  description: >-
+    Agave File Manager is a front-end component that allows users to pick files and folders from linked
+    construction software accounts to share with your application.
+- aid: agave:agave-budgets-api
+  name: Agave Budgets API
+  description: Project budget and cost management resources.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Budgets
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-budgets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.agaveapi.com/
+  - type: APIReference
+    url: https://docs.agaveapi.com/reference
+  - type: GettingStarted
+    url: https://docs.agaveapi.com/quickstart
+- aid: agave:agave-contracts-api
+  name: Agave Contracts API
+  description: Prime contracts and commitment management.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Contracts
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-contracts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.agaveapi.com/
+  - type: APIReference
+    url: https://docs.agaveapi.com/reference
+  - type: GettingStarted
+    url: https://docs.agaveapi.com/quickstart
+- aid: agave:agave-cost-codes-api
+  name: Agave Cost Codes API
+  description: Job cost codes and cost types.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Cost Codes
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-cost-codes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.agaveapi.com/
+  - type: APIReference
+    url: https://docs.agaveapi.com/reference
+  - type: GettingStarted
+    url: https://docs.agaveapi.com/quickstart
+- aid: agave:agave-employees-api
+  name: Agave Employees API
+  description: Employee records and workforce management.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Employees
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-employees-api-openapi.yml
+  - type: Documentation
+    url: https://docs.agaveapi.com/
+  - type: APIReference
+    url: https://docs.agaveapi.com/reference
+  - type: GettingStarted
+    url: https://docs.agaveapi.com/quickstart
+- aid: agave:agave-invoices-api
+  name: Agave Invoices API
+  description: Accounts payable invoices and billing.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-invoices-api-openapi.yml
+  - type: Documentation
+    url: https://docs.agaveapi.com/
+  - type: APIReference
+    url: https://docs.agaveapi.com/reference
+  - type: GettingStarted
+    url: https://docs.agaveapi.com/quickstart
+- aid: agave:agave-link-sessions-api
+  name: Agave Link Sessions API
+  description: Agave Link session management for user authentication.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Link Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-link-sessions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.agaveapi.com/
+  - type: APIReference
+    url: https://docs.agaveapi.com/reference
+  - type: GettingStarted
+    url: https://docs.agaveapi.com/quickstart
+- aid: agave:agave-projects-api
+  name: Agave Projects API
+  description: Construction project management resources.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Project
+  tags_raw:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-projects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.agaveapi.com/
+  - type: APIReference
+    url: https://docs.agaveapi.com/reference
+  - type: GettingStarted
+    url: https://docs.agaveapi.com/quickstart
+- aid: agave:agave-timesheets-api
+  name: Agave Timesheets API
+  description: Employee timesheet and labor tracking.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Timesheets
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-timesheets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.agaveapi.com/
+  - type: APIReference
+    url: https://docs.agaveapi.com/reference
+  - type: GettingStarted
+    url: https://docs.agaveapi.com/quickstart
+- aid: agave:agave-vendors-api
+  name: Agave Vendors API
+  description: Vendor and subcontractor management.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Vendors
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-vendors-api-openapi.yml
+  - type: Documentation
+    url: https://docs.agaveapi.com/
+  - type: APIReference
+    url: https://docs.agaveapi.com/reference
+  - type: GettingStarted
+    url: https://docs.agaveapi.com/quickstart
+- aid: agave:agave-common-api
+  name: Agave Common API
+  description: Common resources in the Agave unified construction API.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Common
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-common-api-openapi.yml
+- aid: agave:agave-customer-management-api
+  name: Agave Customer Management API
+  description: Customer Management resources in the Agave unified construction API.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Customer Management
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-customer-management-api-openapi.yml
+- aid: agave:agave-file-management-api
+  name: Agave File Management API
+  description: File Management resources in the Agave unified construction API.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - File Management
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-file-management-api-openapi.yml
+- aid: agave:agave-financials-management-api
+  name: Agave Financials Management API
+  description: Financials Management resources in the Agave unified construction API.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Financials Management
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-financials-management-api-openapi.yml
+- aid: agave:agave-project-management-api
+  name: Agave Project Management API
+  description: Project Management resources in the Agave unified construction API.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Project Management
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-project-management-api-openapi.yml
+- aid: agave:agave-service-management-api
+  name: Agave Service Management API
+  description: Service Management resources in the Agave unified construction API.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Service Management
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-service-management-api-openapi.yml
+- aid: agave:agave-webhooks-api
+  name: Agave Webhooks API
+  description: Webhooks resources in the Agave unified construction API.
+  humanURL: https://docs.agaveapi.com/
+  baseURL: https://api.agaveapi.com
+  tags:
+  - Webhook
+  tags_raw:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/agave-webhooks-api-openapi.yml
+common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/agave/overview
+- type: FinOps
+  url: finops/agave-finops.yml
+- type: AgenticAccess
+  url: agentic-access/agave-agentic-access.yml
+- type: TrustCenter
+  url: security/agave-trust-center.yml
+- type: DomainSecurity
+  url: security/agave-domain-security.yml
+- type: Authentication
+  url: authentication/agave-authentication.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/agave-api
+- type: Portal
+  url: https://docs.agaveapi.com
+- type: GettingStarted
+  url: https://docs.agaveapi.com/quickstart
+- type: Authentication
+  url: https://docs.agaveapi.com/agave-api/identifiers
+- type: Pricing
+  url: https://useagave.com/pricing
+- type: Security
+  url: https://security.agaveapi.com/
+- type: Partners
+  url: https://useagave.com/partner-hub
+- type: GitHubOrganization
+  url: https://github.com/agave-api
+- type: SDKs
+  url: packages/agave-packages.yml
+  name: Agave client libraries (1 npm package, 1 unpinned CDN script - both first-party)
+- type: SDKs
+  url: https://github.com/agave-api/react-agave-link
+  title: React SDK (archived)
+- type: Features
+  data:
+  - name: Unified Construction API
+    description: Single REST API to read and write data across 100+ construction and
+      accounting software systems with normalized data models.
+  - name: Agave Link Authentication
+    description: Pre-built front-end component for user authentication that handles
+      OAuth flows for all supported construction software platforms.
+  - name: ERP Sync
+    description: Automatic synchronization of jobs, financials, timesheets, and cost
+      data between field systems and ERP platforms.
+  - name: AP Invoice Automation
+    description: AI-powered invoice capture, job matching, cost code coding, approval
+      routing, and ERP sync for accounts payable workflows.
+  - name: Passthrough Requests
+    description: Direct passthrough of requests to source system APIs with Agave handling
+      authentication and protocol translation.
+  - name: Webhooks
+    description: Real-time webhook notifications for data changes in connected construction
+      software systems.
+  - name: Sandbox Environments
+    description: Sandbox mode for testing integrations without affecting production
+      data in connected systems.
+  - name: Agave File Manager
+    description: Pre-built front-end component for browsing and selecting files from
+      connected construction document storage systems.
+- type: UseCases
+  data:
+  - name: Construction Software Integration
+    description: Construction software companies integrate with 100+ other platforms
+      via a single API instead of building and maintaining individual integrations.
+  - name: ERP and PM Sync
+    description: Automatically sync jobs, cost codes, and financials between project
+      management systems like Procore and ERP systems like QuickBooks or Sage.
+  - name: Invoice Processing Automation
+    description: Automate AP invoice capture, job matching, and ERP posting using
+      AI-powered invoice processing workflows.
+  - name: Job Costing
+    description: Pull budget, contract, commitment, and cost data from construction
+      software for real-time job cost analysis and reporting.
+  - name: Timesheet Integration
+    description: Sync employee timesheets from field systems to accounting ERPs to
+      eliminate manual payroll data entry.
+  - name: Document Management
+    description: Enable users to select and share files from connected construction
+      document storage systems using Agave File Manager.
+- type: Integrations
+  data:
+  - name: Procore
+    description: Full read/write integration with Procore for projects, budgets, contracts,
+      commitments, and documents.
+  - name: Autodesk Build
+    description: Integration with Autodesk Build for project management and document
+      storage.
+  - name: QuickBooks Online
+    description: Integration with QuickBooks Online for job costing, invoices, and
+      financial data.
+  - name: Sage 100 Contractor
+    description: Integration with Sage 100 Contractor for construction job costing
+      and accounting.
+  - name: Sage Intacct
+    description: Integration with Sage Intacct cloud ERP for construction financial
+      management.
+  - name: Viewpoint Vista
+    description: Integration with Viewpoint Vista for construction ERP including SQL-based
+      data access.
+  - name: ServiceTitan
+    description: Integration with ServiceTitan for field service management and job
+      costing.
+  - name: Acumatica
+    description: Integration with Acumatica cloud ERP for construction financial management.
+  - name: Foundation
+    description: Integration with Foundation construction accounting software.
+  - name: CMiC
+    description: Integration with CMiC enterprise construction ERP platform.
+- type: OpenAPI
+  url: openapi/_ae-authored/agave-unified-api-from-postman-openapi.yml
+  name: Agave Unified Construction API (derived from Agave's published Postman collection)
+- type: OpenAPI
+  url: openapi/_ae-authored/agave-unified-api-openapi.yml
+  name: Agave Unified Construction API (API Evangelist, from documentation)
+- type: JSONSchema
+  url: json-schema/unified-api-budget-list-schema.json
+- type: JSONSchema
+  url: json-schema/unified-api-budget-schema.json
+- type: JSONSchema
+  url: json-schema/unified-api-contract-list-schema.json
+- type: JSONSchema
+  url: json-schema/unified-api-contract-schema.json
+- type: JSONSchema
+  url: json-schema/unified-api-cost-code-list-schema.json
+- type: JSONSchema
+  url: json-schema/unified-api-cost-code-schema.json
+- type: JSONSchema
+  url: json-schema/unified-api-employee-list-schema.json
+- type: JSONSchema
+  url: json-schema/unified-api-employee-schema.json
+- type: JSONSchema
+  url: json-schema/unified-api-invoice-list-schema.json
+- type: JSONSchema
+  url: json-schema/unified-api-invoice-request-schema.json
+- type: JSONSchema
+  url: json-schema/unified-api-invoice-schema.json
+- type: JSONSchema
+  url: json-schema/unified-api-link-session-request-schema.json
+- type: JSONSchema
+  url: json-schema/unified-api-link-session-schema.json
+- type: JSONSchema
+  url: json-schema/unified-api-project-list-schema.json
+- type: JSONSchema
+  url: json-schema/unified-api-project-schema.json
+- type: JSONSchema
+  url: json-schema/unified-api-timesheet-list-schema.json
+- type: JSONSchema
+  url: json-schema/unified-api-timesheet-schema.json
+- type: JSONSchema
+  url: json-schema/unified-api-vendor-list-schema.json
+- type: JSONSchema
+  url: json-schema/unified-api-vendor-schema.json
+- type: JSONStructure
+  url: json-structure/unified-api-budget-list-structure.json
+- type: JSONStructure
+  url: json-structure/unified-api-budget-structure.json
+- type: JSONStructure
+  url: json-structure/unified-api-contract-list-structure.json
+- type: JSONStructure
+  url: json-structure/unified-api-contract-structure.json
+- type: JSONStructure
+  url: json-structure/unified-api-cost-code-list-structure.json
+- type: JSONStructure
+  url: json-structure/unified-api-cost-code-structure.json
+- type: JSONStructure
+  url: json-structure/unified-api-employee-list-structure.json
+- type: JSONStructure
+  url: json-structure/unified-api-employee-structure.json
+- type: JSONStructure
+  url: json-structure/unified-api-invoice-list-structure.json
+- type: JSONStructure
+  url: json-structure/unified-api-invoice-request-structure.json
+- type: JSONStructure
+  url: json-structure/unified-api-invoice-structure.json
+- type: JSONStructure
+  url: json-structure/unified-api-link-session-request-structure.json
+- type: JSONStructure
+  url: json-structure/unified-api-link-session-structure.json
+- type: JSONStructure
+  url: json-structure/unified-api-project-list-structure.json
+- type: JSONStructure
+  url: json-structure/unified-api-project-structure.json
+- type: JSONStructure
+  url: json-structure/unified-api-timesheet-list-structure.json
+- type: JSONStructure
+  url: json-structure/unified-api-timesheet-structure.json
+- type: JSONStructure
+  url: json-structure/unified-api-vendor-list-structure.json
+- type: JSONStructure
+  url: json-structure/unified-api-vendor-structure.json
+- type: JSONLD
+  url: json-ld/agave-unified-context.jsonld
+- type: Examples
+  url: examples/unified-api-budget-example.json
+- type: Examples
+  url: examples/unified-api-budget-list-example.json
+- type: Examples
+  url: examples/unified-api-contract-example.json
+- type: Examples
+  url: examples/unified-api-contract-list-example.json
+- type: Examples
+  url: examples/unified-api-cost-code-example.json
+- type: Examples
+  url: examples/unified-api-cost-code-list-example.json
+- type: Examples
+  url: examples/unified-api-employee-example.json
+- type: Examples
+  url: examples/unified-api-employee-list-example.json
+- type: Examples
+  url: examples/unified-api-invoice-example.json
+- type: Examples
+  url: examples/unified-api-invoice-list-example.json
+- type: Examples
+  url: examples/unified-api-invoice-request-example.json
+- type: Examples
+  url: examples/unified-api-link-session-example.json
+- type: Examples
+  url: examples/unified-api-link-session-request-example.json
+- type: Examples
+  url: examples/unified-api-project-example.json
+- type: Examples
+  url: examples/unified-api-project-list-example.json
+- type: Examples
+  url: examples/unified-api-timesheet-example.json
+- type: Examples
+  url: examples/unified-api-timesheet-list-example.json
+- type: Examples
+  url: examples/unified-api-vendor-example.json
+- type: Examples
+  url: examples/unified-api-vendor-list-example.json
+- type: SpectralRules
+  url: rules/agave-spectral-rules.yml
+- type: Vocabulary
+  url: vocabulary/agave-vocabulary.yaml
+- type: Blog
+  url: https://useagave.com/blog
+- type: Packages
+  url: packages/agave-packages.yml
+- type: WellKnownProbe
+  url: well-known/agave-well-known.yml
+  name: '/.well-known/ probe - no document served on any Agave host (403 on the API host, 404 elsewhere)'
+- type: MCPServer
+  url: mcp/agave-mcp.yml
+  name: Agave MCP - shipped product, endpoint not published
+- type: ToolCrosswalk
+  url: mcp/agave-tool-crosswalk.yml
+- type: LLMsTxt
+  url: llms/agave-llms.txt
+- type: Overlay
+  url: overlays/agave-unified-api-from-postman-overlay.yaml
+- type: Conformance
+  url: conformance/agave-conformance.yml
+- type: Compliance
+  url: https://security.agaveapi.com/
+  name: Agave security and compliance portal - SOC 2, GDPR
+- type: ErrorCatalog
+  url: errors/agave-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/agave-lifecycle.yml
+- type: StatusPage
+  url: https://status.agaveapi.com
+- type: ChangeLog
+  url: changelog/agave-changelog.yml
+- type: ChangeLog
+  url: https://useagave.com/product-updates
+  name: Agave Product Updates
+- type: Conventions
+  url: conventions/agave-conventions.yml
+- type: Idempotency
+  url: conventions/agave-conventions.yml
+  name: Idempotency - enforced (409 on a repeated key) but the header name is not published
+- type: RateLimits
+  url: rate-limits/agave-rate-limits.yml
+- type: Plans
+  url: plans/agave-plans-pricing.yml
+- type: Sandbox
+  url: sandbox/agave-sandbox.yml
+- type: Components
+  url: components/agave-components.yml
+- type: DataModel
+  url: data-model/agave-data-model.yml
+- type: Webhooks
+  url: asyncapi/agave-webhooks.yml
+  name: Agave webhooks - 7 of 100+ source systems, unsigned delivery
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Postman
+  url: https://docs.agaveapi.com/agave-api/postman-collection
+  name: Agave Postman Collection (437 requests) - Agave's only machine-readable contract
+- type: PostmanCollection
+  url: collections/agave-api-provider.postman_collection.json
+  name: Agave-published Postman collection, saved verbatim
+- type: Documentation
+  url: https://docs.agaveapi.com/
+- type: DeveloperPortal
+  url: https://docs.agaveapi.com/
+- type: APIReference
+  url: https://docs.agaveapi.com/reference
+- type: Support
+  url: mailto:api-support@agaveapi.com
+  name: Agave API support
+- type: SignUp
+  url: https://useagave.com/get-access
+- type: Login
+  url: https://app.agaveapi.com/login
+- type: TermsOfService
+  url: https://useagave.com/terms
+- type: PrivacyPolicy
+  url: https://useagave.com/privacy
+- type: Website
+  url: https://useagave.com
+- type: Integrations
+  url: https://useagave.com/integrations
+  name: Agave source-system integrations
+x-enrichment:
+  date: '2026-08-30'
+  status: enriched
+  artifacts_added: 33
+  pass: local-v1
