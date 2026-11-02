@@ -43,20 +43,19 @@ tags_raw:
 - Unified-API
 kind: contract
 accessModel:
-  pricing: paid
+  pricing: enterprise
   onboarding: unknown
   trial: false
   try_now: false
   public: false
-  label: Paid
-  confidence: high
+  label: Enterprise
+  confidence: medium
   source:
-  - finops
   - authentication
   - rate-limits
   - security
   - sandbox
-  generated: '2026-09-03'
+  generated: '2026-11-02'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/agave.png
 access: 3rd-Party
